@@ -1,5 +1,5 @@
 import "./Header.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { AiFillShop } from "react-icons/ai";
@@ -10,30 +10,39 @@ import Profile from "./Profile";
 
 export function Header() {
   const history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
+  const branchRef = useRef(null);
+  const [selectedBranch, setSelectedBranch] = useState(() =>
+    window.location.pathname === "/branch_2" ? "2" : "1"
+  );
+
+  const handleBranchChange = (event) => {
+    setSelectedBranch(event.target.value);
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      branchRef.current &&
+      !branchRef.current.contains(event.target) &&
+      !event.target.closest(".dropdown-toggle")
+    ) {
+      setIsOpen(false);
+    }
+  };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      const profileMenu = document.getElementById("branch");
-      if (profileMenu && !profileMenu.contains(event.target)) {
-        profileMenu.classList.remove("show");
-      }
-    };
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  const handleToggleClass = (element) => {
-    var parent = document.getElementById(element);
+  const handleToggleClass = () => {
+    var parent = document.getElementById("sidebar");
     if (parent) parent.classList.toggle("show");
 
-    if (element === "sidebar") {
-      var container = document.getElementById("Container");
-      container.classList.toggle("full-width");
-    }
+    let container = document.getElementById("Container");
+    if (container) container.classList.toggle("full-width");
   };
 
   const injectAppTitle = () => {
@@ -52,7 +61,7 @@ export function Header() {
           <div className="dropdown">
             <button
               className="dropdown-toggle"
-              onClick={() => handleToggleClass("branch")}
+              onClick={() => setIsOpen((prev) => !prev)}
             >
               <AiFillShop className="icon-shop" />
               <div className="details">
@@ -60,7 +69,11 @@ export function Header() {
                 <b>{"Mirpur-1 (main)"}</b>
               </div>
             </button>
-            <ul className="dropdown-menu" id="branch">
+            <ul
+              className={`dropdown-menu ${isOpen ? "show" : ""}`}
+              id="branch"
+              ref={branchRef}
+            >
               <li>
                 <Link to="admin/dashboard">
                   <input
@@ -68,7 +81,8 @@ export function Header() {
                     name="branch"
                     id="branch_id_1"
                     value="1"
-                    checked={window.location.pathname !== "/branch_2"}
+                    checked={selectedBranch === "1"}
+                    onChange={handleBranchChange}
                   />
                   <label htmlFor="branch_id_1">{"Mirpur-1 (main)"}</label>
                 </Link>
@@ -80,7 +94,8 @@ export function Header() {
                     name="branch"
                     id="branch_id_2"
                     value="2"
-                    checked={window.location.pathname === "/branch_2"}
+                    checked={selectedBranch === "2"}
+                    onChange={handleBranchChange}
                   />
                   <label htmlFor="branch_id_2">{"Gulshan-1"}</label>
                 </Link>
@@ -93,10 +108,7 @@ export function Header() {
               <IoBookmarks />
             </Link>
 
-            <button
-              className="menu"
-              onClick={() => handleToggleClass("sidebar")}
-            >
+            <button className="menu" onClick={() => handleToggleClass()}>
               <RiMenu2Line />
             </button>
           </div>

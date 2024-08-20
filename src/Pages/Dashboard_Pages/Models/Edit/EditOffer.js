@@ -66,7 +66,9 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
 
       if (response.status === "success") {
         updated();
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -98,7 +100,7 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
                     className="form-control"
                     name="name"
                     id="name"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.name}
                   />
                 </div>
@@ -114,7 +116,7 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
                     className="form-control"
                     name="discount"
                     id="discount"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.discount}
                   />
                 </div>
@@ -130,7 +132,7 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
                     className="form-control"
                     name="startDate"
                     id="startDate"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.startDate}
                   />
                 </div>
@@ -146,7 +148,7 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
                     className="form-control"
                     name="endDate"
                     id="endDate"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.endDate}
                   />
                 </div>
@@ -163,7 +165,7 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>

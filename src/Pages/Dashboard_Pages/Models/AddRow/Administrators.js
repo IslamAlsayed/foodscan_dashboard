@@ -65,7 +65,9 @@ export default function Administrator({ visible, visibleToggle, updated }) {
           role: "administrator",
           identity_card: "",
         });
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -98,7 +100,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     name="name"
                     id="name"
                     value={administrator.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -115,7 +117,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     name="email"
                     id="email"
                     value={administrator.email}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -132,7 +134,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     name="phone"
                     id="phone"
                     value={administrator.phone}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -149,7 +151,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     name="identity_card"
                     id="Identity_card"
                     value={administrator.identity_card}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -166,7 +168,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     name="password"
                     id="password"
                     value={administrator.password}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -183,7 +185,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     name="password_confirmation"
                     id="password_confirm"
                     value={administrator.password_confirmation}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -197,15 +199,15 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     name="role"
                     id="role"
                     value={administrator.role}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   >
-                    <option value="" selected disabled>
+                    <option defaultValue="" selected disabled>
                       --
                     </option>
-                    <option value="chef">chef</option>
-                    <option value="admin">admin</option>
-                    <option value="casher">casher</option>
+                    <option defaultValue="chef">chef</option>
+                    <option defaultValue="admin">admin</option>
+                    <option defaultValue="casher">casher</option>
                   </select>
                 </div>
               </div>
@@ -223,7 +225,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                         id="active"
                         value={1}
                         checked={administrator.status === 1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="active">active</label>
@@ -235,7 +237,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                         id="inactive"
                         value={0}
                         checked={administrator.status === 0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="inactive">inactive</label>

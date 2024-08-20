@@ -27,7 +27,7 @@ export default function EditDiningTable({
   }, [visible]);
 
   const handleChange = (e) => {
-    const { name, value, id } = e.target;
+    const { name, value } = e.target;
 
     setDiningTable((prevDiningTable) => ({
       ...prevDiningTable,
@@ -53,7 +53,9 @@ export default function EditDiningTable({
 
       if (response.status === "success") {
         updated();
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -85,7 +87,7 @@ export default function EditDiningTable({
                     name="num"
                     id="number"
                     value={diningTable.num}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -101,7 +103,7 @@ export default function EditDiningTable({
                     name="size"
                     id="size"
                     value={diningTable.size}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -116,7 +118,7 @@ export default function EditDiningTable({
                     className="form-control"
                     name="floor"
                     id="floor"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={diningTable.floor}
                   />
                 </div>

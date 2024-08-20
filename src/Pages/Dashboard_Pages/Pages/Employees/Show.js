@@ -52,12 +52,12 @@ export default function Show() {
     <div className="Show">
       <div className="row">
         <div className="image">
-          <img src={profileImage} alt="profile image" />
+          <img src={profileImage} alt="profile" />
         </div>
 
         <div className="details">
           <h3>{employee.name}</h3>
-          <p className="typeRole">user</p>
+          <p className="typeRole">{employee.name}</p>
         </div>
       </div>
 

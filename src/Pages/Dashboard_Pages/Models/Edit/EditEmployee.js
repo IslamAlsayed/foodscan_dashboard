@@ -30,7 +30,7 @@ export default function EditEmployee({
   }, [visible]);
 
   const handleChange = (e) => {
-    const { name, value, id } = e.target;
+    const { name, value } = e.target;
 
     setEmployee((prevData) => {
       return {
@@ -62,7 +62,9 @@ export default function EditEmployee({
 
       if (response.status === "success") {
         updated();
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -94,7 +96,7 @@ export default function EditEmployee({
                     name="name"
                     id="name"
                     value={employee.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -110,7 +112,7 @@ export default function EditEmployee({
                     name="email"
                     id="email"
                     value={employee.email}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -124,7 +126,7 @@ export default function EditEmployee({
                     name="role"
                     id="role"
                     value={employee.role}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     className="form-control"
                   >
                     <option value="chef" selected={employee.role === "chef"}>
@@ -151,7 +153,7 @@ export default function EditEmployee({
                     name="phone"
                     id="phone"
                     value={employee.phone}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -167,7 +169,7 @@ export default function EditEmployee({
                     name="password"
                     id="password"
                     value={employee.password}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -183,7 +185,7 @@ export default function EditEmployee({
                     name="password_confirmation"
                     id="password_confirmation"
                     value={employee.password_confirmation}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>

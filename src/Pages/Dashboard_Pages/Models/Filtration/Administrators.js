@@ -76,38 +76,44 @@ export default function Administrators({
         <div className="row pb-4">
           <div className="row mt-3">
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">name</label>
+              <label htmlFor="name" className="mb-2">
+                name
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="name"
                 id="name"
                 value={administrators.name}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">email</label>
+              <label htmlFor="email" className="mb-2">
+                email
+              </label>
               <input
                 type="email"
                 className="form-control email"
                 name="email"
                 id="email"
                 value={administrators.email}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">phone</label>
+              <label htmlFor="phone" className="mb-2">
+                phone
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="phone"
                 id="phone"
                 value={administrators.phone}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
@@ -119,7 +125,7 @@ export default function Administrators({
                   name="status"
                   id="active"
                   checked={administrators.status === 1}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="active">active</label>
                 <input
@@ -127,7 +133,7 @@ export default function Administrators({
                   name="status"
                   id="inactive"
                   checked={administrators.status === 0}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="inactive">inactive</label>
               </div>

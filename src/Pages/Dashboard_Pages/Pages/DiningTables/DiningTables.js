@@ -58,13 +58,22 @@ export default function DiningTables() {
 
   const downloadQRCode = (item) => {
     if (qrRef.current === null) return;
+    if (document.getElementById("Loader")) {
+      document.getElementById("Loader").classList.add("show");
+    }
 
     toPng(qrRef.current)
       .then((dataUrl) => {
-        const link = document.createElement("a");
-        link.download = `customer_menu_table_${item.id}.png`;
-        link.href = dataUrl;
-        link.click();
+        if (dataUrl) {
+          if (document.getElementById("Loader")) {
+            document.getElementById("Loader").classList.remove("show");
+
+            const link = document.createElement("a");
+            link.download = `customer_menu_table_${item.id}.png`;
+            link.href = dataUrl;
+            link.click();
+          }
+        }
       })
       .catch((err) => {
         console.error("Error generating PNG: ", err);
@@ -129,7 +138,7 @@ export default function DiningTables() {
       render: (item) => (
         <div className="actionResource">
           <Link
-            to={`/admin/dashboard/dining-table/show/${item.key}`}
+            to={`/admin/dashboard/dining-table/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

@@ -77,38 +77,44 @@ export default function DiningTables({
         <div className="row pb-4">
           <div className="row mt-3">
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">number</label>
+              <label htmlFor="number" className="mb-2">
+                number
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="num"
                 id="num"
                 value={diningTables.num}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">size</label>
+              <label htmlFor="size" className="mb-2">
+                size
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="size"
                 id="size"
                 value={diningTables.size}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">floor</label>
+              <label htmlFor="floor" className="mb-2">
+                floor
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="floor"
                 id="floor"
                 value={diningTables.floor}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
@@ -120,7 +126,7 @@ export default function DiningTables({
                   name="status"
                   id="active"
                   checked={diningTables.status === 1}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="active">active</label>
                 <input
@@ -128,7 +134,7 @@ export default function DiningTables({
                   name="status"
                   id="inactive"
                   checked={diningTables.status === 0}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="inactive">inactive</label>
               </div>

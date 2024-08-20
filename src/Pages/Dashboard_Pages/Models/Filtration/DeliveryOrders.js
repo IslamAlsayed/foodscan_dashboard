@@ -11,7 +11,9 @@ export default function DeliveryOrders({
   filtrated,
 }) {
   const [deliveryOrders, setDeliveryOrders] = useState({
+    id: "",
     customer_id: "",
+    created_at: "",
     total_cost: "",
     status: "",
   });
@@ -38,17 +40,29 @@ export default function DeliveryOrders({
   const handleChange = (e) => {
     setFilteredData(JSON.parse(sessionStorage.getItem("origin_data")));
     const { name, value } = e.target;
-    setDeliveryOrders((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "created_at") {
+      setDeliveryOrders((prevData) => ({
+        ...prevData,
+        created_at: formatDate(value),
+      }));
+    } else {
+      setDeliveryOrders({ ...deliveryOrders, [name]: value });
+    }
   };
 
+  function formatDate(dateString) {
+    return new Date(dateString)
+      .toLocaleString("sv-SE", { timeZone: "UTC" })
+      .replace("T", " ");
+  }
+
   const handleSearch = () => {
-    const { customer_id, total_cost, status } = deliveryOrders;
+    const { id, customer_id, created_at, total_cost, status } = deliveryOrders;
     const filtered = filteredData.filter((item) => {
       return (
+        (id === "" || item.id === parseInt(id)) &&
         (customer_id === "" || item.customer_id === parseInt(customer_id)) &&
+        (!created_at || item.created_at <= created_at) &&
         (total_cost === "" || item.total_cost === parseInt(total_cost)) &&
         (!status || item.status === status)
       );
@@ -60,7 +74,9 @@ export default function DeliveryOrders({
 
   const handleClear = () => {
     setDeliveryOrders({
+      id: "",
       customer_id: "",
+      created_at: "",
       total_cost: "",
       status: "",
     });
@@ -83,6 +99,20 @@ export default function DeliveryOrders({
         <div className="row pb-4">
           <div className="row mt-3">
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
+              <label htmlFor="id" className="mb-2">
+                id
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                name="id"
+                id="id"
+                value={deliveryOrders.id}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+
+            <div className="col col-12 col-md-6 col-lg-3 mb-3">
               <label htmlFor="customer_id" className="mb-2">
                 customer id
               </label>
@@ -91,7 +121,7 @@ export default function DeliveryOrders({
                 name="customer_id"
                 id="customer_id"
                 value={deliveryOrders.customer_id}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               >
                 <option value="" selected disabled>
                   --
@@ -104,6 +134,21 @@ export default function DeliveryOrders({
                   ))}
               </select>
             </div>
+
+            <div className="col col-12 col-md-6 col-lg-3 mb-3">
+              <label htmlFor="created_at" className="mb-2">
+                date
+              </label>
+              <input
+                type="datetime-local"
+                className="form-control"
+                name="created_at"
+                id="created_at"
+                value={deliveryOrders.created_at}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
               <label htmlFor="total_cost" className="mb-2">
                 total_cost
@@ -114,7 +159,7 @@ export default function DeliveryOrders({
                 name="total_cost"
                 id="total_cost"
                 value={deliveryOrders.total_cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
@@ -127,7 +172,7 @@ export default function DeliveryOrders({
                 name="status"
                 id="status"
                 value={deliveryOrders.status}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               >
                 <option value="" selected disabled>
                   --

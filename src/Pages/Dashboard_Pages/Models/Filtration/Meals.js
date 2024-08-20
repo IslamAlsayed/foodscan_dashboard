@@ -10,6 +10,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
     cost: "",
     category_id: "",
     size: "",
+    type: "",
     status: "",
   });
   const [categories, setCategories] = useState([]);
@@ -42,19 +43,25 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
         ...prevData,
         status: id === "active" ? 1 : 0,
       }));
+    } else if (name === "type") {
+      setMeals((prevData) => ({
+        ...prevData,
+        type: id === "vegetarian" ? "vegetarian" : "non-vegetarian",
+      }));
     } else {
       setMeals({ ...meals, [name]: value });
     }
   };
 
   const handleSearch = () => {
-    const { name, cost, category_id, size, status } = meals;
+    const { name, cost, category_id, size, type, status } = meals;
     const filtered = filteredData.filter((item) => {
       return (
         (!name || item.name.toLowerCase().includes(name.toLowerCase())) &&
         (!cost || item.cost === parseFloat(cost)) &&
         (category_id === "" || item.category_id === parseInt(category_id)) &&
         (!size || item.size === parseFloat(size)) &&
+        (!type || item.type.toLowerCase().includes(type.toLowerCase())) &&
         (status === "" || item.status === parseInt(status))
       );
     });
@@ -69,6 +76,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
       cost: "",
       category_id: "",
       size: "",
+      type: "",
       status: "",
     });
     setFilteredData(JSON.parse(sessionStorage.getItem("origin_data")));
@@ -95,7 +103,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
               name="name"
               id="name"
               value={meals.name}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             />
           </div>
 
@@ -109,7 +117,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
               name="cost"
               id="cost"
               value={meals.cost}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             />
           </div>
 
@@ -122,7 +130,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
               name="category_id"
               id="category_id"
               value={meals.category_id}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             >
               <option value="" selected disabled>
                 --
@@ -146,7 +154,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
               name="size"
               id="size"
               value={meals.size}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
             >
               <option value="" selected disabled>
                 --
@@ -158,7 +166,29 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
             </select>
           </div>
 
-          <div className="col col-12 col-md-6 col-lg-4 mb-3">
+          <div className="col col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+            <label className="mb-2">Type</label>
+            <div className="col d-flex gap-2 align-items-center">
+              <input
+                type="radio"
+                name="type"
+                id="vegetarian"
+                checked={meals.type === "vegetarian"}
+                onChange={(e) => handleChange(e)}
+              />
+              <label htmlFor="vegetarian">Veg</label>
+              <input
+                type="radio"
+                name="type"
+                id="non-vegetarian"
+                checked={meals.type === "non-vegetarian"}
+                onChange={(e) => handleChange(e)}
+              />
+              <label htmlFor="non-vegetarian">Non Veg</label>
+            </div>
+          </div>
+
+          <div className="col col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
             <label className="mb-2">status</label>
             <div className="col d-flex gap-2 align-items-center">
               <input
@@ -166,7 +196,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
                 name="status"
                 id="active"
                 checked={meals.status === 1}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
               <label htmlFor="active">active</label>
               <input
@@ -174,7 +204,7 @@ export default function Meals({ handleModalToggle, data, headers, filtrated }) {
                 name="status"
                 id="inactive"
                 checked={meals.status === 0}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
               <label htmlFor="inactive">inactive</label>
             </div>

@@ -1,6 +1,6 @@
 .Sidebar {
   width: 270px;
-  padding: 15px;
+  padding: 35px 15px 15px;
   overflow-y: auto;
   transition: transform 0.3s;
   height: calc(100svh - 70px);
@@ -32,18 +32,25 @@
 }
 
 @media (max-width: 1024px) {
-  .Sidebar.show {
-    transform: translateX(-270px);
-  }
-
   .Sidebar {
     height: 100svh;
     top: 0;
     transform: translateX(0);
+    box-shadow: 2px 0 9px #00000020;
+  }
+
+  .Sidebar.show {
+    transform: translateX(-270px);
   }
 
   .Sidebar .closeSidebar {
     display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .Sidebar {
+    padding: 15px;
   }
 }
 

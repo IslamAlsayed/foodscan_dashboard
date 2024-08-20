@@ -231,6 +231,10 @@
         border-radius: 7px;
     }
 
+    .Pos .posMenuItem .mainMenu {
+        padding-bottom: 70px;
+    }
+
     .Pos .closePosCartItems {
         display: block;
     }

@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
 import "react-quill/dist/quill.snow.css";
 import "react-datepicker/dist/react-datepicker.css";
 

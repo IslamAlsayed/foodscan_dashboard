@@ -21,7 +21,9 @@ export default function DeleteRecord({ url, refreshed }) {
           const response = await deleteData(url);
           if (response.status === "success") {
             refreshed();
-            Swal.fire("Deleted!", response.message, "success");
+            setTimeout(() => {
+              Swal.fire("Deleted!", response.message, "success");
+            }, 250);
           }
         } catch (error) {
           Swal.fire("Error!", error.response?.data?.message, "error");

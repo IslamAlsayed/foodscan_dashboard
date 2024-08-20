@@ -64,11 +64,7 @@ export default function Show() {
             setPay(newPay === "1" ? "Paid" : "Not Paid");
           }
         } catch (error) {
-          if (error.response && error.response.status === 422) {
-            Swal.fire("Error!", "Validation error occurred.", "error");
-          } else {
-            Swal.fire("Error!", error.response?.data?.message, "error");
-          }
+          Swal.fire("Error!", error.response?.data?.message, "error");
         }
       }
     });
@@ -104,13 +100,12 @@ export default function Show() {
           if (response.status === "success") {
             setLoading(false);
             setStatus(newStatus);
+            setTimeout(() => {
+              Swal.fire("Updated!", response.message, "success");
+            }, 250);
           }
         } catch (error) {
-          if (error.response && error.response.status === 422) {
-            Swal.fire("Error!", "Validation error occurred.", "error");
-          } else {
-            Swal.fire("Error!", error.response?.data?.message, "error");
-          }
+          Swal.fire("Error!", error.response?.data?.message, "error");
         }
       }
     });
@@ -207,7 +202,7 @@ export default function Show() {
             <div className="cards">
               <div className="card" data-id="1">
                 <div className="card-img">
-                  <img src={ImageTest} alt="image" />
+                  <img src={ImageTest} alt="order" />
                 </div>
                 <div className="card-text">
                   <p className="name fw-bold">kung peo chicken</p>
@@ -220,7 +215,7 @@ export default function Show() {
 
               <div className="card" data-id="2">
                 <div className="card-img">
-                  <img src={ImageTest} alt="image" />
+                  <img src={ImageTest} alt="order" />
                 </div>
                 <div className="card-text">
                   <p className="name fw-bold">kung peo chicken</p>

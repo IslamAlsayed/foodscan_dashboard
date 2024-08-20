@@ -75,9 +75,10 @@ export default function MoreDetails({ visible, data, modalClose }) {
                     <img src={addon.image} alt={addon.name} />
                   </div>
                   <div className="addon-text">
-                    <p>{addon.name}</p>
+                    <p>
+                      {addon.name} <span>x {addon.quantity}</span>
+                    </p>
                     <p>price: ${addon.cost}</p>
-                    <p>quantity: {addon.quantity}</p>
                   </div>
                   <button
                     className="trashAddon"
@@ -99,9 +100,10 @@ export default function MoreDetails({ visible, data, modalClose }) {
                     <img src={extra.image} alt={extra.name} />
                   </div>
                   <div className="extra-text">
-                    <p>{extra.name}</p>
+                    <p>
+                      {extra.name} <span>x {extra.quantity}</span>
+                    </p>
                     <p>price: ${extra.cost}</p>
-                    <p>quantity: {extra.quantity}</p>
                   </div>
                   <button
                     className="trashExtra"

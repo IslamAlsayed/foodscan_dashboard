@@ -31,7 +31,6 @@ export default function Invoice({ visible, modalClose }) {
     });
 
     setCartItemTotal(totalCost);
-    console.log("invoiceItem", invoiceItem);
   }, []);
 
   const convert = (value) => {
@@ -95,7 +94,7 @@ export default function Invoice({ visible, modalClose }) {
                   <>
                     <tbody className="item" key={index}>
                       <tr>
-                        <td>{item.sizes[0].quantity}</td>
+                        <td>x {item.sizes[0].quantity}</td>
                         <td>
                           <span>{item.name}</span>
                           <span>size: {convert(item.sizes[0].size)}</span>
@@ -105,7 +104,7 @@ export default function Invoice({ visible, modalClose }) {
                       {Object(item.addons).length > 0
                         ? item.addons.map((addon, index) => (
                             <tr className="addons" key={index}>
-                              <td>{addon.quantity}</td>
+                              <td>x {addon.quantity}</td>
                               <td>addon: {addon.name}</td>
                               <td>${addon.cost}</td>
                             </tr>
@@ -115,7 +114,7 @@ export default function Invoice({ visible, modalClose }) {
                       {Object(item.extras).length > 0
                         ? item.extras.map((extra, index) => (
                             <tr className="extras" key={index}>
-                              <td>{extra.quantity}</td>
+                              <td>x {extra.quantity}</td>
                               <td>extra: {extra.name}</td>
                               <td>${extra.cost}</td>
                             </tr>

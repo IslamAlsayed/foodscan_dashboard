@@ -96,26 +96,30 @@ export default function Extras({
         <div className="row pb-4">
           <div className="row mt-3">
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">name</label>
+              <label htmlFor="name" className="mb-2">
+                name
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="name"
                 id="name"
                 value={extras.name}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">price</label>
+              <label htmlFor="price" className="mb-2">
+                price
+              </label>
               <input
                 type="number"
                 className="form-control"
                 name="cost"
                 id="cost"
                 value={extras.cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
@@ -128,7 +132,7 @@ export default function Extras({
                 name="category_id"
                 id="category_id"
                 value={extras.category_id}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               >
                 <option value="" selected disabled>
                   --
@@ -150,7 +154,7 @@ export default function Extras({
                   name="type"
                   id="vegetarian"
                   checked={extras.type === "vegetarian"}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="vegetarian">Vegetarian</label>
                 <input
@@ -158,7 +162,7 @@ export default function Extras({
                   name="type"
                   id="non-vegetarian"
                   checked={extras.type === "non-vegetarian"}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="non-vegetarian">Non-Vegetarian</label>
               </div>
@@ -172,7 +176,7 @@ export default function Extras({
                   name="status"
                   id="active"
                   checked={extras.status === 1}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="active">active</label>
                 <input
@@ -180,7 +184,7 @@ export default function Extras({
                   name="status"
                   id="inactive"
                   checked={extras.status === 0}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="inactive">inactive</label>
               </div>

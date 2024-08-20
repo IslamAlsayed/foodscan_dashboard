@@ -11,10 +11,10 @@ export default function Login() {
     if (Cookies.get("token_resta")) {
       history.push("/admin/dashboard");
     }
-  }, []);
+  }, [history]);
 
-  const [email, setEmail] = useState("ebtesam132015@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("islam@gmail.com");
+  const [password, setPassword] = useState("test1234");
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -33,7 +33,7 @@ export default function Login() {
       if (data.status === "success") {
         setEmail("");
         setPassword("");
-        history.push(`/admin/dashboard`);
+        history.push("/admin/dashboard");
       }
     } catch (error) {
       setError(error.message);
@@ -80,9 +80,9 @@ export default function Login() {
                   </button>
                 </div>
                 <div className="changeRoute form-class-ext-center text-dark">
-                  <a href="" className="text-dark fw-bold">
-                    <Link to="/auth/resetpassword">forget password ?</Link>
-                  </a>
+                  <Link to="/auth/resetPassword" className="text-dark fw-bold">
+                    forget password?
+                  </Link>
                 </div>
               </form>
             </div>

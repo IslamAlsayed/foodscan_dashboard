@@ -15,7 +15,7 @@ export default function EditAdministrator({
   const [administrator, setAdministrator] = useState({
     name: "",
     email: "",
-    role: "",
+    role: "chef",
     phone: "",
     password: "",
     password_confirmation: "",
@@ -64,7 +64,9 @@ export default function EditAdministrator({
 
       if (response.status === "success") {
         updated();
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -96,7 +98,7 @@ export default function EditAdministrator({
                     name="name"
                     id="name"
                     value={administrator.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -112,7 +114,7 @@ export default function EditAdministrator({
                     name="email"
                     id="email"
                     value={administrator.email}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -122,26 +124,15 @@ export default function EditAdministrator({
                   <label htmlFor="role" className="form-label">
                     role
                   </label>
-                  <select
+                  <input
+                    type="text"
+                    className="form-control"
                     name="role"
                     id="role"
+                    disabled
                     value={administrator.role}
-                    onChange={handleChange}
-                    className="form-control"
-                  >
-                    <option
-                      value="chef"
-                      selected={administrator.role === "chef"}
-                    >
-                      Chef
-                    </option>
-                    <option
-                      value="cashier"
-                      selected={administrator.role === "cashier"}
-                    >
-                      Cashier
-                    </option>
-                  </select>
+                    onChange={(e) => handleChange(e)}
+                  />
                 </div>
               </div>
 
@@ -156,7 +147,7 @@ export default function EditAdministrator({
                     name="phone"
                     id="phone"
                     value={administrator.phone}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -172,7 +163,7 @@ export default function EditAdministrator({
                     name="password"
                     id="password"
                     value={administrator.password}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -188,7 +179,7 @@ export default function EditAdministrator({
                     name="password_confirmation"
                     id="password_confirmation"
                     value={administrator.password_confirmation}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>

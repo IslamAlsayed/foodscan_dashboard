@@ -31,7 +31,7 @@ export default function EditCategories({ visible, item, updated }) {
   };
 
   const handleChange = (e) => {
-    const { name, value, id, type, files } = e.target;
+    const { name, value, type, files } = e.target;
     setCategory((prevData) => {
       if (name === "image" && type === "file") {
         return {
@@ -65,7 +65,9 @@ export default function EditCategories({ visible, item, updated }) {
       if (response.status === "success") {
         updated();
         if (imageRef.current) imageRef.current.value = null;
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -102,7 +104,7 @@ export default function EditCategories({ visible, item, updated }) {
                     name="name"
                     id="name"
                     value={category.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -118,7 +120,7 @@ export default function EditCategories({ visible, item, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -133,7 +135,7 @@ export default function EditCategories({ visible, item, updated }) {
                     name="description"
                     id="description"
                     value={category.description}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   ></textarea>
                 </div>
               </div>

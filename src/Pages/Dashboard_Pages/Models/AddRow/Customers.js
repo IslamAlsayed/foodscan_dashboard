@@ -16,7 +16,6 @@ export default function Customers({ visible, visibleToggle, updated }) {
     password_confirmation: "",
     status: 1,
     role: "customer",
-    identity_card: "",
   });
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export default function Customers({ visible, visibleToggle, updated }) {
     formData.append("password_confirmation", customer.password_confirmation);
     formData.append("Role", customer.role);
     formData.append("status", customer.status);
-    formData.append("identity_card", customer.identity_card);
 
     try {
       const response = await addData("admin/customers", formData);
@@ -60,9 +58,10 @@ export default function Customers({ visible, visibleToggle, updated }) {
           password_confirmation: "",
           status: 1,
           role: "customer",
-          identity_card: "",
         });
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -95,7 +94,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                     name="name"
                     id="name"
                     value={customer.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -112,7 +111,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                     name="email"
                     id="email"
                     value={customer.email}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -129,24 +128,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                     name="phone"
                     id="phone"
                     value={customer.phone}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="col-6">
-                <div className="mb-3">
-                  <label htmlFor="Identity_card" className="form-label">
-                    Identity card <span className="star">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="identity_card"
-                    id="Identity_card"
-                    value={customer.identity_card}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -163,7 +145,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                     name="password"
                     id="password"
                     value={customer.password}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -180,7 +162,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                     name="password_confirmation"
                     id="password_confirm"
                     value={customer.password_confirmation}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -194,7 +176,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                     name="role"
                     id="role"
                     value={customer.role}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   >
                     <option value="" selected disabled>
@@ -220,7 +202,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                         id="active"
                         value={1}
                         checked={customer.status === 1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="active">active</label>
@@ -232,7 +214,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
                         id="inactive"
                         value={0}
                         checked={customer.status === 0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="inactive">inactive</label>

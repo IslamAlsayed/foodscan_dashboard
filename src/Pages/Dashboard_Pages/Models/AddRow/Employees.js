@@ -62,7 +62,9 @@ function Employees({ visible, visibleToggle, updated }) {
           role: "employee",
           identity_card: "",
         });
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -95,7 +97,7 @@ function Employees({ visible, visibleToggle, updated }) {
                     name="name"
                     id="name"
                     value={employee.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -112,7 +114,7 @@ function Employees({ visible, visibleToggle, updated }) {
                     name="email"
                     id="email"
                     value={employee.email}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -129,7 +131,7 @@ function Employees({ visible, visibleToggle, updated }) {
                     name="phone"
                     id="phone"
                     value={employee.phone}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -146,7 +148,7 @@ function Employees({ visible, visibleToggle, updated }) {
                     name="identity_card"
                     id="Identity_card"
                     value={employee.identity_card}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -163,7 +165,7 @@ function Employees({ visible, visibleToggle, updated }) {
                     name="password"
                     id="password"
                     value={employee.password}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -180,7 +182,7 @@ function Employees({ visible, visibleToggle, updated }) {
                     name="password_confirmation"
                     id="password_confirm"
                     value={employee.password_confirmation}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -194,7 +196,7 @@ function Employees({ visible, visibleToggle, updated }) {
                     name="role"
                     id="role"
                     value={employee.role}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   >
                     <option value="" selected disabled>
@@ -220,7 +222,7 @@ function Employees({ visible, visibleToggle, updated }) {
                         id="active"
                         value={1}
                         checked={employee.status === 1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="active">active</label>
@@ -232,7 +234,7 @@ function Employees({ visible, visibleToggle, updated }) {
                         id="inactive"
                         value={0}
                         checked={employee.status === 0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="inactive">inactive</label>

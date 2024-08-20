@@ -178,6 +178,11 @@
     width: 40px;
 }
 
+.Pos .modal-content .menu table tr td:first-of-type {
+    width: 40px;
+    text-transform: lowercase;
+}
+
 .Pos .modal-content .menu table .addons {
     width: 100%;
 }

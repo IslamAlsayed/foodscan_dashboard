@@ -74,7 +74,9 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
       if (response.status === "success") {
         updated();
         if (imageRef.current) imageRef.current.value = null;
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -119,7 +121,7 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
                     name="name"
                     id="name"
                     value={extra.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -134,7 +136,7 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
                     name="category_id"
                     id="category"
                     value={extra.category_id}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   >
                     {categories.map((category) => (
                       <option value={category.id}>{category.name}</option>
@@ -154,7 +156,7 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
                     name="cost"
                     id="cost"
                     value={extra.cost}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -170,7 +172,7 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
                         id="vegetarian"
                         value="vegetarian"
                         checked={extra.type === "vegetarian"}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                       />
                       <label htmlFor="vegetarian">vegetarian</label>
                     </div>
@@ -181,7 +183,7 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
                         id="non-vegetarian"
                         value="non-vegetarian"
                         checked={extra.type === "non-vegetarian"}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                       />
                       <label htmlFor="non-vegetarian">non vegetarian</label>
                     </div>
@@ -200,7 +202,7 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -214,7 +216,7 @@ export default function EditExtra({ visible, visibleToggle, item, updated }) {
                     className="form-control"
                     name="description"
                     id="description"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={extra.description}
                   ></textarea>
                 </div>

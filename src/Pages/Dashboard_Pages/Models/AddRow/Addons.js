@@ -28,7 +28,7 @@ export default function Addons({ visible, visibleToggle, updated }) {
     if (name === "type") {
       setAddon((prevData) => ({
         ...prevData,
-        type: id === "veg" ? "vegetarian" : "non-vegetarian",
+        type: id === "vegetarian" ? "vegetarian" : "non-vegetarian",
       }));
     } else if (name === "status") {
       setAddon((prevData) => ({
@@ -71,7 +71,9 @@ export default function Addons({ visible, visibleToggle, updated }) {
 
         if (imageRef.current) imageRef.current.value = null;
 
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -116,7 +118,7 @@ export default function Addons({ visible, visibleToggle, updated }) {
                     name="name"
                     id="name"
                     value={addon.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -131,7 +133,7 @@ export default function Addons({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="category_id"
                     id="category"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={addon.category_id}
                     required
                   >
@@ -158,7 +160,7 @@ export default function Addons({ visible, visibleToggle, updated }) {
                     name="cost"
                     id="cost"
                     value={addon.cost}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -175,10 +177,10 @@ export default function Addons({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="type"
                         id="vegetarian"
-                        required
-                        checked={addon.type === "vegetarian"}
                         value="vegetarian"
-                        onChange={handleChange}
+                        checked={addon.type === "vegetarian"}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="vegetarian">vegetarian</label>
                     </div>
@@ -187,10 +189,10 @@ export default function Addons({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="type"
                         id="non-vegetarian"
-                        required
-                        checked={addon.type === "non-vegetarian"}
                         value="non-vegetarian"
-                        onChange={handleChange}
+                        checked={addon.type === "non-vegetarian"}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="non-vegetarian">non vegetarian</label>
                     </div>
@@ -209,10 +211,10 @@ export default function Addons({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="status"
                         id="active"
-                        required
                         value={1}
                         checked={addon.status === 1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="active">active</label>
                     </div>
@@ -221,10 +223,10 @@ export default function Addons({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="status"
                         id="inactive"
-                        required
                         value={0}
                         checked={addon.status === 0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="inactive">inactive</label>
                     </div>
@@ -242,7 +244,7 @@ export default function Addons({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="image"
                     id="image"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -256,7 +258,7 @@ export default function Addons({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="description"
                     id="description"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={addon.description}
                     required
                   ></textarea>

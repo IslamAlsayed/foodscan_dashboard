@@ -11,10 +11,10 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
   const [categories, setCategories] = useState([]);
   const [meal, setMeal] = useState({
     name: "",
-    status: "",
-    type: "",
     category_id: "",
     image: null,
+    type: "",
+    status: "",
     description: "",
   });
 
@@ -62,14 +62,11 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
 
     const formData = new FormData();
     formData.append("name", meal.name);
-    formData.append("status", meal.status);
-    formData.append("type", meal.type);
     formData.append("category_id", meal.category_id);
+    formData.append("type", meal.type);
+    formData.append("status", meal.status);
     if (meal.image) formData.append("image", meal.image);
     formData.append("description", meal.description);
-    // formData.append("size", meal.size);
-    // formData.append("cost", meal.cost);
-    // formData.append("number_of_pieces", meal.number_of_pieces);
     formData.append("_method", "put");
 
     try {
@@ -79,10 +76,14 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
         true
       );
 
+      console.log("meal", meal);
+
       if (response.status === "success") {
         updated();
         if (imageRef.current) imageRef.current.value = null;
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -129,7 +130,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                     name="name"
                     id="name"
                     value={meal.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -144,11 +145,12 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                     name="category_id"
                     id="category"
                     value={meal.category_id}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   >
-                    {categories.map((category) => (
-                      <option value={category.id}>{category.name}</option>
-                    ))}
+                    {Object(categories).length > 0 &&
+                      categories.map((category) => (
+                        <option value={category.id}>{category.name}</option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -164,7 +166,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -181,7 +183,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                         name="type"
                         id="vegetarian"
                         value="vegetarian"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.type === "vegetarian"}
                       />
                       <label htmlFor="vegetarian">vegetarian</label>
@@ -192,7 +194,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                         name="type"
                         id="non-vegetarian"
                         value="non-vegetarian"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.type === "non-vegetarian"}
                       />
                       <label htmlFor="non-vegetarian">non vegetarian</label>
@@ -213,7 +215,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                         name="status"
                         id="active"
                         value={1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.status === 1}
                       />
                       <label htmlFor="active">active</label>
@@ -224,7 +226,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                         name="status"
                         id="inactive"
                         value={0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.status === 0}
                       />
                       <label htmlFor="inactive">inactive</label>
@@ -243,7 +245,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                     name="description"
                     id="description"
                     value={meal.description}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   ></textarea>
                 </div>
               </div>

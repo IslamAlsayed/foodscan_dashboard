@@ -66,7 +66,7 @@ export default function ShowItem() {
       fetchExtras(meal.id);
       fetchAddons(meal.id);
     }
-  }, [isMealLoaded, meal]);
+  }, [isMealLoaded, meal, fetchExtras, fetchAddons]);
 
   if (loading) return <p>Loading...</p>;
 
@@ -84,7 +84,6 @@ export default function ShowItem() {
           key="1"
         >
           {meal && <Information data={meal} />}
-          {/* <Information data={meal} /> */}
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={

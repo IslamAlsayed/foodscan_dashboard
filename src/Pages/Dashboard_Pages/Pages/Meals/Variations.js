@@ -1,27 +1,32 @@
 import "../SubModels.css";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { Table, Row, Col } from "antd";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiXMark } from "react-icons/hi2";
 import Swal from "sweetalert2";
-import { addData, getData } from "../../../../axiosConfig/API";
+import { Modal } from "bootstrap";
+import { addData, getData, updateData } from "../../../../axiosConfig/API";
+import { FiEdit } from "react-icons/fi";
 
 export default function Variations({ order_id }) {
   const { id } = useParams();
   const componentRef = useRef();
   const [variations, setVariations] = useState();
-  const [size, setSize] = useState([
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [sizeList, setSizeList] = useState([
     { value: 1, label: "small" },
     { value: 2, label: "medium" },
     { value: 3, label: "big" },
     { value: 4, label: "family" },
   ]);
+
   const [meal, setMeal] = useState({
     size: "",
     number_of_piece: "",
     cost: "",
-    meal_id:id,
+    meal_id: id,
   });
 
   const handleChange = (e) => {
@@ -29,46 +34,24 @@ export default function Variations({ order_id }) {
     setMeal({ ...meal, [name]: value });
   };
 
-  const fetchVariations = useCallback(async (id) => {
-    if (!id) return;
-    try {
-      const result = await getData(`admin/meals/${id}/size-costs`);
-      const sizesInResult = result.map((record) => record.size);
+  const fetchVariations = useCallback(
+    async (id) => {
+      if (!id) return;
+      try {
+        const result = await getData(`admin/meals/${id}/size-costs`);
+        const sizesInResult = result.map((record) => record.size);
 
-      const updatedSize = size.filter(
-        (item) => !sizesInResult.includes(item.value)
-      );
-      setSize(updatedSize);
-
-      const updatedResult = result.map((record) => {
-        let size;
-        switch (record.size) {
-          case 1:
-            size = "small";
-            break;
-          case 2:
-            size = "medium";
-            break;
-          case 3:
-            size = "big";
-            break;
-          case 4:
-            size = "family";
-            break;
-          default:
-            size = "none";
-        }
-
-        return {
-          ...record,
-          size,
-        };
-      });
-      setVariations(updatedResult);
-    } catch (error) {
-      console.error(error.response?.data?.message);
-    }
-  }, []);
+        const updatedSize = sizeList.filter(
+          (item) => !sizesInResult.includes(item.value)
+        );
+        setSizeList(updatedSize);
+        setVariations(result);
+      } catch (error) {
+        console.error(error.response?.data?.message);
+      }
+    },
+    [sizeList]
+  );
 
   useEffect(() => {
     if (order_id) fetchVariations(order_id);
@@ -84,7 +67,18 @@ export default function Variations({ order_id }) {
     formData.append("meal_id", meal.meal_id);
 
     try {
-      const response = await addData(`admin/meals/size-cost`, formData);
+      let response;
+      const method = e.target._method.value;
+
+      if (method === "update") {
+        response = await updateData(
+          `admin/meals/${meal.meal_id}/size-cost`,
+          formData,
+          false
+        );
+      } else {
+        response = await addData(`admin/meals/size-cost`, formData);
+      }
 
       if (response.status === "success") {
         fetchVariations(order_id);
@@ -92,14 +86,54 @@ export default function Variations({ order_id }) {
           size: "",
           number_of_piece: "",
           cost: "",
-          meal_id:id,
+          meal_id: id,
         });
 
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire(
+            method === "update" ? "Updated!" : "Saved!",
+            response.message,
+            "success"
+          );
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
     }
+  };
+
+  const handleEdit = (item) => {
+    setMeal(item);
+    setModalVisible(true);
+  };
+
+  const handleClose = () => {
+    setMeal([]);
+    setModalVisible(false);
+  };
+
+  useEffect(() => {
+    const modalElement = document.getElementById("addVariations");
+    if (modalElement) {
+      const myModal = new Modal(modalElement);
+      if (modalVisible) {
+        myModal.show();
+      } else {
+        myModal.hide();
+      }
+    }
+  }, [modalVisible]);
+
+  const convert = (value) => {
+    return value === 1
+      ? "small"
+      : value === 2
+      ? "medium"
+      : value === 3
+      ? "big"
+      : value === 4
+      ? "family"
+      : "none";
   };
 
   const columns = [
@@ -115,14 +149,29 @@ export default function Variations({ order_id }) {
     },
     {
       title: "SIZE",
-      dataIndex: "size",
       key: "size",
+      render: (item) => convert(item.size),
+    },
+    {
+      title: "ACTION",
+      key: "action",
+      render: (item) => (
+        <Link
+          to="#"
+          className="editIcon"
+          data-tooltip="edit"
+          onClick={() => handleEdit(item)}
+          style={{ "--c": "#35B263", "--bg": "#DCFCE7" }}
+        >
+          <FiEdit />
+        </Link>
+      ),
     },
   ];
 
   return (
     <div className="SubModel">
-      {Object(size).length > 0 ? (
+      {Object(sizeList).length > 0 ? (
         <Row gutter={16}>
           <Col span={16}>
             <button
@@ -159,39 +208,37 @@ export default function Variations({ order_id }) {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                onClick={handleClose}
               ></button>
             </div>
             <div className="modal-body">
               <div className="row">
-                <div className="col col-12 col-sm-6">
-                  <div className="mb-3">
-                    <label htmlFor="size" className="form-label">
-                      SIZE <span className="star">*</span>
-                    </label>
-                    <select
-                      className="form-control"
-                      name="size"
-                      id="size"
-                      value={meal.size}
-                      onChange={handleChange}
-                      required
-                    >
-                      <option value="" selected disabled>
-                        --
-                      </option>
-                      {size.map((item) => (
-                        <option key={item.value} value={item.value}>
-                          {item.label}
+                {Object(sizeList).length > 0 && (
+                  <div className="col col-12 col-sm-6">
+                    <div className="mb-3">
+                      <label htmlFor="size" className="form-label">
+                        SIZE <span className="star">*</span>
+                      </label>
+                      <select
+                        className="form-control"
+                        name="size"
+                        id="size"
+                        value={meal.size}
+                        onChange={(e) => handleChange(e)}
+                        required
+                      >
+                        <option value="" selected>
+                          --
                         </option>
-                      ))}
-
-                      {/* <option value="1">small</option>
-                      <option value="2">medium</option>
-                      <option value="3">big</option>
-                      <option value="4">family</option> */}
-                    </select>
+                        {sizeList.map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="col col-12 col-sm-6">
                   <div className="mb-3">
@@ -204,7 +251,7 @@ export default function Variations({ order_id }) {
                       name="number_of_piece"
                       id="number_of_piece"
                       value={meal.number_of_piece}
-                      onChange={handleChange}
+                      onChange={(e) => handleChange(e)}
                     />
                   </div>
                 </div>
@@ -220,7 +267,7 @@ export default function Variations({ order_id }) {
                       name="cost"
                       id="cost"
                       value={meal.cost}
-                      onChange={handleChange}
+                      onChange={(e) => handleChange(e)}
                       required
                     />
                   </div>
@@ -229,6 +276,13 @@ export default function Variations({ order_id }) {
             </div>
 
             <div className="modal-footer">
+              <input
+                type="hidden"
+                name="_method"
+                id="_method"
+                value={modalVisible ? "update" : "add"}
+              />
+
               <button type="submit" className="btn btn-primary">
                 <FaCheckCircle />
                 <span>save</span>
@@ -238,6 +292,7 @@ export default function Variations({ order_id }) {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                onClick={handleClose}
               >
                 <HiXMark />
                 <span>cancel</span>

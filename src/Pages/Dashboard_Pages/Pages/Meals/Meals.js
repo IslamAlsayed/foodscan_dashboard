@@ -5,7 +5,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import { getData ,imageStorageURL} from "../../../../axiosConfig/API";
+import { getData, imageStorageURL } from "../../../../axiosConfig/API";
 import Filtration from "../../Models/Filtration/Meals";
 import AddRow from "../../Models/AddRow/Meals";
 import EditMeal from "../../Models/Edit/EditMeal";
@@ -78,10 +78,7 @@ export default function Meals() {
       dataIndex: "image",
       key: "image",
       render: (record) => (
-        <img
-          src={`${imageStorageURL}/${record}`}
-          alt={record.name}
-        />
+        <img src={`${imageStorageURL}/${record}`} alt={record.name} />
       ),
     },
     {

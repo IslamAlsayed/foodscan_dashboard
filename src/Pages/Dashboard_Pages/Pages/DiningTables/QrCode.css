@@ -42,6 +42,11 @@
     margin: 20px auto 0;
 }
 
+.qrCodeComponent .qrCode-body .qrCode span {
+    font-size: 22px;
+    justify-content: center;
+}
+
 .qrCodeComponent .qrCode-body p {
     padding: 5px;
 }

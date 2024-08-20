@@ -75,7 +75,9 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
       if (response.status === "success") {
         updated();
         if (imageRef.current) imageRef.current.value = null;
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -120,7 +122,7 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
                     name="name"
                     id="name"
                     value={addon.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -135,10 +137,12 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
                     name="category_id"
                     id="category"
                     value={addon.category_id}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   >
                     {categories.map((category) => (
-                      <option key={category.id} value={category.id}>{category.name}</option>
+                      <option key={category.id} value={category.id}>
+                        {category.name}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -155,7 +159,7 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
                     name="cost"
                     id="cost"
                     value={addon.cost}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -171,7 +175,7 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
                         id="vegetarian"
                         value="vegetarian"
                         checked={addon.type === "vegetarian"}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                       />
                       <label htmlFor="vegetarian">vegetarian</label>
                     </div>
@@ -182,7 +186,7 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
                         id="non-vegetarian"
                         value="non-vegetarian"
                         checked={addon.type === "non-vegetarian"}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                       />
                       <label htmlFor="non-vegetarian">non vegetarian</label>
                     </div>
@@ -201,7 +205,7 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -215,7 +219,7 @@ export default function EditAddon({ visible, visibleToggle, item, updated }) {
                     className="form-control"
                     name="description"
                     id="description"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={addon.description}
                   ></textarea>
                 </div>

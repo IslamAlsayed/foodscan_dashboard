@@ -167,6 +167,16 @@
   padding: 10px 0 0;
 }
 
+
+@media (max-width: 425px) {
+  .Header .navbar .profile .dropdown-menu {
+    width: calc(100% - 15px);
+    position: fixed;
+    left: 50% !important;
+    transform: translateX(-50%);
+  }
+}
+
 .Header .navbar .profile .dropdown-menu li {
   height: fit-content;
   background: #fff !important;

@@ -26,7 +26,7 @@ export default function SubAddons({ order_id, data }) {
   useEffect(() => {
     if (data) setAddons(data);
     if (order_id) fetchOptionsAddons(order_id);
-  }, [data, setAddons, fetchOptionsAddons]);
+  }, [data, order_id, setAddons, fetchOptionsAddons]);
 
   const handleAddAddon = async (e) => {
     e.preventDefault();
@@ -38,17 +38,20 @@ export default function SubAddons({ order_id, data }) {
       });
 
       if (response.status === "success") {
-        refreshAddons();
+        refreshAddons(order_id);
         setAddon_id("");
         fetchOptionsAddons(order_id);
-        Swal.fire("Addon!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Addon!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
     }
   };
 
-  const refreshAddons = useCallback(async () => {
+  const refreshAddons = useCallback(async (order_id) => {
+    if (!order_id) return;
     try {
       const result = await getData(`admin/meals/${order_id}/addons`);
       setAddons(result);

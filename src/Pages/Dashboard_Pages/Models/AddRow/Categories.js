@@ -67,7 +67,9 @@ function Categories({ visible, updated }) {
           status: 1,
         });
         if (imageRef.current) imageRef.current.value = null;
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -104,7 +106,7 @@ function Categories({ visible, updated }) {
                     name="name"
                     id="name"
                     value={category.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -122,7 +124,7 @@ function Categories({ visible, updated }) {
                         name="status"
                         id="active"
                         value={1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={category.status === 1}
                         required
                       />
@@ -134,7 +136,7 @@ function Categories({ visible, updated }) {
                         name="status"
                         id="inactive"
                         value={0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={category.status === 0}
                         required
                       />
@@ -155,7 +157,7 @@ function Categories({ visible, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -171,7 +173,7 @@ function Categories({ visible, updated }) {
                     name="description"
                     id="description"
                     value={category.description}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   ></textarea>
                 </div>

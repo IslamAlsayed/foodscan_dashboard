@@ -15,7 +15,7 @@ export default function Extras({ visible, visibleToggle, updated }) {
     type: "",
     category_id: "",
     image: null,
-    status:"",
+    status: "",
     cost: "",
   });
 
@@ -28,7 +28,7 @@ export default function Extras({ visible, visibleToggle, updated }) {
     if (name === "type") {
       setExtra((prevData) => ({
         ...prevData,
-        type: id === "veg" ? "vegetarian" : "non-vegetarian",
+        type: id === "vegetarian" ? "vegetarian" : "non-vegetarian",
       }));
     } else if (name === "status") {
       setExtra((prevData) => ({
@@ -71,7 +71,9 @@ export default function Extras({ visible, visibleToggle, updated }) {
 
         if (imageRef.current) imageRef.current.value = null;
 
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -117,7 +119,7 @@ export default function Extras({ visible, visibleToggle, updated }) {
                     name="name"
                     id="name"
                     value={extra.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -133,7 +135,7 @@ export default function Extras({ visible, visibleToggle, updated }) {
                     name="category_id"
                     id="category"
                     value={extra.category_id}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   >
                     <option value="" selected disabled>
@@ -157,7 +159,7 @@ export default function Extras({ visible, visibleToggle, updated }) {
                     name="cost"
                     id="cost"
                     value={extra.cost}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -174,10 +176,10 @@ export default function Extras({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="type"
                         id="vegetarian"
-                        required
-                        checked={extra.type === "vegetarian"}
                         value="vegetarian"
-                        onChange={handleChange}
+                        checked={extra.type === "vegetarian"}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="vegetarian">vegetarian</label>
                     </div>
@@ -186,10 +188,10 @@ export default function Extras({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="type"
                         id="non-vegetarian"
-                        required
-                        checked={extra.type === "non-vegetarian"}
                         value="non-vegetarian"
-                        onChange={handleChange}
+                        checked={extra.type === "non-vegetarian"}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="non-vegetarian">non vegetarian</label>
                     </div>
@@ -208,10 +210,10 @@ export default function Extras({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="status"
                         id="active"
-                        required
                         value={1}
                         checked={extra.status === 1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="active">active</label>
                     </div>
@@ -220,10 +222,10 @@ export default function Extras({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="status"
                         id="inactive"
-                        required
                         value={0}
                         checked={extra.status === 0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <label htmlFor="inactive">inactive</label>
                     </div>
@@ -241,7 +243,7 @@ export default function Extras({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="image"
                     id="image"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>

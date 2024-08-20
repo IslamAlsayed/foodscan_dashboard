@@ -91,7 +91,7 @@ export default function TablesOrders({
                 name="customer_id"
                 id="customer_id"
                 value={tablesOrders.customer_id}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               >
                 <option value="" selected disabled>
                   --
@@ -114,7 +114,7 @@ export default function TablesOrders({
                 name="total_cost"
                 id="total_cost"
                 value={tablesOrders.total_cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
@@ -127,7 +127,7 @@ export default function TablesOrders({
                 name="status"
                 id="status"
                 value={tablesOrders.status}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               >
                 <option value="" selected disabled>
                   --

@@ -11,6 +11,7 @@ import DetailsItem from "./Features/DetailsItem";
 import { getData } from "../../../../axiosConfig/API";
 import Invoice from "./Features/Invoice";
 import MoreDetails from "./Features/MoreDetails";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Pos() {
   const [meals, setMeals] = useState([]);
@@ -122,41 +123,43 @@ export default function Pos() {
         <div className="posContent">
           <div className="subMenu mb-4">
             <div className="cards">
-              {subMenuItems.map((item, index) => (
-                <a href="#" className="card" key={index} id={item.id}>
-                  <img src={item.image} alt={item.title} />
-                  <small className="card-title">{item.title}</small>
-                </a>
-              ))}
+              {Object(subMenuItems).length > 0 &&
+                subMenuItems.map((item, index) => (
+                  <Link to="./pos" className="card" key={index} id={item.id}>
+                    <img src={item.image} alt={item.title} />
+                    <small className="card-title">{item.title}</small>
+                  </Link>
+                ))}
             </div>
           </div>
 
           <div className="mainMenu">
             <div className="cards">
-              {meals.map((item, index) => (
-                <div className="card" key={index} id={item.id}>
-                  <div className="card-img">
-                    <img
-                      src={`http://localhost:8000/storage/${item.image}`}
-                      alt={item.name}
-                    />
-                  </div>
-                  <div className="card-body p-2">
-                    <p className="fw-bold pb-2">{item.name}</p>
-                    <div>
-                      <span className="fw-bold price">
-                        ${item.meal_size_costs[0].cost}
-                      </span>
-                      <button
-                        className="addCartBtn"
-                        onClick={() => addToCart(item)}
-                      >
-                        <FaShoppingBag /> add
-                      </button>
+              {Object(meals).length > 0 &&
+                meals.map((item, index) => (
+                  <div className="card" key={index} id={item.id}>
+                    <div className="card-img">
+                      <img
+                        src={`http://localhost:8000/storage/${item.image}`}
+                        alt={item.name}
+                      />
+                    </div>
+                    <div className="card-body p-2">
+                      <p className="fw-bold pb-2">{item.name}</p>
+                      <div>
+                        <span className="fw-bold price">
+                          ${item.meal_size_costs[0].cost}
+                        </span>
+                        <button
+                          className="addCartBtn"
+                          onClick={() => addToCart(item)}
+                        >
+                          <FaShoppingBag /> add
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>

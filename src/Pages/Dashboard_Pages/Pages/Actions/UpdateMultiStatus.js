@@ -40,7 +40,9 @@ export default function UpdateMultiStatus({ url, item, updated, list }) {
             } else {
               setStaticItem({ status: NewValue });
             }
-            Swal.fire("Updated!", response.message, "success");
+            setTimeout(() => {
+              Swal.fire("Updated!", response.message, "success");
+            }, 250);
           }
         } catch (error) {
           Swal.fire("Error!", error.response?.data?.message, "error");

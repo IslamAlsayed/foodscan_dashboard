@@ -23,7 +23,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
   }, [visible]);
 
   const handleChange = (e) => {
-    const { name, value, id, type, files } = e.target;
+    const { name, value, type, files } = e.target;
     setOffer((prevData) => {
       if (name === "image" && type === "file") {
         return {
@@ -63,7 +63,9 @@ export default function Offers({ visible, visibleToggle, updated }) {
           image: null,
         });
         if (imageRef.current) imageRef.current.value = null;
-        Swal.fire("Saved!", response.data.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -95,7 +97,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="name"
                     id="name"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.name}
                     required
                   />
@@ -112,7 +114,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="discount"
                     id="discount"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.discount}
                     required
                   />
@@ -129,7 +131,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="startDate"
                     id="startDate"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.startDate}
                     required
                   />
@@ -146,7 +148,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="endDate"
                     id="endDate"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={offer.endDate}
                     required
                   />
@@ -166,7 +168,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
                         id="active"
                         value="active"
                         checked={offer.status === "active"}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="active">active</label>
@@ -178,7 +180,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
                         id="inactive"
                         value="inactive"
                         checked={offer.status === "inactive"}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         required
                       />
                       <label htmlFor="inactive">inactive</label>
@@ -198,7 +200,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>

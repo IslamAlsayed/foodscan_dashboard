@@ -96,26 +96,30 @@ export default function Addons({
         <div className="row pb-4">
           <div className="row mt-3">
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">name</label>
+              <label htmlFor="name" className="mb-2">
+                name
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="name"
                 id="name"
                 value={addons.name}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">price</label>
+              <label htmlFor="cost" className="mb-2">
+                price
+              </label>
               <input
                 type="number"
                 className="form-control"
                 name="cost"
                 id="cost"
                 value={addons.cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
@@ -128,7 +132,7 @@ export default function Addons({
                 name="category_id"
                 id="category_id"
                 value={addons.category_id}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               >
                 <option value="" selected disabled>
                   --
@@ -150,7 +154,7 @@ export default function Addons({
                   name="type"
                   id="vegetarian"
                   checked={addons.type === "vegetarian"}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="vegetarian">Vegetarian</label>
                 <input
@@ -158,21 +162,23 @@ export default function Addons({
                   name="type"
                   id="non-vegetarian"
                   checked={addons.type === "non-vegetarian"}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
-                <label htmlFor="non-vegetarian">Non-Vegetarian</label>
+                <label htmlFor="non-vegetarian">Non Vegetarian</label>
               </div>
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">status</label>
+              <label htmlFor="status" className="mb-2">
+                status
+              </label>
               <div className="col d-flex gap-2 align-items-center">
                 <input
                   type="radio"
                   name="status"
                   id="active"
                   checked={addons.status === 1}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="active">active</label>
                 <input
@@ -180,7 +186,7 @@ export default function Addons({
                   name="status"
                   id="inactive"
                   checked={addons.status === 0}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="inactive">inactive</label>
               </div>

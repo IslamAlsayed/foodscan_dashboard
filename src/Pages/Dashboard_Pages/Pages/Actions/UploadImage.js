@@ -43,14 +43,12 @@ export default function Image({ url, data }) {
 
       if (response.status === "success") {
         setActionsVisible(false);
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
-      if (error.response && error.response.status === 422) {
-        Swal.fire("Error!", "Validation error occurred.", "error");
-      } else {
-        Swal.fire("Error!", error.response?.data?.message, "error");
-      }
+      Swal.fire("Error!", error.response?.data?.message, "error");
     }
   };
 

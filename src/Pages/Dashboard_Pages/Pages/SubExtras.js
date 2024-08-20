@@ -26,7 +26,7 @@ export default function SubExtras({ order_id, data }) {
   useEffect(() => {
     if (data) setExtras(data);
     if (order_id) fetchOptionsExtras(order_id);
-  }, [data, setExtras, fetchOptionsExtras]);
+  }, [data, order_id, setExtras, fetchOptionsExtras]);
 
   const handleAddExtra = async (e) => {
     e.preventDefault();
@@ -38,17 +38,20 @@ export default function SubExtras({ order_id, data }) {
       });
 
       if (response.status === "success") {
-        refreshExtras();
+        refreshExtras(order_id);
         setExtra_id("");
         fetchOptionsExtras(order_id);
-        Swal.fire("Extra!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Extra!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
     }
   };
 
-  const refreshExtras = useCallback(async () => {
+  const refreshExtras = useCallback(async (order_id) => {
+    if (!order_id) return;
     try {
       const result = await getData(`admin/meals/${order_id}/extras`);
       setExtras(result);

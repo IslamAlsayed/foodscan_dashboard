@@ -1,11 +1,10 @@
+import { useEffect, useRef, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { IoKeyOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 import { AiFillEdit } from "react-icons/ai";
-import { MdEmail } from "react-icons/md";
 import profile from "../../../assets/global/profile.png";
-import { useEffect, useState } from "react";
 import { logout, getUser } from "../../../axiosConfig/Auth";
 
 const mockAdmin = {
@@ -18,7 +17,9 @@ const mockAdmin = {
 export default function Profile() {
   const history = useHistory();
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("");
+  const profileMenuRef = useRef(null);
   const [admin, setAdmin] = useState("");
 
   useEffect(() => {
@@ -59,41 +60,33 @@ export default function Profile() {
     }, 1000);
   };
 
+  const handleClickOutside = (event) => {
+    if (
+      profileMenuRef.current &&
+      !profileMenuRef.current.contains(event.target) &&
+      !event.target.closest(".dropdown-toggle")
+    ) {
+      setIsOpen(false);
+    }
+  };
+
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      const profileMenu = document.getElementById("profile");
-      if (profileMenu && !profileMenu.contains(event.target)) {
-        profileMenu.classList.remove("show");
-      }
-    };
-
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
-  const handleToggleProfile = (element) => {
-    var parent = document.getElementById(element);
-    if (parent) parent.classList.toggle("show");
-
-    if (element === "sidebar") {
-      var container = document.getElementById("Container");
-      if (container) container.classList.toggle("full-width");
-    }
-  };
-
-  const closeProfileModal = () => {
-    let profile = document.getElementById("profile");
-    if (profile) profile.classList.remove("show");
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    console.log(file);
   };
 
   return (
     <div className="dropdown profile">
       <button
         className="dropdown-toggle"
-        onClick={() => handleToggleProfile("profile")}
+        onClick={() => setIsOpen((prev) => !prev)}
       >
         <img src={profile} alt="avatar" />
         <div className="details">
@@ -101,10 +94,14 @@ export default function Profile() {
           <b>{admin.name}</b>
         </div>
       </button>
-      <ul className="dropdown-menu" id="profile">
+      <ul
+        className={`dropdown-menu ${isOpen ? "show" : ""}`}
+        id="profile"
+        ref={profileMenuRef}
+      >
         <div className="user">
           <div className="image">
-            <img src={profile} alt="user image" />
+            <img src={profile} alt="user" />
 
             <form className="input-file">
               <input
@@ -112,6 +109,8 @@ export default function Profile() {
                 name="image"
                 id="file-input"
                 className="file-input"
+                value=""
+                onChange={(e) => handleFileChange(e)}
               />
               <label htmlFor="file-input">
                 <AiFillEdit />
@@ -131,7 +130,7 @@ export default function Profile() {
         <ul className="group">
           <li
             className={`item ${classActive("edit/profile")}`}
-            onClick={() => closeProfileModal()}
+            onClick={() => setIsOpen((prev) => !prev)}
           >
             <Link to="/admin/dashboard/edit/profile">
               <FiEdit />
@@ -139,17 +138,8 @@ export default function Profile() {
             </Link>
           </li>
           <li
-            className={`item ${classActive("change/email")}`}
-            onClick={() => closeProfileModal()}
-          >
-            <Link to="/admin/dashboard/change/email">
-              <MdEmail />
-              <span>change email</span>
-            </Link>
-          </li>
-          <li
             className={`item ${classActive("change/password")}`}
-            onClick={() => closeProfileModal()}
+            onClick={() => setIsOpen((prev) => !prev)}
           >
             <Link to="/admin/dashboard/change/password">
               <IoKeyOutline />

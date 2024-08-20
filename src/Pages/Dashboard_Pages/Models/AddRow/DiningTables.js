@@ -48,7 +48,9 @@ function DiningTables({ visible, visibleToggle, updated }) {
           status: 1,
         });
 
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -81,7 +83,7 @@ function DiningTables({ visible, visibleToggle, updated }) {
                     name="num"
                     id="number"
                     value={diningTable.num}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -98,7 +100,7 @@ function DiningTables({ visible, visibleToggle, updated }) {
                     name="size"
                     id="size"
                     value={diningTable.size}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -114,7 +116,7 @@ function DiningTables({ visible, visibleToggle, updated }) {
                     className="form-control"
                     name="floor"
                     id="floor"
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     value={diningTable.floor}
                     required
                   />
@@ -132,10 +134,10 @@ function DiningTables({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="status"
                         id="active"
-                        required
                         value={1}
                         checked={diningTable.status === 1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <span>active</span>
                     </div>
@@ -144,10 +146,10 @@ function DiningTables({ visible, visibleToggle, updated }) {
                         type="radio"
                         name="status"
                         id="inactive"
-                        required
                         value={0}
                         checked={diningTable.status === 0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
                       <span>inactive</span>
                     </div>

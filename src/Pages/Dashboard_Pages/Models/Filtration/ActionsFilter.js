@@ -29,20 +29,22 @@ export default function ActionsFilter({ handleModalToggle, data, headers }) {
   const [toggleFilter, setToggleFilter] = useState(false);
 
   useEffect(() => {
-    const myCollapse = document.getElementById("collapseTarget");
+    if (data) {
+      const myCollapse = document.getElementById("collapseTarget");
 
-    if (myCollapse) {
-      const bsCollapse = new Collapse(myCollapse, { toggle: false });
-      if (toggleFilter) {
-        bsCollapse.show();
-        if (!sessionStorage.getItem("origin_data")) {
-          sessionStorage.setItem("origin_data", JSON.stringify(data));
+      if (myCollapse) {
+        const bsCollapse = new Collapse(myCollapse, { toggle: false });
+        if (toggleFilter) {
+          bsCollapse.show();
+          if (!sessionStorage.getItem("origin_data")) {
+            sessionStorage.setItem("origin_data", JSON.stringify(data));
+          }
+        } else {
+          bsCollapse.hide();
         }
-      } else {
-        bsCollapse.hide();
       }
     }
-  }, [toggleFilter]);
+  }, [toggleFilter, data]);
 
   const handleExport = () => {
     var listPrint = document.getElementById("listPrint");
@@ -79,7 +81,9 @@ export default function ActionsFilter({ handleModalToggle, data, headers }) {
               <div className="listPrint" id="listPrint">
                 <ul>
                   <li>
-                    <Button icon={<LuPrinter />}>Print</Button>
+                    <Button icon={<LuPrinter />} onClick={() => window.print()}>
+                      Print
+                    </Button>
                   </li>
                   <li>
                     <CSVLink

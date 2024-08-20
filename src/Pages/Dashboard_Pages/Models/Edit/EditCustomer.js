@@ -15,7 +15,6 @@ export default function EditCustomer({
   const [customer, setCustomer] = useState({
     name: "",
     email: "",
-    role: "",
     phone: "",
     password: "",
     password_confirmation: "",
@@ -30,7 +29,7 @@ export default function EditCustomer({
   }, [visible]);
 
   const handleChange = (e) => {
-    const { name, value, id } = e.target;
+    const { name, value } = e.target;
 
     setCustomer((prevData) => {
       return {
@@ -46,7 +45,6 @@ export default function EditCustomer({
     const formData = new FormData();
     formData.append("name", customer.name);
     formData.append("email", customer.email);
-    formData.append("role", customer.role);
     formData.append("phone", customer.phone);
     formData.append("password", customer.password);
     formData.append("password_confirmation", customer.password_confirmation);
@@ -61,7 +59,9 @@ export default function EditCustomer({
 
       if (response.status === "success") {
         updated();
-        Swal.fire("Updated!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Updated!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -93,7 +93,7 @@ export default function EditCustomer({
                     name="name"
                     id="name"
                     value={customer.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -109,33 +109,8 @@ export default function EditCustomer({
                     name="email"
                     id="email"
                     value={customer.email}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
-                </div>
-              </div>
-
-              <div className="col-6">
-                <div className="mb-3">
-                  <label htmlFor="role" className="form-label">
-                    role
-                  </label>
-                  <select
-                    name="role"
-                    id="role"
-                    value={customer.role}
-                    onChange={handleChange}
-                    className="form-control"
-                  >
-                    <option value="chef" selected={customer.role === "chef"}>
-                      Chef
-                    </option>
-                    <option
-                      value="cashier"
-                      selected={customer.role === "cashier"}
-                    >
-                      Cashier
-                    </option>
-                  </select>
                 </div>
               </div>
 
@@ -150,7 +125,7 @@ export default function EditCustomer({
                     name="phone"
                     id="phone"
                     value={customer.phone}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -166,7 +141,7 @@ export default function EditCustomer({
                     name="password"
                     id="password"
                     value={customer.password}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -182,7 +157,7 @@ export default function EditCustomer({
                     name="password_confirmation"
                     id="password_confirmation"
                     value={customer.password_confirmation}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>

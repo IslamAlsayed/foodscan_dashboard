@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { RiAddCircleLine } from "react-icons/ri";
 import { FaTrash, FaXmark } from "react-icons/fa6";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
@@ -16,6 +16,63 @@ export default function CartItems({
   const [discountValue, setDiscountValue] = useState(0);
   const [finalTotal, setFinalTotal] = useState(0);
   const [finalTotalWithDiscount, setFinalTotalWithDiscount] = useState(0);
+
+  const applyDiscount = useCallback(
+    (totalCost) => {
+      let discountAmount = 0;
+
+      if (discountType === "percentage") {
+        discountAmount = (totalCost * discountValue) / 100;
+      } else if (discountType === "fixed") {
+        discountAmount = discountValue;
+      }
+
+      const newFinalTotalWithDiscount = totalCost - discountAmount;
+      setFinalTotalWithDiscount(
+        newFinalTotalWithDiscount > 0 ? newFinalTotalWithDiscount : 0
+      );
+    },
+    [discountType, discountValue]
+  );
+
+  useEffect(() => {
+    const someTotalCost = 100;
+    applyDiscount(someTotalCost);
+  }, [applyDiscount]);
+
+  const updateFinalTotal = useCallback(
+    (items) => {
+      let totalCost = 0;
+
+      if (Object(items).length > 0) {
+        items.forEach((item) => {
+          if (item.sizes) {
+            item.sizes.forEach((size) => {
+              totalCost += size.cost * size.quantity;
+            });
+          }
+          if (item.addons) {
+            item.addons.forEach((addon) => {
+              totalCost += addon.cost * addon.quantity;
+            });
+          }
+          if (item.extras) {
+            item.extras.forEach((extra) => {
+              totalCost += extra.cost * extra.quantity;
+            });
+          }
+        });
+        setFinalTotal(totalCost);
+        applyDiscount(totalCost);
+        total(totalCost);
+      } else {
+        setFinalTotal(0);
+        applyDiscount(0);
+        total(0);
+      }
+    },
+    [applyDiscount, total]
+  );
 
   useEffect(() => {
     total(finalTotal);
@@ -40,22 +97,7 @@ export default function CartItems({
     return () => {
       window.removeEventListener("storageUpdated", loadStoreItems);
     };
-  }, []);
-
-  const applyDiscount = (totalCost) => {
-    let discountAmount = 0;
-
-    if (discountType === "percentage") {
-      discountAmount = (totalCost * discountValue) / 100;
-    } else if (discountType === "fixed") {
-      discountAmount = discountValue;
-    }
-
-    const newFinalTotalWithDiscount = totalCost - discountAmount;
-    setFinalTotalWithDiscount(
-      newFinalTotalWithDiscount > 0 ? newFinalTotalWithDiscount : 0
-    );
-  };
+  }, [finalTotal, total, updateFinalTotal]);
 
   const updateQuantity = (id, operation) => {
     const updatedItems = items.map((item) =>
@@ -82,37 +124,6 @@ export default function CartItems({
     updateFinalTotal(updatedItems);
   };
 
-  const updateFinalTotal = (items) => {
-    let totalCost = 0;
-
-    if (Object(items).length > 0) {
-      items.forEach((item) => {
-        if (item.sizes) {
-          item.sizes.forEach((size) => {
-            totalCost += size.cost * size.quantity;
-          });
-        }
-        if (item.addons) {
-          item.addons.forEach((addon) => {
-            totalCost += addon.cost * addon.quantity;
-          });
-        }
-        if (item.extras) {
-          item.extras.forEach((extra) => {
-            totalCost += extra.cost * extra.quantity;
-          });
-        }
-      });
-      setFinalTotal(totalCost);
-      applyDiscount(totalCost);
-      total(totalCost);
-    } else {
-      setFinalTotal(0);
-      applyDiscount(0);
-      total(0);
-    }
-  };
-
   const handleOrder = () => {
     Swal.fire({
       title: "Confirm Order",
@@ -130,7 +141,9 @@ export default function CartItems({
           console.log("response", response);
           if (response.status === "success") {
             handleResetCart();
-            Swal.fire("Saved!", response.message, "success");
+            setTimeout(() => {
+              Swal.fire("Saved!", response.message, "success");
+            }, 250);
           }
         } catch (error) {
           Swal.fire("Error!", error.response?.data?.message, "error");

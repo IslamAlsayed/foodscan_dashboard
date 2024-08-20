@@ -5,7 +5,6 @@ import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { Header } from "../../Components/Dashboard/Header/Header";
 import { Sidebar } from "../../Components/Dashboard/Sidebar/Sidebar";
 import { EditProfile } from "./Pages/Profile/EditProfile";
-import { ChangeEmail } from "./Pages/Profile/ChangeEmail";
 import { ChangePassword } from "./Pages/Profile/ChangePassword";
 import privateRoutes from "../Dashboard_Pages/store/privateRoutes";
 import NotFound from "./Pages/_404_page";
@@ -45,11 +44,6 @@ export function Dashboard() {
             />
 
             <ProtectedRoute
-              path="/admin/dashboard/change/email"
-              component={ChangeEmail}
-            />
-
-            <ProtectedRoute
               path="/admin/dashboard/change/password"
               component={ChangePassword}
             />
@@ -60,7 +54,7 @@ export function Dashboard() {
                   key={route.path}
                   path={route.path}
                   component={route.component}
-                  exact={route.name == "Dashboard"}
+                  exact={route.name === "Dashboard"}
                 />
               ))
             )}

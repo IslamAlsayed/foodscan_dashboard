@@ -40,7 +40,9 @@ export default function AddCustomer() {
           password_confirmation: "",
         });
 
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -84,7 +86,7 @@ export default function AddCustomer() {
                     name="name"
                     id="name"
                     value={customer.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -101,7 +103,7 @@ export default function AddCustomer() {
                     name="email"
                     id="email"
                     value={customer.email}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -118,7 +120,7 @@ export default function AddCustomer() {
                     name="phone"
                     id="phone"
                     value={customer.phone}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -135,7 +137,7 @@ export default function AddCustomer() {
                     name="password"
                     id="password"
                     value={customer.password}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -152,7 +154,7 @@ export default function AddCustomer() {
                     name="password_confirmation"
                     id="password_confirmation"
                     value={customer.password_confirmation}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>

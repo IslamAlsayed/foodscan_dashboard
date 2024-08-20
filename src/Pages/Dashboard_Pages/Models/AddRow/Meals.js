@@ -86,7 +86,9 @@ export default function Meals({ visible, visibleToggle, updated }) {
         });
 
         if (imageRef.current) imageRef.current.value = null;
-        Swal.fire("Saved!", response.message, "success");
+        setTimeout(() => {
+          Swal.fire("Saved!", response.message, "success");
+        }, 250);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -132,7 +134,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                     name="name"
                     id="name"
                     value={meal.name}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -148,7 +150,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                     name="category_id"
                     id="category"
                     value={meal.category_id}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   >
                     <option value="" selected disabled>
@@ -172,7 +174,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                     name="cost"
                     id="cost"
                     value={meal.cost}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -188,7 +190,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                     name="number_of_pieces"
                     id="number_of_pieces"
                     value={meal.number_of_pieces}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </div>
@@ -203,7 +205,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                     name="size"
                     id="size"
                     value={meal.size}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   >
                     <option value="" selected disabled>
@@ -228,7 +230,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                     name="image"
                     id="image"
                     ref={imageRef}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   />
                 </div>
@@ -246,7 +248,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                         name="type"
                         id="vegetarian"
                         value="vegetarian"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.type === "vegetarian"}
                         required
                       />
@@ -258,7 +260,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                         name="type"
                         id="non-vegetarian"
                         value="non-vegetarian"
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.type === "non-vegetarian"}
                         required
                       />
@@ -280,7 +282,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                         name="status"
                         id="active"
                         value={1}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.status === 1}
                         required
                       />
@@ -292,7 +294,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                         name="status"
                         id="inactive"
                         value={0}
-                        onChange={handleChange}
+                        onChange={(e) => handleChange(e)}
                         checked={meal.status === 0}
                         required
                       />
@@ -312,7 +314,7 @@ export default function Meals({ visible, visibleToggle, updated }) {
                     name="description"
                     id="description"
                     value={meal.description}
-                    onChange={handleChange}
+                    onChange={(e) => handleChange(e)}
                     required
                   ></textarea>
                 </div>

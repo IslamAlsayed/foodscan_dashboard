@@ -1,73 +1,82 @@
 import "./Profile.css";
-import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { updateData } from "../../../../axiosConfig/API";
+import Cookies from "js-cookie";
 
 export function ChangePassword() {
-  const [old_password, setOld_password] = useState("");
-  const [new_password, setNew_password] = useState("");
-  const [new_password_confirmation, setNew_password_confirmation] =
-    useState("");
+  const [employee, setEmployee] = useState({
+    old_password: "",
+    new_password: "",
+    new_password_confirmation: "",
+  });
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const adminData = JSON.parse(localStorage.getItem("adminData") || {});
+  let adminCookies = JSON.parse(Cookies.get("admin_resta"));
 
   useEffect(() => {
-    if (adminData) {
-      setOld_password("");
-      setNew_password("");
-      setNew_password_confirmation("");
+    if (adminCookies) {
+      setEmployee({
+        old_password: "",
+        new_password: "",
+        new_password_confirmation: "",
+      });
     }
-  }, [adminData]);
+  }, [adminCookies]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEmployee({ ...employee, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!old_password || !new_password || !new_password_confirmation) {
+    if (
+      !employee.old_password ||
+      !employee.new_password ||
+      !employee.new_password_confirmation
+    ) {
       setErrorMessage("Please fill in all required fields.");
       return;
     }
 
-    if (new_password !== new_password_confirmation) {
+    if (employee.new_password !== employee.new_password_confirmation) {
       setErrorMessage(
         "The new password and password confirmation do not match."
       );
       return;
     }
 
+    const formData = new FormData();
+    formData.append("old_password", employee.old_password);
+    formData.append("new_password", employee.new_password);
+    formData.append(
+      "new_password_confirmation",
+      employee.new_password_confirmation
+    );
+    formData.append("_method", "patch");
+
     try {
       const response = await updateData(
         "admin/employees/change-password",
-        {
-          old_password: old_password,
-          new_password: new_password,
-          new_password_confirmation: new_password_confirmation,
-        },
-        "patch"
+        formData,
+        false
       );
 
       if (response.status === "success") {
+        setEmployee({
+          old_password: "",
+          new_password: "",
+          new_password_confirmation: "",
+        });
         setMessage(response.message);
-        setOld_password("");
-        setNew_password("");
-        setNew_password_confirmation("");
         setErrorMessage("");
-
         setTimeout(() => setMessage(""), 3000);
       }
     } catch (error) {
       setErrorMessage(error.response.data.message || "An error occurred");
-      if (error.response && error.response.status === 422) {
-        Swal.fire("Error!", "Validation error occurred.", "error");
-      } else {
-        Swal.fire(
-          "Error!",
-          error.response.data.message || "An error occurred",
-          "error"
-        );
-      }
     }
   };
 
@@ -93,8 +102,8 @@ export function ChangePassword() {
                 className="form-control"
                 name="old_password"
                 id="old_password"
-                value={old_password}
-                onChange={(e) => setOld_password(e.target.value)}
+                value={employee.old_password}
+                onChange={(e) => handleChange(e)}
                 required
               />
             </div>
@@ -110,8 +119,8 @@ export function ChangePassword() {
                 className="form-control"
                 name="new_password"
                 id="new_password"
-                value={new_password}
-                onChange={(e) => setNew_password(e.target.value)}
+                value={employee.new_password}
+                onChange={(e) => handleChange(e)}
                 required
               />
             </div>
@@ -127,8 +136,8 @@ export function ChangePassword() {
                 className="form-control"
                 name="new_password_confirmation"
                 id="new_password_confirmation"
-                value={new_password_confirmation}
-                onChange={(e) => setNew_password_confirmation(e.target.value)}
+                value={employee.new_password_confirmation}
+                onChange={(e) => handleChange(e)}
                 required
               />
             </div>

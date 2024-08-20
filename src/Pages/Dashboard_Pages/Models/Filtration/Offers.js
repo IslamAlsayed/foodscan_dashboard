@@ -99,62 +99,72 @@ export default function Offers({
         <div className="row pb-4">
           <div className="row mt-3">
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">name</label>
+              <label htmlFor="name" className="mb-2">
+                name
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="name"
                 id="name"
                 value={offers.name}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">discount</label>
+              <label htmlFor="discount" className="mb-2">
+                discount
+              </label>
               <input
                 type="number"
                 className="form-control"
                 name="discount"
                 id="discount"
                 value={offers.discount}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">start data</label>
+              <label htmlFor="start_data" className="mb-2">
+                start data
+              </label>
               <input
                 type="datetime-local"
                 className="form-control"
                 name="start_data"
                 id="start_data"
                 value={offers.start_data}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">end data</label>
+              <label htmlFor="end_data" className="mb-2">
+                end data
+              </label>
               <input
                 type="datetime-local"
                 className="form-control"
                 name="end_data"
                 id="end_data"
                 value={offers.end_data}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-4 mb-3">
-              <label className="mb-2">status</label>
+              <label htmlFor="status" className="mb-2">
+                status
+              </label>
               <div className="col d-flex gap-2 align-items-center">
                 <input
                   type="radio"
                   name="status"
                   id="active"
                   checked={offers.status === 1}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="active">active</label>
                 <input
@@ -162,7 +172,7 @@ export default function Offers({
                   name="status"
                   id="inactive"
                   checked={offers.status === 0}
-                  onChange={handleChange}
+                  onChange={(e) => handleChange(e)}
                 />
                 <label htmlFor="inactive">inactive</label>
               </div>

@@ -68,50 +68,58 @@ export default function CreditBalanceReport({
         <div className="row pb-4">
           <div className="row mt-3">
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">name</label>
+              <label htmlFor="name" className="mb-2">
+                name
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="name"
                 id="name"
                 value={credit.cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">email</label>
+              <label htmlFor="email" className="mb-2">
+                email
+              </label>
               <input
                 type="email"
                 className="form-control email"
                 name="email"
                 id="email"
                 value={credit.cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">phone</label>
+              <label htmlFor="phone" className="mb-2">
+                phone
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="phone"
                 id="phone"
                 value={credit.cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label className="mb-2">role</label>
+              <label htmlFor="role" className="mb-2">
+                role
+              </label>
               <input
                 type="text"
                 className="form-control"
                 name="role"
                 id="role"
                 value={credit.cost}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e)}
               />
             </div>
           </div>
