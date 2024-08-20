@@ -16,10 +16,6 @@ export function Header() {
     window.location.pathname === "/branch_2" ? "2" : "1"
   );
 
-  const handleBranchChange = (event) => {
-    setSelectedBranch(event.target.value);
-  };
-
   const handleClickOutside = (event) => {
     if (
       branchRef.current &&
@@ -46,8 +42,12 @@ export function Header() {
   };
 
   const injectAppTitle = () => {
-    document.title = "resta - QrCode Restaurant";
+    document.title = "Resta";
     history.push("/admin/dashboard");
+  };
+
+  const handleBranchChange = (event) => {
+    setSelectedBranch(event.target.value);
   };
 
   return (

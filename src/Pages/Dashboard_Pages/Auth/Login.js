@@ -17,6 +17,11 @@ export default function Login() {
   const [password, setPassword] = useState("test1234");
   const [error, setError] = useState("");
 
+  const injectData = (email, password) => {
+    setEmail(email);
+    setPassword(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -43,50 +48,53 @@ export default function Login() {
 
   return (
     <div className="formUser">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6 offset-md-3">
-            <div className="card my-5">
-              <form className="card-body p-lg-5" onSubmit={handleSubmit}>
-                {error && <p className="alert alert-danger">{error}</p>}
-                <div className="mb-3">
-                  <label htmlFor="email pb-2">email</label>
-                  <input
-                    type="email"
-                    className="form-control email"
-                    name="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password pb-2">password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    name="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="btn btn-color px-5 mb-2 w-100"
-                  >
-                    Login
-                  </button>
-                </div>
-                <div className="changeRoute form-class-ext-center text-dark">
-                  <Link to="/auth/resetPassword" className="text-dark fw-bold">
-                    forget password?
-                  </Link>
-                </div>
-              </form>
-            </div>
+      <div class="content">
+        <form className="mb-3" onSubmit={handleSubmit}>
+          {error && <p className="alert alert-danger">{error}</p>}
+          <div className="mb-3">
+            <label htmlFor="email pb-2">email</label>
+            <input
+              type="email"
+              className="form-control email"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
+          <div className="mb-3">
+            <label htmlFor="password pb-2">password</label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="text-center">
+            <button type="submit" className="btn btn-color px-5 mb-2 w-100">
+              Login
+            </button>
+          </div>
+          <div className="changeRoute form-class-ext-center text-dark">
+            <Link to="/auth/resetPassword" className="text-dark fw-bold">
+              forget password?
+            </Link>
+          </div>
+        </form>
+
+        <div className="roles">
+          <button onClick={() => injectData("islam@gmail.com", "test1234")}>
+            admin
+          </button>
+          <button onClick={() => injectData("islam2@gmail.com", "test1234")}>
+            chef
+          </button>
+          <button onClick={() => injectData("islam3@gmail.com", "test1234")}>
+            casher
+          </button>
         </div>
       </div>
     </div>

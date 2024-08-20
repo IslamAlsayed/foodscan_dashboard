@@ -1,5 +1,3 @@
-import "./styles/Login.css";
-
 export default function ResetPassword() {
   return (
     <div className="formUser">

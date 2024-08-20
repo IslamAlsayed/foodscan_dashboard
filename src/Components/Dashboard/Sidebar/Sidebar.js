@@ -26,8 +26,8 @@ export function Sidebar() {
     let titleValue = "";
 
     if (window.location.pathname !== "/admin/dashboard")
-      titleValue = "resta - " + url;
-    else titleValue = "resta - QrCode Restaurant";
+      titleValue = "Resta - " + url;
+    else titleValue = "Resta";
 
     document.title = titleValue;
   };
