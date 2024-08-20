@@ -4,7 +4,9 @@ import React, { useEffect } from "react";
 export default function Loader() {
   useEffect(() => {
     setTimeout(() => {
-      document.getElementById("Loader").classList.remove("show");
+      if (document.getElementById("Loader")) {
+        document.getElementById("Loader").classList.remove("show");
+      }
     }, 2000);
   }, []);
 

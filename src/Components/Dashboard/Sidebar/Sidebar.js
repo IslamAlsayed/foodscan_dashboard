@@ -1,10 +1,18 @@
 import "./Sidebar.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaGear, FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import publicRoutes from "../../../Pages/Dashboard_Pages/store/publicRoutes";
+import { getUser } from "../../../axiosConfig/Auth";
 
 export function Sidebar() {
+  const [adminRole, setAdminRole] = useState();
+
+  useEffect(() => {
+    const user = getUser();
+    setAdminRole(user.Role);
+  }, []);
+
   const isActive = (path) => {
     return (
       window.location.pathname
@@ -52,45 +60,60 @@ export function Sidebar() {
         />
       </div>
 
-      {publicRoutes.map((routeGroup, index) => (
-        <div className="group" key={index}>
-          {routeGroup.label && <label>{routeGroup.label}</label>}
+      {publicRoutes.map((routeGroup, index) => {
+        const hasMatchingItems = routeGroup.items.some((route) =>
+          route.role.includes(adminRole)
+        );
+
+        return (
+          hasMatchingItems && (
+            <div className="group" key={index}>
+              {routeGroup.label && <label>{routeGroup.label}</label>}
+              <ul>
+                {routeGroup.items.map(
+                  (route) =>
+                    route.role.includes(adminRole) && (
+                      <li
+                        key={route.id}
+                        id={route.id}
+                        className={`liRoute ${
+                          isActive(route.path) ? "active" : ""
+                        }`}
+                        onClick={() => handleClassActive(route.id)}
+                      >
+                        <Link to={route.path}>
+                          {React.createElement(route.icon)}
+                          <span>{route.name}</span>
+                        </Link>
+                      </li>
+                    )
+                )}
+              </ul>
+            </div>
+          )
+        );
+      })}
+
+      {adminRole === "admin" && (
+        <div className="group" key="75">
+          <label>set up</label>
           <ul>
-            {routeGroup.items.map((route) => (
-              <li
-                key={route.id}
-                id={route.id}
-                className={`liRoute ${isActive(route.path) ? "active" : ""}`}
-                onClick={() => handleClassActive(route.id)}
-              >
-                <Link to={route.path}>
-                  {React.createElement(route.icon)}
-                  <span>{route.name}</span>
-                </Link>
-              </li>
-            ))}
+            <li
+              key="77"
+              id="77"
+              className={`liRoute ${
+                isActive("/settings/company") ? "active" : ""
+              }`}
+              onClick={() => handleClassActive("77")}
+            >
+              <Link to="/settings/company">
+                <FaGear />
+                <span>settings</span>
+              </Link>
+            </li>
           </ul>
         </div>
-      ))}
-
-      <div className="group" key="75">
-        <label>set up</label>
-        <ul>
-          <li
-            key="77"
-            id="77"
-            className={`liRoute ${
-              isActive("/settings/company") ? "active" : ""
-            }`}
-            onClick={() => handleClassActive("77")}
-          >
-            <Link to="/settings/company">
-              <FaGear />
-              <span>settings</span>
-            </Link>
-          </li>
-        </ul>
-      </div>
+      )}
     </div>
   );
 }

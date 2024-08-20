@@ -6,6 +6,7 @@ import { MdDateRange } from "react-icons/md";
 import ImageTest from "../../../../assets/global/profile.png";
 import Swal from "sweetalert2";
 import { getData, updateData } from "../../../../axiosConfig/API";
+import { getUser, isAuth } from "../../../../axiosConfig/Auth";
 
 export default function Show() {
   const { id } = useParams();
@@ -13,6 +14,14 @@ export default function Show() {
   const [loading, setLoading] = useState(true);
   const [pay, setPay] = useState(null);
   const [status, setStatus] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    if (isAuth()) {
+      const user = getUser();
+      setUserRole(user.Role);
+    }
+  }, []);
 
   const fetchOrder = useCallback(async (id) => {
     if (!id) return;
@@ -152,19 +161,24 @@ export default function Show() {
         </div>
 
         <div className="options">
-          <select
-            name="payment_type"
-            id="payment_type"
-            value={pay === "Paid" ? "1" : "0"}
-            onChange={handlePayChange}
-          >
-            <option value="1" disabled={pay === "Paid"}>
-              Paid
-            </option>
-            <option value="0" disabled={pay === "Not Paid"}>
-              Not Paid
-            </option>
-          </select>
+          {userRole && userRole === "admin" || userRole === "casher" ? (
+            <select
+              name="payment_type"
+              id="payment_type"
+              value={pay === "Paid" ? "1" : "0"}
+              onChange={handlePayChange}
+            >
+              <option value="1" disabled={pay === "Paid"}>
+                Paid
+              </option>
+              <option value="0" disabled={pay === "Not Paid"}>
+                Not Paid
+              </option>
+            </select>
+          ) : (
+            false
+          )}
+
           <select
             name="status"
             id="status"

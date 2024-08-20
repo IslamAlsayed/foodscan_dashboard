@@ -260,7 +260,7 @@ export default function CartItems({
                 <th>price</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bodyCartItems">
               {Object(items).length > 0 ? (
                 items.map((item) => (
                   <tr id={item.id} key={item.id}>

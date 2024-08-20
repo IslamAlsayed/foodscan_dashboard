@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import { updateData } from "../../../../axiosConfig/API";
 
-export function EditProfile() {
+export default function EditProfile() {
   const [employee, setEmployee] = useState({
     name: "",
     email: "",

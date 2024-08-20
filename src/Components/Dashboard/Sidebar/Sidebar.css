@@ -1,6 +1,6 @@
 .Sidebar {
   width: 270px;
-  padding: 35px 15px 15px;
+  padding: 15px;
   overflow-y: auto;
   transition: transform 0.3s;
   height: calc(100svh - 70px);
@@ -45,12 +45,6 @@
 
   .Sidebar .closeSidebar {
     display: block;
-  }
-}
-
-@media (max-width: 768px) {
-  .Sidebar {
-    padding: 15px;
   }
 }
 

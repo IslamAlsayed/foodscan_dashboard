@@ -125,7 +125,12 @@ export default function Pos() {
             <div className="cards">
               {Object(subMenuItems).length > 0 &&
                 subMenuItems.map((item, index) => (
-                  <Link to="./pos" className="card" key={index} id={item.id}>
+                  <Link
+                    to="./pos"
+                    className="card"
+                    key={index}
+                    id={`subMenu_${index + 1}`}
+                  >
                     <img src={item.image} alt={item.title} />
                     <small className="card-title">{item.title}</small>
                   </Link>
@@ -137,7 +142,7 @@ export default function Pos() {
             <div className="cards">
               {Object(meals).length > 0 &&
                 meals.map((item, index) => (
-                  <div className="card" key={index} id={item.id}>
+                  <div className="card" key={index} id={`mainMenu_${item.id}`}>
                     <div className="card-img">
                       <img
                         src={`http://localhost:8000/storage/${item.image}`}

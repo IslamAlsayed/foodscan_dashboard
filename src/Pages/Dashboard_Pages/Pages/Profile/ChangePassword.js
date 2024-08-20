@@ -5,7 +5,7 @@ import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { updateData } from "../../../../axiosConfig/API";
 import Cookies from "js-cookie";
 
-export function ChangePassword() {
+export default function ChangePassword() {
   const [employee, setEmployee] = useState({
     old_password: "",
     new_password: "",
@@ -23,7 +23,7 @@ export function ChangePassword() {
         new_password_confirmation: "",
       });
     }
-  }, [adminCookies]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

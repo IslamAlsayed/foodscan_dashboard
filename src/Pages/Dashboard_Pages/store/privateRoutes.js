@@ -18,6 +18,8 @@ import ShowAdministrator from "../Pages/Administrators/Show";
 import ShowCustomer from "../Pages/Customers/Show";
 import DetailsCustomer from "../Pages/Customers/Details";
 import ShowEmployee from "../Pages/Employees/Show";
+import EditProfile from "../Pages/Profile/EditProfile";
+import ChangePassword from "../Pages/Profile/ChangePassword";
 
 const privateRoutes = [
   {
@@ -25,66 +27,89 @@ const privateRoutes = [
     name: "show meal",
     icon: GiTemporaryShield,
     component: ShowMeal,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/categories/show/:id",
     name: "show category",
     icon: GiTemporaryShield,
     component: ShowCategory,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/dining-table/show/:id",
     name: "show dining table",
     icon: PiPicnicTableBold,
     component: ShowDiningTable,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/extra/show/:id",
     name: "show extra",
     icon: PiPicnicTableBold,
     component: ShowExtra,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/addon/show/:id",
     name: "show addon",
     icon: PiPicnicTableBold,
     component: ShowAddon,
+    role: ["admin"],
   },
   {
-    path: "/admin/dashboard/delivery-order/show/:id",
+    path: "/admin/dashboard/delivery-orders/show/:id",
     name: "show delivery order",
     icon: LuFileSpreadsheet,
     component: ShowDeliveryOrder,
+    role: ["admin", "chef", "casher"],
   },
   {
     path: "/admin/dashboard/offer/show/:id",
     name: "show offer",
     icon: BiSolidOffer,
     component: ShowOffer,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/administrator/show/:id",
     name: "show Administrator",
     icon: FaUser,
     component: ShowAdministrator,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/customer/show/:id",
     name: "show Customer",
     icon: FaUsers,
     component: ShowCustomer,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/details-order/:id/:id",
     name: "details order",
     icon: FaUsers,
     component: DetailsCustomer,
+    role: ["admin"],
   },
   {
     path: "/admin/dashboard/employee/show/:id",
     name: "show Employee",
     icon: FaUserGroup,
     component: ShowEmployee,
+    role: ["admin"],
+  },
+  {
+    path: "/admin/dashboard/edit/profile",
+    name: "edit profile",
+    component: EditProfile,
+    role: ["admin", "chef", "casher"],
+  },
+  {
+    path: "/admin/dashboard/change/password",
+    name: "change password",
+    component: ChangePassword,
+    role: ["admin", "chef", "casher"],
   },
 ];
 

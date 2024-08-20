@@ -76,7 +76,7 @@ export default function TableOrders() {
       render: (item) => (
         <>
           <Link
-            to={`/admin/dashboard/delivery-order/show/${item.id}`}
+            to={`/admin/dashboard/delivery-orders/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

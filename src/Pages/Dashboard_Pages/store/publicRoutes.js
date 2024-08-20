@@ -39,6 +39,7 @@ const routes = [
         name: "Dashboard",
         icon: MdDashboard,
         component: Dashboard,
+        role: ["admin", "chef", "casher"],
       },
       {
         id: "2",
@@ -46,6 +47,7 @@ const routes = [
         name: "Meals",
         icon: GiTemporaryShield,
         component: Meals,
+        role: ["admin"],
       },
       {
         id: "3",
@@ -53,6 +55,7 @@ const routes = [
         name: "Categories",
         icon: BiCategory,
         component: Categories,
+        role: ["admin"],
       },
       {
         id: "4",
@@ -60,6 +63,7 @@ const routes = [
         name: "Dining Tables",
         icon: LiaTableSolid,
         component: DiningTables,
+        role: ["admin"],
       },
       {
         id: "5",
@@ -67,6 +71,7 @@ const routes = [
         name: "Extras",
         icon: SiNextra,
         component: Extras,
+        role: ["admin"],
       },
       {
         id: "6",
@@ -74,6 +79,7 @@ const routes = [
         name: "Addons",
         icon: TbDeviceIpadDollar,
         component: Addons,
+        role: ["admin"],
       },
     ],
   },
@@ -86,6 +92,7 @@ const routes = [
         name: "Pos Menu",
         icon: FaSignsPost,
         component: Pos,
+        role: ["admin", "casher"],
       },
       {
         id: "7",
@@ -93,6 +100,7 @@ const routes = [
         name: "Delivery Orders",
         icon: TbTruckDelivery,
         component: DeliveryOrders,
+        role: ["admin", "chef", "casher"],
       },
       {
         id: "8",
@@ -100,6 +108,7 @@ const routes = [
         name: "Table Orders",
         icon: GiStorkDelivery,
         component: TablesOrders,
+        role: ["admin", "chef", "casher"],
       },
     ],
   },
@@ -112,6 +121,7 @@ const routes = [
         name: "Offers",
         icon: BiSolidOffer,
         component: Offers,
+        role: ["admin"],
       },
     ],
   },
@@ -124,6 +134,7 @@ const routes = [
         name: "Administrators",
         icon: FaUser,
         component: Administrators,
+        role: ["admin"],
       },
       {
         id: "11",
@@ -131,6 +142,7 @@ const routes = [
         name: "Customers",
         icon: FaUsers,
         component: Customers,
+        role: ["admin"],
       },
       {
         id: "12",
@@ -138,6 +150,7 @@ const routes = [
         name: "Employees",
         icon: FaUserGroup,
         component: Employees,
+        role: ["admin"],
       },
     ],
   },
@@ -150,6 +163,7 @@ const routes = [
         name: "Transactions",
         icon: GrTransaction,
         component: Transactions,
+        role: ["admin"],
       },
     ],
   },
@@ -162,6 +176,7 @@ const routes = [
         name: "Sales Reports",
         icon: BsGraphUpArrow,
         component: SalesReports,
+        role: ["admin"],
       },
       {
         id: "15",
@@ -169,6 +184,7 @@ const routes = [
         name: "Items Reports",
         icon: RiAlignItemBottomLine,
         component: ItemsReports,
+        role: ["admin"],
       },
       {
         id: "16",
@@ -176,6 +192,7 @@ const routes = [
         name: "Credit Balance Report",
         icon: MdCreditScore,
         component: CreditBalanceReport,
+        role: ["admin"],
       },
     ],
   },

@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
 export default function DetailsItem({ visible, cartItem, modalClose }) {
-  const [staticModalVisible, setStaticModalVisible] = useState(false);
+  const [staticModalVisible, setStaticModalVisible] = useState(visible);
   const [mealSize, setMealSize] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedAddons, setSelectedAddons] = useState({});
   const [selectedExtras, setSelectedExtras] = useState({});
   const [quantity, setQuantity] = useState(1);
-  const [notes, setNotes] = useState(null);
+  const [notes, setNotes] = useState();
 
   useEffect(() => {
     if (cartItem) {
@@ -18,10 +18,6 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
     }
     setStaticModalVisible(visible);
   }, [cartItem, visible]);
-
-  const handleSizeChange = (size) => {
-    setSelectedSize(size);
-  };
 
   const handleSelectItem = (item, type) => {
     const updateFunction =
@@ -78,6 +74,15 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
       })),
     };
 
+    const finalizeCartUpdate = () => {
+      storeItems.push(newItem);
+      localStorage.setItem("cartItems", JSON.stringify(storeItems));
+      const event = new Event("storageUpdated");
+      window.dispatchEvent(event);
+      handleModalReset();
+      modalClose();
+    };
+
     if (document.getElementById("Loader")) {
       document.getElementById("Loader").classList.add("show");
 
@@ -88,15 +93,6 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
     } else {
       finalizeCartUpdate();
     }
-
-    const finalizeCartUpdate = () => {
-      storeItems.push(newItem);
-      localStorage.setItem("cartItems", JSON.stringify(storeItems));
-      const event = new Event("storageUpdated");
-      window.dispatchEvent(event);
-      handleModalReset();
-      modalClose();
-    };
   };
 
   const handleModalReset = () => {
@@ -173,7 +169,7 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
                     id={convert(size.size)}
                     value={size.size}
                     checked={size.size === selectedSize}
-                    onChange={() => handleSizeChange(size.size)}
+                    onChange={() => setSelectedSize(size.size)}
                   />
                   <label htmlFor={convert(size.size)}>
                     {convert(size.size)}
@@ -260,6 +256,7 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
               onChange={(e) => setNotes(e.target.value)}
             ></textarea>
           </div>
+
           <button
             type="button"
             className="btn form-control mt-3 fw-bold"
