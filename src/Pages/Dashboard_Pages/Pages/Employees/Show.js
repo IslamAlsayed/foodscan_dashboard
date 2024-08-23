@@ -52,7 +52,7 @@ export default function Show() {
     <div className="Show">
       <div className="row">
         <div className="image">
-          <img src={profileImage} alt="profile" />
+          <img loading="lazy" src={profileImage} alt="profile" />
         </div>
 
         <div className="details">

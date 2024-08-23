@@ -59,17 +59,19 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
           quantity,
         },
       ],
-      addons: addons.map(({ id, name, cost, quantity }) => ({
+      addons: addons.map(({ id, name, cost, image, quantity }) => ({
         id,
         name,
         cost,
+        image,
         quantity,
       })),
 
-      extras: extras.map(({ id, name, cost, quantity }) => ({
+      extras: extras.map(({ id, name, cost, image, quantity }) => ({
         id,
         name,
         cost,
+        image,
         quantity,
       })),
     };

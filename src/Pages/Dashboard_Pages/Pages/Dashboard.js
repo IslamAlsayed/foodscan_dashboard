@@ -1,5 +1,5 @@
 import "./Dashboard.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { BsFront } from "react-icons/bs";
@@ -197,7 +197,7 @@ export default function Dashboard() {
                     key={index}
                   >
                     <div className="card-img">
-                      <img src={card.image} alt={card.title} />
+                      <img loading="lazy" src={card.image} alt={card.title} />
                     </div>
                     <div className="card-title">{card.title}</div>
                   </Link>
@@ -221,7 +221,7 @@ export default function Dashboard() {
                     key={index}
                   >
                     <div className="card-img">
-                      <img src={card.image} alt={card.title} />
+                      <img loading="lazy" src={card.image} alt={card.title} />
                     </div>
                     <div className="card-text">
                       <p>{card.title}</p>

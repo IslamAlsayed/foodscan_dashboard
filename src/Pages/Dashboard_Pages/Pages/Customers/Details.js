@@ -1,13 +1,10 @@
 import "./Details.css";
 import Link from "antd/es/typography/Link";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-
 import Dashboard from "../../../../Pages/Dashboard_Pages/Pages/Dashboard";
 import ImageTest from "../../../../assets/global/profile.png";
 import ProgressOrder from "./ProgressOrder";
 
 export default function Details() {
-  const { id } = useParams();
   const currentStep = 4;
 
   return (
@@ -56,7 +53,7 @@ export default function Details() {
             <div className="cards">
               <div className="card" data-id="1">
                 <div className="card-img">
-                  <img src={ImageTest} alt="dish" />
+                  <img loading="lazy" src={ImageTest} alt="dish" />
                 </div>
                 <div className="card-text">
                   <p>{"name item"}</p>
@@ -69,7 +66,7 @@ export default function Details() {
 
               <div className="card" data-id="2">
                 <div className="card-img">
-                  <img src={ImageTest} alt="dish" />
+                  <img loading="lazy" src={ImageTest} alt="dish" />
                 </div>
                 <div className="card-text">
                   <p>{"name item"}</p>
@@ -82,7 +79,7 @@ export default function Details() {
 
               <div className="card" data-id="3">
                 <div className="card-img">
-                  <img src={ImageTest} alt="dish" />
+                  <img loading="lazy" src={ImageTest} alt="dish" />
                 </div>
                 <div className="card-text">
                   <p>{"name item"}</p>

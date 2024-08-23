@@ -78,7 +78,11 @@ export default function Meals() {
       dataIndex: "image",
       key: "image",
       render: (record) => (
-        <img src={`${imageStorageURL}/${record}`} alt={record.name} />
+        <img
+          loading="lazy"
+          src={`${imageStorageURL}/${record}`}
+          alt={record.name}
+        />
       ),
     },
     {

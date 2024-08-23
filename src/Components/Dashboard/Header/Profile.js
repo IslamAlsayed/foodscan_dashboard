@@ -88,7 +88,7 @@ export default function Profile() {
         className="dropdown-toggle"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        <img src={profile} alt="avatar" />
+        <img loading="lazy" src={profile} alt="avatar" />
         <div className="details">
           <span>Hello</span>
           <b>{admin.name}</b>
@@ -101,7 +101,7 @@ export default function Profile() {
       >
         <div className="user">
           <div className="image">
-            <img src={profile} alt="user" />
+            <img loading="lazy" src={profile} alt="user" />
 
             <form className="input-file">
               <input

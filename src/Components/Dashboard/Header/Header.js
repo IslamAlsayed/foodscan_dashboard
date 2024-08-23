@@ -53,7 +53,7 @@ export function Header() {
   return (
     <div className="Header">
       <Link to="#" onClick={injectAppTitle}>
-        <img src={Logo} className="logo" alt="logo" />
+        <img loading="lazy" src={Logo} className="logo" alt="logo" />
       </Link>
 
       <div className="navbar">

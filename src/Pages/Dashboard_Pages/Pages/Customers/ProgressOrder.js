@@ -18,7 +18,7 @@ const ProgressOrder = ({ currentStep }) => {
     <>
       <div className="head">
         <p>your order has been delivered</p>
-        <img src={Delivery} alt="delivery" />
+        <img loading="lazy" src={Delivery} alt="delivery" />
       </div>
 
       <div className="progressBar">

@@ -161,7 +161,7 @@ export default function Show() {
         </div>
 
         <div className="options">
-          {userRole && userRole === "admin" || userRole === "casher" ? (
+          {(userRole && userRole === "admin") || userRole === "casher" ? (
             <select
               name="payment_type"
               id="payment_type"
@@ -216,7 +216,7 @@ export default function Show() {
             <div className="cards">
               <div className="card" data-id="1">
                 <div className="card-img">
-                  <img src={ImageTest} alt="order" />
+                  <img loading="lazy" src={ImageTest} alt="order" />
                 </div>
                 <div className="card-text">
                   <p className="name fw-bold">kung peo chicken</p>
@@ -229,7 +229,7 @@ export default function Show() {
 
               <div className="card" data-id="2">
                 <div className="card-img">
-                  <img src={ImageTest} alt="order" />
+                  <img loading="lazy" src={ImageTest} alt="order" />
                 </div>
                 <div className="card-text">
                   <p className="name fw-bold">kung peo chicken</p>

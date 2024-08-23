@@ -67,7 +67,7 @@ export default function Show() {
 
         <div className="qrCode-body">
           <div className="logo">
-            <img src={Logo} alt="Logo" />
+            <img loading="lazy" src={Logo} alt="Logo" />
           </div>
           <p>mirpur 1 (main)</p>
           <p>+48446843546</p>

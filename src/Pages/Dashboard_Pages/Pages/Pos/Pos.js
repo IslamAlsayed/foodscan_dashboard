@@ -131,7 +131,7 @@ export default function Pos() {
                     key={index}
                     id={`subMenu_${index + 1}`}
                   >
-                    <img src={item.image} alt={item.title} />
+                    <img loading="lazy" src={item.image} alt={item.title} />
                     <small className="card-title">{item.title}</small>
                   </Link>
                 ))}

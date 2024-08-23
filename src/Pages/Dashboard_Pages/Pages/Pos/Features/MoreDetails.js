@@ -72,7 +72,10 @@ export default function MoreDetails({ visible, data, modalClose }) {
               {addons.map((addon) => (
                 <div className="addon" key={addon.id}>
                   <div className="addon-img">
-                    <img src={addon.image} alt={addon.name} />
+                    <img
+                      src={`http://localhost:8000/storage/${addon.image}`}
+                      alt={addon.name}
+                    />
                   </div>
                   <div className="addon-text">
                     <p>
@@ -97,7 +100,10 @@ export default function MoreDetails({ visible, data, modalClose }) {
               {extras.map((extra) => (
                 <div className="extra" key={extra.id}>
                   <div className="extra-img">
-                    <img src={extra.image} alt={extra.name} />
+                    <img
+                      src={`http://localhost:8000/storage/${extra.image}`}
+                      alt={extra.name}
+                    />
                   </div>
                   <div className="extra-text">
                     <p>

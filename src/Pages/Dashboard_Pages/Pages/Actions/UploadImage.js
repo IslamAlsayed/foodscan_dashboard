@@ -68,7 +68,7 @@ export default function Image({ url, data }) {
   return (
     <div className="SubModel Image">
       <div className="preview" id="preview">
-        <img src={categoryImage.imagePreview} alt="preview" />
+        <img loading="lazy" src={categoryImage.imagePreview} alt="preview" />
       </div>
 
       <form

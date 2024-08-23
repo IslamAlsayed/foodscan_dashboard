@@ -13,13 +13,7 @@ export function Sidebar() {
     setAdminRole(user.Role);
   }, []);
 
-  const isActive = (path) => {
-    return (
-      window.location.pathname
-        .replace("/admin/dashboard/", "")
-        .split("/")[0] === path.replace("/admin/dashboard/", "").split("/")[0]
-    );
-  };
+  const isActive = (path) => window.location.pathname === path;
 
   const injectAppTitle = () => {
     let url = window.location.pathname.replace("/admin/dashboard/", "");
@@ -104,7 +98,7 @@ export function Sidebar() {
               className={`liRoute ${
                 isActive("/settings/company") ? "active" : ""
               }`}
-              onClick={() => handleClassActive("77")}
+              onClick={() => handleClassActive(77)}
             >
               <Link to="/settings/company">
                 <FaGear />

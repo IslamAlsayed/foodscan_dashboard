@@ -124,59 +124,7 @@ export default function CartItems({
     updateFinalTotal(updatedItems);
   };
 
-  const handleOrder = () => {
-    Swal.fire({
-      title: "Confirm Order",
-      text: "Are you sure you want to place this order?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#28a745",
-      cancelButtonColor: "#dc3545",
-      confirmButtonText: "Yes, place order",
-      cancelButtonText: "No, cancel",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await addData("auth/orders", items);
-          console.log("response", response);
-          if (response.status === "success") {
-            handleResetCart();
-            setTimeout(() => {
-              Swal.fire("Saved!", response.message, "success");
-            }, 250);
-          }
-        } catch (error) {
-          Swal.fire("Error!", error.response?.data?.message, "error");
-        }
-      }
-    });
-  };
-
-  const handleDeleteItem = (id) => {
-    Swal.fire({
-      title: "Delete Item",
-      text: "Are you sure you want to delete item?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#28a745",
-      cancelButtonColor: "#dc3545",
-      confirmButtonText: "Yes, delete item",
-      cancelButtonText: "No, cancel",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        if (document.getElementById("Loader")) {
-          document.getElementById("Loader").classList.add("show");
-
-          setTimeout(() => {
-            document.getElementById("Loader").classList.remove("show");
-            removeOneItemFromCart();
-          }, 1500);
-        } else {
-          removeOneItemFromCart();
-        }
-      }
-    });
-
+  const handleMultiFunction = (type, label, id = null) => {
     const removeOneItemFromCart = () => {
       const updatedItems = items.filter((item) => item.id !== id);
       localStorage.setItem("cartItems", JSON.stringify(updatedItems));
@@ -185,40 +133,62 @@ export default function CartItems({
       const event = new Event("storageUpdated");
       window.dispatchEvent(event);
     };
-  };
-
-  const handleResetCart = () => {
-    Swal.fire({
-      title: "Reset Cart",
-      text: "Are you sure you want to reset cart?",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "#28a745",
-      cancelButtonColor: "#dc3545",
-      confirmButtonText: "Yes, reset cart",
-      cancelButtonText: "No, cancel",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        if (document.getElementById("Loader")) {
-          document.getElementById("Loader").classList.add("show");
-
-          setTimeout(() => {
-            document.getElementById("Loader").classList.remove("show");
-            resetItemsCart();
-          }, 1500);
-        } else {
-          resetItemsCart();
-        }
-      }
-    });
 
     const resetItemsCart = () => {
       localStorage.setItem("cartItems", JSON.stringify([]));
       setItems([]);
       updateFinalTotal(localStorage.setItem("cartItems", JSON.stringify([])));
+
       const event = new Event("storageUpdated");
       window.dispatchEvent(event);
     };
+
+    Swal.fire({
+      title: label,
+      text: `Are you sure you want to ${label}?`,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#28a745",
+      cancelButtonColor: "#dc3545",
+      confirmButtonText: `Yes, ${label}`,
+      cancelButtonText: "No, cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        if (type === "makeOrder") {
+          try {
+            const response = await addData("auth/orders", items);
+            console.log("response", response);
+            if (response.status === "success") {
+              resetItemsCart();
+              setTimeout(() => {
+                Swal.fire("Saved!", response.message, "success");
+              }, 250);
+            }
+          } catch (error) {
+            Swal.fire("Error!", error.response?.data?.message, "error");
+          }
+        } else {
+          if (document.getElementById("Loader")) {
+            document.getElementById("Loader").classList.add("show");
+
+            setTimeout(() => {
+              document.getElementById("Loader").classList.remove("show");
+              if (type === "deleteItem") {
+                removeOneItemFromCart();
+              } else if (type === "resetCart") {
+                resetItemsCart();
+              }
+            }, 1500);
+          } else {
+            if (type === "deleteItem") {
+              removeOneItemFromCart();
+            } else if (type === "resetCart") {
+              resetItemsCart();
+            }
+          }
+        }
+      }
+    });
   };
 
   return (
@@ -262,12 +232,18 @@ export default function CartItems({
             </thead>
             <tbody className="bodyCartItems">
               {Object(items).length > 0 ? (
-                items.map((item) => (
-                  <tr id={item.id} key={item.id}>
+                items.map((item, index) => (
+                  <tr key={index} id={item.id}>
                     <td>
                       <FaTrash
                         className="text-danger"
-                        onClick={() => handleDeleteItem(item.id)}
+                        onClick={() =>
+                          handleMultiFunction(
+                            "deleteItem",
+                            "Delete Item",
+                            item.id
+                          )
+                        }
                       />
                     </td>
                     <td>{item.name}</td>
@@ -361,10 +337,16 @@ export default function CartItems({
         </ul>
 
         <div className="paymentOption mt-3">
-          <button className="btn btn-danger" onClick={handleResetCart}>
+          <button
+            className="btn btn-danger"
+            onClick={() => handleMultiFunction("resetCart", "Reset Cart")}
+          >
             cancel
           </button>
-          <button className="btn btn-success" onClick={handleOrder}>
+          <button
+            className="btn btn-success"
+            onClick={() => handleMultiFunction("makeOrder", "Confirm Order")}
+          >
             order
           </button>
         </div>
