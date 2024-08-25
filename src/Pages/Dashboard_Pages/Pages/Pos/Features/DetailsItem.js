@@ -125,6 +125,7 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
           <div className="item">
             <div className="item-img">
               <img
+                loading="lazy"
                 src={`http://localhost:8000/storage/${cartItem.image}`}
                 alt={cartItem.name}
               />
@@ -193,6 +194,7 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
                   >
                     <div className="addon-img">
                       <img
+                        loading="lazy"
                         src={`http://localhost:8000/storage/${addon.image}`}
                         alt={addon.name}
                       />
@@ -227,6 +229,7 @@ export default function DetailsItem({ visible, cartItem, modalClose }) {
                   >
                     <div className="extra-img">
                       <img
+                        loading="lazy"
                         src={`http://localhost:8000/storage/${extra.image}`}
                         alt={extra.name}
                       />

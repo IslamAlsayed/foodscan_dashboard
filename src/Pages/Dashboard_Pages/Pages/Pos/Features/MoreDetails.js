@@ -73,6 +73,7 @@ export default function MoreDetails({ visible, data, modalClose }) {
                 <div className="addon" key={addon.id}>
                   <div className="addon-img">
                     <img
+                      loading="lazy"
                       src={`http://localhost:8000/storage/${addon.image}`}
                       alt={addon.name}
                     />
@@ -101,6 +102,7 @@ export default function MoreDetails({ visible, data, modalClose }) {
                 <div className="extra" key={extra.id}>
                   <div className="extra-img">
                     <img
+                      loading="lazy"
                       src={`http://localhost:8000/storage/${extra.image}`}
                       alt={extra.name}
                     />
