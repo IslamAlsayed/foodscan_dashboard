@@ -17,6 +17,15 @@ export const login = async (email, password) => {
     Cookies.set("token_resta", response.data.access_token);
     Cookies.set("admin_resta", JSON.stringify(response.data.customer));
 
+    // illogical
+    if (!localStorage.getItem("cartItems")) {
+      localStorage.setItem("cartItems", JSON.stringify([]));
+    }
+
+    if (!localStorage.getItem("cartTotal")) {
+      localStorage.setItem("cartTotal", 0);
+    }
+
     return response.data;
   } catch (error) {
     return error.response?.data;

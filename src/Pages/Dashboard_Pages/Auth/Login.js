@@ -28,7 +28,6 @@ export default function Login() {
 
     if (!email || !password) {
       setError("Both email and password are required");
-      setTimeout(() => setError(""), 3000);
       return;
     }
 
@@ -44,8 +43,9 @@ export default function Login() {
       }
     } catch (error) {
       setError(error.message);
-      setTimeout(() => setError(""), 3000);
     }
+
+    setTimeout(() => setError(""), 3000);
   };
 
   return (
