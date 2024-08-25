@@ -39,6 +39,8 @@ export default function Login() {
         setEmail("");
         setPassword("");
         history.push("/admin/dashboard");
+      } else {
+        setError(data?.message);
       }
     } catch (error) {
       setError(error.message);

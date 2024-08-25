@@ -1,5 +1,5 @@
-import { Header } from "../../Components/Dashboard/Header/Header";
-import { Sidebar } from "../../Components/Dashboard/Sidebar/Sidebar";
+import Header from "../../Components/Dashboard/Header/Header";
+import Sidebar from "../../Components/Dashboard/Sidebar/Sidebar";
 
 export function Branch_2() {
   return (

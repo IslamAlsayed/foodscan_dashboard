@@ -8,7 +8,7 @@ import { RiMenu2Line } from "react-icons/ri";
 import Logo from "../../../assets/global/logo.png";
 import Profile from "./Profile";
 
-export function Header() {
+export default function Header() {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const branchRef = useRef(null);

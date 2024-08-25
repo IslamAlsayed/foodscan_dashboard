@@ -19,9 +19,7 @@ export const login = async (email, password) => {
 
     return response.data;
   } catch (error) {
-    console.error(error.response?.data?.message);
-
-    throw new Error("An error occurred");
+    return error.response?.data;
   } finally {
     if (document.getElementById("Loader")) {
       document.getElementById("Loader").classList.remove("show");
