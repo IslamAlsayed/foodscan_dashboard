@@ -34,7 +34,7 @@ const routes = [
   {
     items: [
       {
-        id: "1",
+        id: 1,
         path: "/admin/dashboard",
         name: "Dashboard",
         icon: MdDashboard,
@@ -42,7 +42,7 @@ const routes = [
         role: ["admin", "chef", "casher"],
       },
       {
-        id: "2",
+        id: 2,
         path: "/admin/dashboard/meals",
         name: "Meals",
         icon: GiTemporaryShield,
@@ -50,7 +50,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "3",
+        id: 3,
         path: "/admin/dashboard/categories",
         name: "Categories",
         icon: BiCategory,
@@ -58,7 +58,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "4",
+        id: 4,
         path: "/admin/dashboard/dining-tables",
         name: "Dining Tables",
         icon: LiaTableSolid,
@@ -66,7 +66,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "5",
+        id: 5,
         path: "/admin/dashboard/extras",
         name: "Extras",
         icon: SiNextra,
@@ -74,7 +74,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "6",
+        id: 6,
         path: "/admin/dashboard/addons",
         name: "Addons",
         icon: TbDeviceIpadDollar,
@@ -87,7 +87,7 @@ const routes = [
     label: "pos & orders",
     items: [
       {
-        id: "6",
+        id: 7,
         path: "/admin/dashboard/pos",
         name: "Pos Menu",
         icon: FaSignsPost,
@@ -95,7 +95,7 @@ const routes = [
         role: ["admin", "casher"],
       },
       {
-        id: "7",
+        id: 8,
         path: "/admin/dashboard/delivery-orders",
         name: "Delivery Orders",
         icon: TbTruckDelivery,
@@ -103,7 +103,7 @@ const routes = [
         role: ["admin", "chef", "casher"],
       },
       {
-        id: "8",
+        id: 9,
         path: "/admin/dashboard/tables-orders",
         name: "Table Orders",
         icon: GiStorkDelivery,
@@ -116,7 +116,7 @@ const routes = [
     label: "promo",
     items: [
       {
-        id: "9",
+        id: 10,
         path: "/admin/dashboard/offers",
         name: "Offers",
         icon: BiSolidOffer,
@@ -129,7 +129,7 @@ const routes = [
     label: "users",
     items: [
       {
-        id: "10",
+        id: 11,
         path: "/admin/dashboard/administrators",
         name: "Administrators",
         icon: FaUser,
@@ -137,7 +137,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "11",
+        id: 12,
         path: "/admin/dashboard/customers",
         name: "Customers",
         icon: FaUsers,
@@ -145,7 +145,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "12",
+        id: 13,
         path: "/admin/dashboard/employees",
         name: "Employees",
         icon: FaUserGroup,
@@ -158,7 +158,7 @@ const routes = [
     label: "accounts",
     items: [
       {
-        id: "13",
+        id: 14,
         path: "/admin/dashboard/transactions",
         name: "Transactions",
         icon: GrTransaction,
@@ -171,7 +171,7 @@ const routes = [
     label: "reports",
     items: [
       {
-        id: "14",
+        id: 15,
         path: "/admin/dashboard/sales-reports",
         name: "Sales Reports",
         icon: BsGraphUpArrow,
@@ -179,7 +179,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "15",
+        id: 16,
         path: "/admin/dashboard/items-reports",
         name: "Items Reports",
         icon: RiAlignItemBottomLine,
@@ -187,7 +187,7 @@ const routes = [
         role: ["admin"],
       },
       {
-        id: "16",
+        id: 17,
         path: "/admin/dashboard/credit-balance-report",
         name: "Credit Balance Report",
         icon: MdCreditScore,

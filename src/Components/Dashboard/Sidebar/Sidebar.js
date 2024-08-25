@@ -1,5 +1,5 @@
 import "./Sidebar.css";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaGear, FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import publicRoutes from "../../../Pages/Dashboard_Pages/store/publicRoutes";
@@ -13,7 +13,10 @@ export default function Sidebar() {
     setAdminRole(user?.Role);
   }, []);
 
-  const isActive = (path) => window.location.pathname === path;
+  const isActive = (path) => {
+    const currentPath = window.location.pathname;
+    return currentPath === path || currentPath.split("/show")[0] === path;
+  };
 
   const injectAppTitle = () => {
     const currentPath = window.location.pathname;
