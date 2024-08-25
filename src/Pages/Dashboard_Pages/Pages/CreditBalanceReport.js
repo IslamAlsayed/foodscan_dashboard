@@ -4,30 +4,30 @@ import { Table } from "antd";
 import Breadcrumb from "../../../Components/Dashboard/Features/Breadcrumb";
 import Filtration from "../Models/Filtration/CreditBalanceReport";
 
-const static_data = [
-  {
-    id: "1",
-    name: "name",
-    email: "email@email.com",
-    phone: "+154545346",
-    balance: "balance",
-  },
-  {
-    id: "2",
-    name: "name",
-    email: "email@email.com",
-    phone: "+154545346",
-    balance: "balance",
-  },
-];
-
 export default function CreditBalanceReport() {
   const componentRef = useRef();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(static_data);
-  }, [static_data]);
+    const static_data = [
+      {
+        id: "1",
+        name: "name",
+        email: "email@email.com",
+        phone: "+154545346",
+        balance: "balance",
+      },
+      {
+        id: "2",
+        name: "name",
+        email: "email@email.com",
+        phone: "+154545346",
+        balance: "balance",
+      },
+    ];
+
+    if (static_data) setData(static_data);
+  }, []);
 
   const columns = [
     {
