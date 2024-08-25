@@ -10,7 +10,7 @@ export function Sidebar() {
 
   useEffect(() => {
     const user = getUser();
-    setAdminRole(user.Role);
+    setAdminRole(user?.Role);
   }, []);
 
   const isActive = (path) => window.location.pathname === path;
