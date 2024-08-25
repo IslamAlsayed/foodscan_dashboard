@@ -73,7 +73,7 @@ export function ResetPasswordGeneral(props) {
   return (
     <>
       <div className=" container w-75 m-auto text-center pt-5">
-        <img src={reset} height={75} width={75}></img>
+        <img src={reset} height={75} width={75} alt="reset"></img>
         <h3>Password Reset</h3>
         <form onSubmit={handleSubmit}>
           <div>

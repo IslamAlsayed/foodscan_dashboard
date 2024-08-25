@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { updateData } from "../../../../axiosConfig/API";
-import Cookies from "js-cookie";
 
 export default function ChangePassword() {
   const [employee, setEmployee] = useState({
@@ -13,16 +12,13 @@ export default function ChangePassword() {
   });
   const [message, setMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  let adminCookies = JSON.parse(Cookies.get("admin_resta"));
 
   useEffect(() => {
-    if (adminCookies) {
-      setEmployee({
-        old_password: "",
-        new_password: "",
-        new_password_confirmation: "",
-      });
-    }
+    setEmployee({
+      old_password: "",
+      new_password: "",
+      new_password_confirmation: "",
+    });
   }, []);
 
   const handleChange = (e) => {

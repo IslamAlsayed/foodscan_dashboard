@@ -20,10 +20,14 @@ export default function SubSidebar() {
   useEffect(() => {
     const currentRoute = window.location.pathname.replace("/settings/", "");
     setActiveRoute(currentRoute);
-  }, [window.location]);
+  }, []);
 
   const handleRouteClick = (route) => {
     setActiveRoute(route.replace("/settings/", ""));
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
