@@ -16,11 +16,12 @@ export default function Sidebar() {
   const isActive = (path) => window.location.pathname === path;
 
   const injectAppTitle = () => {
-    let url = window.location.pathname.replace("/admin/dashboard/", "");
+    const currentPath = window.location.pathname;
+
+    let url = currentPath.replace("/admin/dashboard/", "");
     let titleValue = "";
 
-    if (window.location.pathname !== "/admin/dashboard")
-      titleValue = "Resta - " + url;
+    if (currentPath !== "/admin/dashboard") titleValue = "Resta - " + url;
     else titleValue = "Resta";
 
     document.title = titleValue;
@@ -55,18 +56,22 @@ export default function Sidebar() {
       </div>
 
       {publicRoutes.map((routeGroup, index) => {
-        const hasMatchingItems = routeGroup.items.some((route) =>
+        const hasMatchingRoutes = routeGroup.items.some((route) =>
           route.role.includes(adminRole)
         );
 
+        // {
+        //   console.log("hasMatchingRoutes", hasMatchingRoutes);
+        // }
+
         return (
-          hasMatchingItems && (
+          hasMatchingRoutes && (
             <div className="group" key={index}>
               {routeGroup.label && <label>{routeGroup.label}</label>}
               <ul>
                 {routeGroup.items.map(
                   (route) =>
-                    route.role.includes(adminRole) && (
+                    hasMatchingRoutes && (
                       <li
                         key={route.id}
                         id={route.id}
@@ -87,6 +92,39 @@ export default function Sidebar() {
           )
         );
       })}
+
+      {/* {publicRoutes.map((routeGroup, index) => {
+        const routesToShow = routeGroup.items.filter((route) =>
+          route.role.includes(adminRole)
+        );
+
+        {
+          console.log("routesToShow", routesToShow);
+        }
+
+        if (routesToShow.length === 0) return null;
+
+        return (
+          <div className="group" key={index}>
+            {routeGroup.label && <label>{routeGroup.label}</label>}
+            <ul>
+              {routesToShow.map((route) => (
+                <li
+                  key={route.id}
+                  id={route.id}
+                  className={`liRoute ${isActive(route.path) ? "active" : ""}`}
+                  onClick={() => handleClassActive(route.id)}
+                >
+                  <Link to={route.path}>
+                    {React.createElement(route.icon)}
+                    <span>{route.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      })} */}
 
       {adminRole === "admin" && (
         <div className="group" key="75">

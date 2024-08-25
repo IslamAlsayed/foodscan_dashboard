@@ -5,7 +5,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import { getData,imageStorageURL} from "../../../../axiosConfig/API";
+import { getData, imageStorageURL } from "../../../../axiosConfig/API";
 import Filtration from "../../Models/Filtration/Categories";
 import AddRow from "../../Models/AddRow/Categories";
 import EditCategory from "../../Models/Edit/EditCategory";
@@ -84,8 +84,8 @@ export default function Categories() {
       key: "image",
       render: (record) => (
         <img
-        src={`${imageStorageURL}/${record}`}
-        alt={record.name}
+          src={`${imageStorageURL}/${record}`}
+          alt={record.name}
           style={{ width: "70px", height: "auto" }}
         />
       ),

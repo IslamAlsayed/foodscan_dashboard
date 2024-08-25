@@ -5,7 +5,7 @@ import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import { getData ,imageStorageURL } from "../../../../axiosConfig/API";
+import { getData, imageStorageURL } from "../../../../axiosConfig/API";
 import Filtration from "../../Models/Filtration/Extras";
 import AddRow from "../../Models/AddRow/Extras";
 import EditExtra from "../../Models/Edit/EditExtras";
@@ -78,10 +78,7 @@ export default function Extra() {
       dataIndex: "image",
       key: "image",
       render: (record) => (
-        <img
-        src={`${imageStorageURL}/${record}`}
-        alt={record.name}
-        />
+        <img src={`${imageStorageURL}/${record}`} alt={record.name} />
       ),
     },
     {
@@ -105,7 +102,7 @@ export default function Extra() {
       render: (item) => (
         <>
           <Link
-            to={`/admin/dashboard/extra/show/${item.id}`}
+            to={`/admin/dashboard/extras/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

@@ -17,7 +17,7 @@ export default function CartItems({
   const [finalTotal, setFinalTotal] = useState(0);
   const [finalTotalWithDiscount, setFinalTotalWithDiscount] = useState(0);
 
-  const applyDiscount = useCallback(
+  const handleApplyDiscount = useCallback(
     (totalCost) => {
       let discountAmount = 0;
 
@@ -27,18 +27,13 @@ export default function CartItems({
         discountAmount = discountValue;
       }
 
-      const newFinalTotalWithDiscount = totalCost - discountAmount;
+      const newFinalTotalWithDiscount = finalTotal - discountAmount;
       setFinalTotalWithDiscount(
         newFinalTotalWithDiscount > 0 ? newFinalTotalWithDiscount : 0
       );
     },
-    [discountType, discountValue]
+    [discountType, discountValue, finalTotal]
   );
-
-  useEffect(() => {
-    const someTotalCost = 100;
-    applyDiscount(someTotalCost);
-  }, [applyDiscount]);
 
   const updateFinalTotal = useCallback(
     (items) => {
@@ -62,16 +57,17 @@ export default function CartItems({
             });
           }
         });
+
         setFinalTotal(totalCost);
-        applyDiscount(totalCost);
+        setFinalTotalWithDiscount(totalCost);
         total(totalCost);
       } else {
         setFinalTotal(0);
-        applyDiscount(0);
+        setFinalTotalWithDiscount(0);
         total(0);
       }
     },
-    [applyDiscount, total]
+    [handleApplyDiscount, total]
   );
 
   useEffect(() => {
@@ -310,10 +306,12 @@ export default function CartItems({
           <input
             type="number"
             value={discountValue}
-            onClick={() => setDiscountValue("")}
+            onClick={() =>
+              discountValue === 0 ? setDiscountValue("") : discountValue
+            }
             onChange={(e) => setDiscountValue(Number(e.target.value))}
           />
-          <button onClick={() => applyDiscount(finalTotal)}>Apply</button>
+          <button onClick={() => handleApplyDiscount(finalTotal)}>Apply</button>
         </div>
 
         <ul className="payment-details">
@@ -328,10 +326,7 @@ export default function CartItems({
           <li className="d-flex justify-content-between">
             <span className="fw-bold">total</span>
             <span className="fw-bold">
-              $
-              {finalTotalWithDiscount === 0
-                ? finalTotal.toFixed(2)
-                : finalTotalWithDiscount.toFixed(2)}
+              ${finalTotalWithDiscount.toFixed(2)}
             </span>
           </li>
         </ul>

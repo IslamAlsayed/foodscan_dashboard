@@ -94,7 +94,7 @@ export default function Customers() {
       render: (item) => (
         <>
           <Link
-            to={`/admin/dashboard/customer/show/${item.id}`}
+            to={`/admin/dashboard/customers/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

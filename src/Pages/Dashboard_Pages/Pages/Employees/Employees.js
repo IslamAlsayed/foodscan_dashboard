@@ -94,7 +94,7 @@ export default function Employees() {
       render: (item) => (
         <>
           <Link
-            to={`/admin/dashboard/employee/show/${item.id}`}
+            to={`/admin/dashboard/employees/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

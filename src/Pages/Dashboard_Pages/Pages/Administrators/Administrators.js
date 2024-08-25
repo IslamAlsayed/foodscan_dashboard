@@ -94,7 +94,7 @@ export default function Administrators() {
       render: (item) => (
         <>
           <Link
-            to={`/admin/dashboard/administrator/show/${item.id}`}
+            to={`/admin/dashboard/administrators/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

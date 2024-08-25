@@ -6,7 +6,7 @@ import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
 import EditAddon from "../../Models/Edit/EditAddon";
-import { getData ,imageStorageURL} from "../../../../axiosConfig/API";
+import { getData, imageStorageURL } from "../../../../axiosConfig/API";
 import Filtration from "../../Models/Filtration/Addons";
 import AddRow from "../../Models/AddRow/Addons";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
@@ -78,10 +78,7 @@ export default function Addon() {
       dataIndex: "image",
       key: "image",
       render: (record) => (
-        <img
-        src={`${imageStorageURL}/${record}`}
-        alt={record.name}
-        />
+        <img src={`${imageStorageURL}/${record}`} alt={record.name} />
       ),
     },
     {
@@ -105,7 +102,7 @@ export default function Addon() {
       render: (item) => (
         <>
           <Link
-            to={`/admin/dashboard/addon/show/${item.id}`}
+            to={`/admin/dashboard/addons/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

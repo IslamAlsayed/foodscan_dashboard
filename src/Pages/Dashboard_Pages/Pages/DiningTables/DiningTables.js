@@ -138,7 +138,7 @@ export default function DiningTables() {
       render: (item) => (
         <div className="actionResource">
           <Link
-            to={`/admin/dashboard/dining-table/show/${item.id}`}
+            to={`/admin/dashboard/dining-tables/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}

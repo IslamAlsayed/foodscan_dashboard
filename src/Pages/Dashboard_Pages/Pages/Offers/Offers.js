@@ -100,7 +100,7 @@ export default function Offers() {
       render: (item) => (
         <>
           <Link
-            to={`/admin/dashboard/offer/show/${item.id}`}
+            to={`/admin/dashboard/offers/show/${item.id}`}
             className="eyeIcon"
             data-tooltip="view"
             style={{ "--c": "#1772FF", "--bg": "#E2EDFB" }}
