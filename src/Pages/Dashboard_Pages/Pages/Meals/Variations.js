@@ -26,6 +26,7 @@ export default function Variations() {
     size: "",
     number_of_pieces: "",
     cost: "",
+    meal_id: id,
   });
 
   const handleChange = (e) => {
@@ -63,6 +64,7 @@ export default function Variations() {
     formData.append("size", newSize.size);
     formData.append("number_of_pieces", meal.number_of_pieces);
     formData.append("cost", meal.cost);
+    formData.append("meal_id", meal.meal_id);
 
     try {
       let response;
@@ -87,6 +89,7 @@ export default function Variations() {
             size: "",
             number_of_pieces: "",
             cost: "",
+            meal_id: id,
           });
         } else {
           setMeal({ size: newSize.size });
@@ -120,6 +123,7 @@ export default function Variations() {
       size: "",
       number_of_pieces: "",
       cost: "",
+      meal_id: id,
     });
     setNewSize({ size: "" });
     setModalVisible(false);
@@ -252,9 +256,6 @@ export default function Variations() {
                           </option>
                         )}
 
-                        {/* <option value={newSize.size} key="0">
-                          {convert(parseInt(newSize.size))}
-                        </option> */}
                         {sizeList.map((item) => (
                           <option value={item.value} key={item.value}>
                             {item.label}
@@ -268,7 +269,7 @@ export default function Variations() {
                 <div className="col col-12 col-sm-6">
                   <div className="mb-3">
                     <label htmlFor="number_of_pieces" className="form-label">
-                      NUMBER OF PIECE <span className="star">*</span>
+                      NUMBER OF PIECES <span className="star">*</span>
                     </label>
                     <input
                       type="number"
