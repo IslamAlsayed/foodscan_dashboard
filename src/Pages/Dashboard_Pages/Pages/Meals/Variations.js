@@ -26,7 +26,6 @@ export default function Variations({ order_id }) {
     size: "",
     number_of_piece: "",
     cost: "",
-    meal_id: id,
   });
 
   const handleChange = (e) => {
@@ -60,15 +59,15 @@ export default function Variations({ order_id }) {
     formData.append("size", meal.size);
     formData.append("number_of_piece", meal.number_of_piece);
     formData.append("cost", meal.cost);
-    formData.append("meal_id", meal.meal_id);
 
     try {
       let response;
       const method = e.target._method.value;
 
       if (method === "update") {
+        formData.append("_method", "put");
         response = await updateData(
-          `admin/meals/${meal.meal_id}/size-cost`,
+          `admin/meals/size-cost/${meal.id}`,
           formData,
           false
         );
@@ -82,7 +81,6 @@ export default function Variations({ order_id }) {
           size: "",
           number_of_piece: "",
           cost: "",
-          meal_id: id,
         });
 
         setTimeout(() => {
@@ -94,7 +92,11 @@ export default function Variations({ order_id }) {
         }, 250);
       }
     } catch (error) {
-      Swal.fire("Error!", error.response?.data?.message, "error");
+      if (error.response) {
+        Swal.fire("Error response:!", error.response.data.error, "error");
+      } else {
+        Swal.fire("Error occurred:!", error.message, "error");
+      }
     }
   };
 

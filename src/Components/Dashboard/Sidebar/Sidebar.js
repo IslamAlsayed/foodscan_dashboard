@@ -70,7 +70,7 @@ export default function Sidebar() {
               <ul>
                 {routeGroup.items.map(
                   (route) =>
-                    hasMatchingRoutes && (
+                    route.role.includes(adminRole) && (
                       <li
                         key={route.id}
                         id={route.id}

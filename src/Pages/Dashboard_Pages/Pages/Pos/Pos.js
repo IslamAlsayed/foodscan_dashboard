@@ -29,7 +29,11 @@ export default function Pos() {
       sessionStorage.removeItem("origin_data");
       if (!sessionStorage.getItem("origin_meals")) {
         sessionStorage.setItem("origin_meals", JSON.stringify(result.meals));
+      } else {
+        sessionStorage.removeItem("origin_meals");
+        sessionStorage.setItem("origin_meals", JSON.stringify(result.meals));
       }
+
       setMeals(result.meals);
     } catch (error) {
       console.error(error.response?.data?.message);
@@ -85,7 +89,7 @@ export default function Pos() {
       setMeals(originMeals);
     } else {
       currentItem.classList.add("current");
-      setMeals(originMeals.filter((item) => item.id === id));
+      setMeals(originMeals.filter((item) => item.category_id === id));
     }
   };
 

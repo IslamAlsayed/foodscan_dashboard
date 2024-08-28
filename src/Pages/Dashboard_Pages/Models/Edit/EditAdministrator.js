@@ -41,7 +41,7 @@ export default function EditAdministrator({
     const formData = new FormData();
     formData.append("name", administrator.name);
     formData.append("email", administrator.email);
-    formData.append("role", administrator.role);
+    formData.append("Role", administrator.role);
     formData.append("phone", administrator.phone);
     formData.append("password", administrator.password);
     formData.append(
@@ -123,24 +123,27 @@ export default function EditAdministrator({
                     className="form-control"
                     name="role"
                     id="role"
-                    value={administrator.role}
+                    value={employee.role}
                     onChange={(e) => handleChange(e)}
                   >
                     <option
                       value="admin"
-                      disabled={administrator.role === "admin"}
+                      selected
+                      disabled={employee.role === "admin"}
                     >
                       admin
                     </option>
                     <option
                       value="casher"
-                      disabled={administrator.role === "casher"}
+                      selected
+                      disabled={employee.role === "casher"}
                     >
                       casher
                     </option>
                     <option
                       value="chef"
-                      disabled={administrator.role === "chef"}
+                      selected
+                      disabled={employee.role === "chef"}
                     >
                       chef
                     </option>

@@ -23,7 +23,7 @@ export default function DeleteRecord({ url, refreshed }) {
             refreshed();
             setTimeout(() => {
               Swal.fire("Deleted!", response.message, "success");
-            }, 250);
+            }, 100);
           }
         } catch (error) {
           Swal.fire("Error!", error.response?.data?.message, "error");

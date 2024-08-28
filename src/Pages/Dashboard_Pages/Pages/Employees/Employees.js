@@ -5,10 +5,10 @@ import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import EditEmployee from "../../Models/Edit/EditEmployee";
 import { getData } from "../../../../axiosConfig/API";
 import Filtration from "../../Models/Filtration/Employees";
 import AddRow from "../../Models/AddRow/Employees";
+import EditEmployee from "../../Models/Edit/EditEmployee";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
 
 export default function Employees() {
@@ -46,6 +46,7 @@ export default function Employees() {
 
   const handleEdit = async (item) => {
     setEditItem(item);
+    console.log("employee edit", item);
     setModalEditVisibleToggle(!modalEditVisibleToggle);
     document.body.style.overflow = modalEditVisibleToggle
       ? "visible"

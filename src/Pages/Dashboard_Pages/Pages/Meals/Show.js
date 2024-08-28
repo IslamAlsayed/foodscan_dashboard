@@ -22,14 +22,12 @@ export default function ShowItem() {
   const [addons, setAddons] = useState(null);
   const [extras, setExtras] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isMealLoaded, setIsMealLoaded] = useState(false);
 
   const fetchMeal = useCallback(async (id) => {
     if (!id) return;
     try {
       const result = await getData(`meals/${id}`);
       setMeal(result);
-      setIsMealLoaded(true);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -62,11 +60,9 @@ export default function ShowItem() {
   }, []);
 
   useEffect(() => {
-    if (isMealLoaded && meal) {
-      fetchExtras(meal.id);
-      fetchAddons(meal.id);
-    }
-  }, [isMealLoaded, meal, fetchExtras, fetchAddons]);
+    fetchExtras(id);
+    fetchAddons(id);
+  }, [id, fetchExtras, fetchAddons]);
 
   if (loading) return;
 

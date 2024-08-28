@@ -43,7 +43,7 @@ export default function SubAddons({ order_id, data }) {
         fetchOptionsAddons(order_id);
         setTimeout(() => {
           Swal.fire("Addon!", response.message, "success");
-        }, 250);
+        }, 500);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -86,7 +86,7 @@ export default function SubAddons({ order_id, data }) {
       render: (item) => (
         <DeleteRecord
           url={`admin/addons-meals/${item.addon_id}/${order_id}`}
-          refreshed={refreshAddons}
+          refreshed={() => refreshAddons(order_id)}
         />
       ),
     },
@@ -153,7 +153,9 @@ export default function SubAddons({ order_id, data }) {
                       </option>
                       {optionsAddons &&
                         optionsAddons.map((addon) => (
-                          <option value={addon.id}>{addon.name}</option>
+                          <option value={addon.id} key={addon.id}>
+                            {addon.name}
+                          </option>
                         ))}
                     </select>
                   </div>

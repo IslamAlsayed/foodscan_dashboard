@@ -89,6 +89,7 @@ export default function Invoice({ visible, modalClose }) {
                   <th key="2">price</th>
                 </tr>
               </thead>
+
               {invoiceItem ? (
                 invoiceItem.map((item, index) => (
                   <>

@@ -123,16 +123,25 @@ export default function EditEmployee({
                     value={employee.role}
                     onChange={(e) => handleChange(e)}
                   >
-                    <option value="admin" disabled={employee.role === "admin"}>
+                    <option
+                      value="admin"
+                      selected
+                      disabled={employee.role === "admin"}
+                    >
                       admin
                     </option>
                     <option
                       value="casher"
+                      selected
                       disabled={employee.role === "casher"}
                     >
                       casher
                     </option>
-                    <option value="chef" disabled={employee.role === "chef"}>
+                    <option
+                      value="chef"
+                      selected
+                      disabled={employee.role === "chef"}
+                    >
                       chef
                     </option>
                   </select>

@@ -43,7 +43,7 @@ export default function SubExtras({ order_id, data }) {
         fetchOptionsExtras(order_id);
         setTimeout(() => {
           Swal.fire("Extra!", response.message, "success");
-        }, 250);
+        }, 100);
       }
     } catch (error) {
       Swal.fire("Error!", error.response?.data?.message, "error");
@@ -86,7 +86,7 @@ export default function SubExtras({ order_id, data }) {
       render: (item) => (
         <DeleteRecord
           url={`admin/extras-meals/${item.extra_id}/${order_id}`}
-          refreshed={refreshExtras}
+          refreshed={() => refreshExtras(order_id)}
         />
       ),
     },
