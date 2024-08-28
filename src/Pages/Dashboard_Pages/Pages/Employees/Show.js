@@ -40,13 +40,11 @@ export default function Show() {
   }, []);
 
   useEffect(() => {
-    if (id) {
-      fetchEmployee(id);
-      fetchEmployeeOrders(id);
-    }
+    fetchEmployee(id);
+    fetchEmployeeOrders(id);
   }, [id, fetchEmployee, fetchEmployeeOrders]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
 
   return (
     <div className="Show">

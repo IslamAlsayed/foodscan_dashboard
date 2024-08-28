@@ -11,7 +11,6 @@ export default function EditEmployee({
   item,
   updated,
 }) {
-  const [staticVisible, setStaticVisible] = useState(false);
   const [employee, setEmployee] = useState({
     name: "",
     email: "",
@@ -24,10 +23,6 @@ export default function EditEmployee({
   useEffect(() => {
     if (item) setEmployee(item);
   }, [item]);
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +45,6 @@ export default function EditEmployee({
     formData.append("phone", employee.phone);
     formData.append("password", employee.password);
     formData.append("password_confirmation", employee.password_confirmation);
-    formData.append("status", employee.status);
     formData.append("_method", "put");
 
     try {
@@ -72,7 +66,7 @@ export default function EditEmployee({
   };
 
   return (
-    <div id="AddTable" className={staticVisible ? "visible" : ""}>
+    <div id="AddTable" className={visible ? "visible" : ""}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>
@@ -123,20 +117,23 @@ export default function EditEmployee({
                     role
                   </label>
                   <select
+                    className="form-control"
                     name="role"
                     id="role"
                     value={employee.role}
                     onChange={(e) => handleChange(e)}
-                    className="form-control"
                   >
-                    <option value="chef" selected={employee.role === "chef"}>
-                      Chef
+                    <option value="admin" disabled={employee.role === "admin"}>
+                      admin
                     </option>
                     <option
-                      value="cashier"
-                      selected={employee.role === "cashier"}
+                      value="casher"
+                      disabled={employee.role === "casher"}
                     >
-                      Cashier
+                      casher
+                    </option>
+                    <option value="chef" disabled={employee.role === "chef"}>
+                      chef
                     </option>
                   </select>
                 </div>

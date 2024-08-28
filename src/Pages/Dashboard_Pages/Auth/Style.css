@@ -8,6 +8,8 @@
 
 .formUser .content {
     width: 500px;
+    border-radius: 7px;
+    border: 1px solid #00000020;
 }
 
 .formUser .btn-color {

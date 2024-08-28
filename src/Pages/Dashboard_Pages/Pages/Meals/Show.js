@@ -68,7 +68,7 @@ export default function ShowItem() {
     }
   }, [isMealLoaded, meal, fetchExtras, fetchAddons]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
 
   return (
     <div className="ShowItem ItemsTabs">

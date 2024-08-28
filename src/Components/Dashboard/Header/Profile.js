@@ -6,13 +6,7 @@ import { CiLogout } from "react-icons/ci";
 import { AiFillEdit } from "react-icons/ai";
 import profile from "../../../assets/global/profile.png";
 import { logout, getUser } from "../../../axiosConfig/Auth";
-
-const mockAdmin = {
-  id: 1,
-  name: "Admin",
-  email: "admin@example.com",
-  phone: "+000000000",
-};
+import Cookies from "js-cookie";
 
 export default function Profile() {
   const history = useHistory();
@@ -21,6 +15,13 @@ export default function Profile() {
   const [activeItem, setActiveItem] = useState("");
   const profileMenuRef = useRef(null);
   const [admin, setAdmin] = useState("");
+
+  const mockAdmin = {
+    id: 1,
+    name: "Admin",
+    email: "admin@example.com",
+    phone: "+000000000",
+  };
 
   useEffect(() => {
     try {
@@ -51,12 +52,15 @@ export default function Profile() {
     }
 
     setTimeout(() => {
-      logout();
-      document.body.style.overflow = "visible";
-      if (document.getElementById("Loader")) {
-        document.getElementById("Loader").classList.remove("show");
-      }
-      history.push("/auth/login");
+      logout().then((response) => {
+        Cookies.set("logoutMessage", response.message);
+
+        document.body.style.overflow = "visible";
+        if (document.getElementById("Loader")) {
+          document.getElementById("Loader").classList.remove("show");
+        }
+        history.push("/auth/login");
+      });
     }, 1000);
   };
 

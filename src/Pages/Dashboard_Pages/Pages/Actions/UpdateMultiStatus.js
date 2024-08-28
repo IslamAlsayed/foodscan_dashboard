@@ -48,9 +48,6 @@ export default function UpdateMultiStatus({ url, item, updated, list }) {
           Swal.fire("Error!", error.response?.data?.message, "error");
         }
       }
-
-      console.log("staticItem.status", staticItem.status);
-      console.log("staticItem", staticItem);
     });
   };
 

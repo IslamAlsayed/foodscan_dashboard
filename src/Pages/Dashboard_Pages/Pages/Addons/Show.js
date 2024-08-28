@@ -12,16 +12,13 @@ import { getData } from "../../../../axiosConfig/API";
 export default function ShowItem() {
   const { id } = useParams();
   const [addon, setAddon] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   const fetchAddon = useCallback(async (id) => {
     if (!id) return;
     try {
       const result = await getData(`addons/${id}`);
       setAddon(result);
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.error(error.response?.data?.message);
     }
   }, []);
@@ -29,8 +26,6 @@ export default function ShowItem() {
   useEffect(() => {
     fetchAddon(id);
   }, [id, fetchAddon]);
-
-  if (loading) return <p>loading...</p>;
 
   return (
     <div className="ShowItem ItemsTabs">

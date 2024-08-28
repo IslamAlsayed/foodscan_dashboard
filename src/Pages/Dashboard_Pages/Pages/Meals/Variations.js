@@ -34,27 +34,23 @@ export default function Variations({ order_id }) {
     setMeal({ ...meal, [name]: value });
   };
 
-  const fetchVariations = useCallback(
-    async (id) => {
-      if (!id) return;
-      try {
-        const result = await getData(`admin/meals/${id}/size-costs`);
-        const sizesInResult = result.map((record) => record.size);
-
-        const updatedSize = sizeList.filter(
-          (item) => !sizesInResult.includes(item.value)
-        );
-        setSizeList(updatedSize);
-        setVariations(result);
-      } catch (error) {
-        console.error(error.response?.data?.message);
-      }
-    },
-    [sizeList]
-  );
+  const fetchVariations = useCallback(async (order_id) => {
+    if (!order_id) return;
+    try {
+      const result = await getData(`admin/meals/${id}/size-costs`);
+      const sizesInResult = result.map((record) => record.size);
+      const updatedSize = sizeList.filter(
+        (item) => !sizesInResult.includes(item.value)
+      );
+      setSizeList(updatedSize);
+      setVariations(result);
+    } catch (error) {
+      console.error(error.response?.data?.message);
+    }
+  }, []);
 
   useEffect(() => {
-    if (order_id) fetchVariations(order_id);
+    fetchVariations(order_id);
   }, [order_id, fetchVariations]);
 
   const handleSubmit = async (e) => {

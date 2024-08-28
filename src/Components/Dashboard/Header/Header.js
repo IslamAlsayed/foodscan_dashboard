@@ -1,15 +1,17 @@
 import "./Header.css";
 import React, { useEffect, useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { AiFillShop } from "react-icons/ai";
 import { IoBookmarks } from "react-icons/io5";
 import { RiMenu2Line } from "react-icons/ri";
 import Logo from "../../../assets/global/logo.png";
 import Profile from "./Profile";
+import Cookies from "js-cookie";
+import CustomAlert from "../CustomAlert/CustomAlert";
 
 export default function Header() {
   const history = useHistory();
+  const [alert, setAlert] = useState({ message: "", type: "" });
   const [isOpen, setIsOpen] = useState(false);
   const branchRef = useRef(null);
   const [selectedBranch, setSelectedBranch] = useState(() =>
@@ -25,6 +27,13 @@ export default function Header() {
       setIsOpen(false);
     }
   };
+
+  useEffect(() => {
+    if (Cookies.get("loginMessage")) {
+      setAlert({ message: Cookies.get("loginMessage"), type: "success" });
+      Cookies.remove("loginMessage");
+    }
+  }, []);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -116,6 +125,12 @@ export default function Header() {
 
         <Profile />
       </div>
+
+      <CustomAlert
+        message={alert.message}
+        type={alert.type}
+        onClose={() => setAlert({ message: "", type: "" })}
+      />
     </div>
   );
 }

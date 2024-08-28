@@ -11,10 +11,10 @@ export default function EditCustomer({
   item,
   updated,
 }) {
-  const [staticVisible, setStaticVisible] = useState(false);
   const [customer, setCustomer] = useState({
     name: "",
     email: "",
+    role: "",
     phone: "",
     password: "",
     password_confirmation: "",
@@ -23,10 +23,6 @@ export default function EditCustomer({
   useEffect(() => {
     if (item) setCustomer(item);
   }, [item]);
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,6 +41,7 @@ export default function EditCustomer({
     const formData = new FormData();
     formData.append("name", customer.name);
     formData.append("email", customer.email);
+    formData.append("role", customer.role);
     formData.append("phone", customer.phone);
     formData.append("password", customer.password);
     formData.append("password_confirmation", customer.password_confirmation);
@@ -69,7 +66,7 @@ export default function EditCustomer({
   };
 
   return (
-    <div id="AddTable" className={staticVisible ? "visible" : ""}>
+    <div id="AddTable" className={visible ? "visible" : ""}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>
@@ -111,6 +108,34 @@ export default function EditCustomer({
                     value={customer.email}
                     onChange={(e) => handleChange(e)}
                   />
+                </div>
+              </div>
+
+              <div className="col-6">
+                <div className="mb-3">
+                  <label htmlFor="role" className="form-label">
+                    role
+                  </label>
+                  <select
+                    className="form-control"
+                    name="role"
+                    id="role"
+                    value={customer.role}
+                    onChange={(e) => handleChange(e)}
+                  >
+                    <option value="admin" disabled={customer.role === "admin"}>
+                      admin
+                    </option>
+                    <option
+                      value="casher"
+                      disabled={customer.role === "casher"}
+                    >
+                      casher
+                    </option>
+                    <option value="chef" disabled={customer.role === "chef"}>
+                      chef
+                    </option>
+                  </select>
                 </div>
               </div>
 

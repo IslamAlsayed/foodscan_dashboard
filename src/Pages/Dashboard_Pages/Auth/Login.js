@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { login } from "../../../axiosConfig/Auth";
+import CustomAlert from "../../../Components/Dashboard/CustomAlert/CustomAlert";
 import Cookies from "js-cookie";
 
 export default function Login() {
   const history = useHistory();
+  const [alert, setAlert] = useState({ message: "", type: "" });
 
   useEffect(() => {
-    if (Cookies.get("token_resta")) {
-      history.push("/admin/dashboard");
-    }
+    if (Cookies.get("token_resta")) history.push("/admin/dashboard");
   }, [history]);
+
+  useEffect(() => {
+    if (Cookies.get("logoutMessage")) {
+      setAlert({ message: Cookies.get("logoutMessage"), type: "success" });
+      Cookies.remove("logoutMessage");
+    }
+  }, []);
 
   const [email, setEmail] = useState("islam@gmail.com");
   const [password, setPassword] = useState("test1234");
-  const [error, setError] = useState("");
 
   const injectData = (email, password) => {
     setEmail(email);
@@ -24,10 +30,12 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
     if (!email || !password) {
-      setError("Both email and password are required");
+      setAlert({
+        message: "Both email and password are required",
+        type: "error",
+      });
       return;
     }
 
@@ -37,22 +45,25 @@ export default function Login() {
       if (data.status === "success") {
         setEmail("");
         setPassword("");
+        Cookies.set("loginMessage", "Login successfully");
         history.push("/admin/dashboard");
       } else {
-        setError(data?.message);
+        setAlert({ message: data?.message, type: "error" });
       }
     } catch (error) {
-      setError(error.message);
+      setAlert({ message: error.message, type: "error" });
     }
-
-    setTimeout(() => setError(""), 3000);
   };
 
   return (
     <div className="formUser">
       <div className="content">
         <form className="mb-3" onSubmit={handleSubmit}>
-          {error && <p className="alert alert-danger">{error}</p>}
+          <CustomAlert
+            message={alert.message}
+            type={alert.type}
+            onClose={() => setAlert({ message: "", type: "" })}
+          />
           <div className="mb-3">
             <label htmlFor="email pb-2">email</label>
             <input

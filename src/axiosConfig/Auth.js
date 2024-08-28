@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-const basicURL = "http://127.0.0.1:8000/api/";
+import { basicURL } from "./API";
 
 export const login = async (email, password) => {
   try {
@@ -16,6 +16,9 @@ export const login = async (email, password) => {
     // Setting cookies
     Cookies.set("token_resta", response.data.access_token);
     Cookies.set("admin_resta", JSON.stringify(response.data.customer));
+    setTimeout(() => {
+      if (Cookies.get("token_resta")) Cookies.remove("token_resta");
+    }, 86400000);
 
     // illogical
     if (!localStorage.getItem("cartItems")) {
@@ -38,8 +41,8 @@ export const login = async (email, password) => {
 
 export const logout = () => {
   return new Promise((resolve) => {
-    Cookies.remove("token_resta");
-    Cookies.remove("admin_resta");
+    if (Cookies.get("token_resta")) Cookies.remove("token_resta");
+    if (Cookies.get("admin_resta")) Cookies.remove("admin_resta");
     resolve({ message: "Logged out successfully" });
   });
 };

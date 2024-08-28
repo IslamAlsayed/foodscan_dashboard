@@ -1,4 +1,4 @@
-import "../Invoice.css";
+import "./Invoice.css";
 import React, { useEffect, useState } from "react";
 import { PrinterOutlined } from "@ant-design/icons";
 
@@ -30,7 +30,7 @@ export default function Invoice({ visible, modalClose }) {
       }
     });
 
-    setCartItemTotal(totalCost);
+    setCartItemTotal(totalCost.toFixed(2));
   }, []);
 
   const convert = (value) => {
@@ -46,7 +46,7 @@ export default function Invoice({ visible, modalClose }) {
   };
 
   return (
-    <div className={`modal-overlay ${visible ? "visible" : ""}`}>
+    <div className={`modal-overlay invoice ${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="modal-content">
           <div className="options">
@@ -84,9 +84,9 @@ export default function Invoice({ visible, modalClose }) {
             <table>
               <thead>
                 <tr>
-                  <th>qty</th>
-                  <th>item description</th>
-                  <th>price</th>
+                  <th key="0">qty</th>
+                  <th key="1">item description</th>
+                  <th key="2">price</th>
                 </tr>
               </thead>
               {invoiceItem ? (
@@ -105,7 +105,11 @@ export default function Invoice({ visible, modalClose }) {
                         ? item.addons.map((addon, index) => (
                             <tr className="addons" key={index}>
                               <td>x {addon.quantity}</td>
-                              <td>addon: {addon.name}</td>
+                              {index < 1 ? (
+                                <td>addon: {addon.name}</td>
+                              ) : (
+                                <td>~~~~ : {addon.name}</td>
+                              )}
                               <td>${addon.cost}</td>
                             </tr>
                           ))
@@ -115,7 +119,11 @@ export default function Invoice({ visible, modalClose }) {
                         ? item.extras.map((extra, index) => (
                             <tr className="extras" key={index}>
                               <td>x {extra.quantity}</td>
-                              <td>extra: {extra.name}</td>
+                              {index < 1 ? (
+                                <td>extra: {extra.name}</td>
+                              ) : (
+                                <td>~~~ : {extra.name}</td>
+                              )}
                               <td>${extra.cost}</td>
                             </tr>
                           ))

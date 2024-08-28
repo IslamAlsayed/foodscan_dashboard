@@ -5,7 +5,7 @@
   transition: transform 0.3s;
   height: calc(100svh - 70px);
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid #00000020;
   position: fixed;
   top: 70px;
   left: 0;

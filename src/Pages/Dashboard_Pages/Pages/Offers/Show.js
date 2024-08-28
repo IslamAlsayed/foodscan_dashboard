@@ -12,7 +12,6 @@ import { getData } from "../../../../axiosConfig/API";
 
 export default function ShowItem() {
   const { id } = useParams();
-  console.log("id", id);
   const [offer, setOffer] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +31,7 @@ export default function ShowItem() {
     fetchOffer(id);
   }, [id, fetchOffer]);
 
-  if (loading) return <p>loading...</p>;
+  if (loading) return;
 
   return (
     <div className="Show">

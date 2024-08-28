@@ -1,4 +1,4 @@
-import "../Invoice.css";
+import "./MoreDetails.css";
 import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
@@ -80,7 +80,8 @@ export default function MoreDetails({ visible, data, modalClose }) {
                   </div>
                   <div className="addon-text">
                     <p>
-                      {addon.name} <span>x {addon.quantity}</span>
+                      {addon.name}{" "}
+                      <span className="quantity">x {addon.quantity}</span>
                     </p>
                     <p>price: ${addon.cost}</p>
                   </div>
@@ -109,7 +110,8 @@ export default function MoreDetails({ visible, data, modalClose }) {
                   </div>
                   <div className="extra-text">
                     <p>
-                      {extra.name} <span>x {extra.quantity}</span>
+                      {extra.name}{" "}
+                      <span className="quantity">x {extra.quantity}</span>
                     </p>
                     <p>price: ${extra.cost}</p>
                   </div>

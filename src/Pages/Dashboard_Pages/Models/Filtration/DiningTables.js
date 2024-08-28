@@ -57,7 +57,6 @@ export default function DiningTables({
       floor: "",
       status: "",
     });
-    console.log("filteredData", filteredData);
     setFilteredData(JSON.parse(sessionStorage.getItem("origin_data")));
     filtrated(JSON.parse(sessionStorage.getItem("origin_data")));
   };

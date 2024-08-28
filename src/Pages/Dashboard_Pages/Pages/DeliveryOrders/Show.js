@@ -3,14 +3,20 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { PrinterOutlined } from "@ant-design/icons";
 import { MdDateRange } from "react-icons/md";
-import ImageTest from "../../../../assets/global/profile.png";
 import Swal from "sweetalert2";
-import { getData, updateData } from "../../../../axiosConfig/API";
+import {
+  getData,
+  imageStorageURL,
+  updateData,
+} from "../../../../axiosConfig/API";
 import { getUser, isAuth } from "../../../../axiosConfig/Auth";
 
 export default function Show() {
   const { id } = useParams();
   const [deliveryOrder, setDeliveryOrder] = useState(null);
+  const [userOrder, setUserOrder] = useState(null);
+  const [userAddons, setUserAddons] = useState(null);
+  const [userExtras, setUserExtras] = useState(null);
   const [loading, setLoading] = useState(true);
   const [pay, setPay] = useState(null);
   const [status, setStatus] = useState(null);
@@ -28,6 +34,9 @@ export default function Show() {
     try {
       const result = await getData(`admin/orders/${id}`);
       setDeliveryOrder(result);
+      setUserOrder(result.order_meals[0]);
+      setUserAddons(result.order_addons);
+      setUserExtras(result.order_extras);
       setPay(result.pay === 1 ? "Paid" : "Not Paid");
       setStatus(result.status);
       setLoading(false);
@@ -120,11 +129,7 @@ export default function Show() {
     });
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
-  if (loading || !deliveryOrder) return <p>Loading...</p>;
+  if (loading || !userOrder) return;
 
   return (
     <div className="Show">
@@ -199,7 +204,7 @@ export default function Show() {
             </option>
           </select>
 
-          <button className="btn btn-primary" onClick={handlePrint}>
+          <button className="btn btn-primary" onClick={() => window.print()}>
             <PrinterOutlined />
             print invoice
           </button>
@@ -214,48 +219,86 @@ export default function Show() {
 
           <div className="section">
             <div className="cards">
-              <div className="card" data-id="1">
-                <div className="card-img">
-                  <img loading="lazy" src={ImageTest} alt="order" />
-                </div>
-                <div className="card-text">
-                  <p className="name fw-bold">kung peo chicken</p>
-                  <p className="quantity">
-                    quantity choice: <span className="fw-bold">6 pcs</span>
-                  </p>
-                  <b className="total">$12.2</b>
-                </div>
-              </div>
+              {/* Order */}
+              {userOrder && (
+                <>
+                  <h3>the order</h3>
+                  <div className="card" data-id={userOrder.meal_id}>
+                    <div className="card-img">
+                      <img
+                        loading="lazy"
+                        src={`${imageStorageURL}/${userOrder.meal_image}`}
+                        alt={userOrder.meal_name}
+                      />
+                    </div>
+                    <div className="card-text">
+                      <p className="name fw-bold">{userOrder.meal_name}</p>
+                      <p className="quantity">
+                        quantity choice:
+                        <span className="fw-bold">
+                          {userOrder.quantity} pcs
+                        </span>
+                      </p>
+                      <b className="total">${userOrder.total_cost}</b>
+                    </div>
+                  </div>
+                </>
+              )}
 
-              <div className="card" data-id="2">
-                <div className="card-img">
-                  <img loading="lazy" src={ImageTest} alt="order" />
-                </div>
-                <div className="card-text">
-                  <p className="name fw-bold">kung peo chicken</p>
-                  <p className="quantity">
-                    quantity choice: <span className="fw-bold">6 pcs</span>
-                  </p>
-                  <b className="total">$12.2</b>
-                </div>
-              </div>
+              {/* Addons */}
+              {Object(userAddons).length > 0 &&
+                userAddons.map((addon, index) => (
+                  <>
+                    {index < 1 ? <h3>the addons</h3> : false}
+                    <div className="card" data-id={addon.addon_id}>
+                      <div className="card-img">
+                        <img
+                          loading="lazy"
+                          src={`${imageStorageURL}/${addon.addon_image}`}
+                          alt={addon.addon_name}
+                        />
+                      </div>
+                      <div className="card-text">
+                        <p className="name fw-bold">{addon.addon_name}</p>
+                        <p className="quantity">
+                          quantity choice:
+                          <span className="fw-bold">{addon.quantity} pcs</span>
+                        </p>
+                        <b className="total">${addon.total_cost}</b>
+                      </div>
+                    </div>
+                  </>
+                ))}
+
+              {/* Extras */}
+              {Object(userExtras).length > 0 &&
+                userExtras.map((extra, index) => (
+                  <>
+                    {index < 1 ? <h3>the extras</h3> : false}
+                    <div className="card" data-id={extra.extra_id}>
+                      <div className="card-img">
+                        <img
+                          loading="lazy"
+                          src={`${imageStorageURL}/${extra.extra_image}`}
+                          alt={extra.extra_name}
+                        />
+                      </div>
+                      <div className="card-text">
+                        <p className="name fw-bold">{extra.extra_name}</p>
+                        <p className="quantity">
+                          quantity choice:
+                          <span className="fw-bold">{extra.quantity} pcs</span>
+                        </p>
+                        <b className="total">${extra.total_cost}</b>
+                      </div>
+                    </div>
+                  </>
+                ))}
             </div>
           </div>
         </div>
 
         <div className="sections sections-right">
-          <div className="section">
-            <div className="title">
-              <b>subTotal</b>
-              <b>${deliveryOrder.total_cost}</b>
-            </div>
-
-            <div className="details">
-              <b>total</b>
-              <b>${deliveryOrder.total_cost}</b>
-            </div>
-          </div>
-
           <div className="section">
             <div className="title">
               <b>subTotal</b>

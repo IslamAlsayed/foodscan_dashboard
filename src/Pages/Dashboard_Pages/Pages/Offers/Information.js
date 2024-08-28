@@ -1,7 +1,7 @@
 import { Row, Col } from "antd";
 
 export default function Information({ data }) {
-  if (!data) return <p>Loading...</p>;
+  if (!data) return;
 
   return (
     <div className="Information">

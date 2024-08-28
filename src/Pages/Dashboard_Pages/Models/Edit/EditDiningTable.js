@@ -11,7 +11,6 @@ export default function EditDiningTable({
   item,
   updated,
 }) {
-  const [staticVisible, setStaticVisible] = useState(false);
   const [diningTable, setDiningTable] = useState({
     num: "",
     size: "",
@@ -21,10 +20,6 @@ export default function EditDiningTable({
   useEffect(() => {
     if (item) setDiningTable(item);
   }, [item]);
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,7 +58,7 @@ export default function EditDiningTable({
   };
 
   return (
-    <div id="AddTable" className={staticVisible ? "visible" : ""}>
+    <div id="AddTable" className={visible ? "visible" : ""}>
       <div className="modal-container">
         <div className="breadcrumb">
           <span>

@@ -7,7 +7,6 @@ import { getData, addData } from "../../../../axiosConfig/API";
 
 export default function Extras({ visible, visibleToggle, updated }) {
   const imageRef = useRef(null);
-  const [staticVisible, setStaticVisible] = useState(false);
   const [categories, setCategories] = useState([]);
   const [extra, setExtra] = useState({
     name: "",
@@ -18,10 +17,6 @@ export default function Extras({ visible, visibleToggle, updated }) {
     status: "",
     cost: "",
   });
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value, id } = e.target;
@@ -94,7 +89,7 @@ export default function Extras({ visible, visibleToggle, updated }) {
   }, [fetchCategories]);
 
   return (
-    <div id="AddTable" className={`${staticVisible ? "visible" : ""}`}>
+    <div id="AddTable" className={`${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>

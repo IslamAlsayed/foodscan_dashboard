@@ -30,7 +30,7 @@ export default function ShowItem() {
     fetchExtra(id);
   }, [id, fetchExtra]);
 
-  if (loading) return <p>loading...</p>;
+  if (loading) return;
 
   return (
     <div className="ShowItem ItemsTabs">

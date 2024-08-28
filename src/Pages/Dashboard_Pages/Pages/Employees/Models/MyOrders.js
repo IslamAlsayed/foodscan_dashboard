@@ -10,7 +10,7 @@ export default function MyOrders({ data }) {
       : 0;
   };
 
-  if (!data) return <p>Loading...</p>;
+  if (!data) return;
 
   return (
     <div className="MyOrders">

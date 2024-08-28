@@ -5,10 +5,10 @@
     top: 0;
     left: 0;
     z-index: 707;
+    opacity: 0;
     display: flex;
     justify-content: center;
     background-color: #737373a6;
-    opacity: 0;
     visibility: hidden;
     transition: 0.3s;
     transform: translateY(-30px) scale(0.97);
@@ -21,23 +21,28 @@
 }
 
 .DetailsItem form {
-    width: 400px;
+    /* width: 400px; */
     height: fit-content;
     padding: 15px;
     background: #fff;
     position: relative;
     border-radius: 7px;
-    margin-top: 15px;
 }
 
 .xmarkModalClose {
-    position: absolute;
+    position: sticky;
+    width: 100%;
     top: 15px;
     right: 15px;
     color: red;
     cursor: pointer;
     font-size: 20px;
     z-index: 10;
+    text-align: end;
+}
+
+.DetailsItem .modal-container .modal-content {
+    padding-top: 0;
 }
 
 .DetailsItem .btn-close {
@@ -86,6 +91,7 @@
 .DetailsItem .modal-body>.quantity input {
     width: 30px;
     text-align: center;
+    pointer-events: none;
 }
 
 .DetailsItem .modal-body>.quantity svg {
@@ -108,6 +114,7 @@
 .DetailsItem .modal-body>.sizes>div {
     gap: 15px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -124,10 +131,11 @@
 
 .DetailsItem .modal-body>.addons .length,
 .DetailsItem .modal-body>.extras .length {
-    gap: 15px;
+    gap: 20px;
     display: flex;
     margin-top: 5px;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: start;
 }
 
 .DetailsItem .modal-body>.addons .addon,
@@ -141,11 +149,6 @@
     flex-direction: column;
 }
 
-.DetailsItem .modal-body>.addons .addon:active,
-.DetailsItem .modal-body>.extras .extra:active {
-    transform: scale(0.98);
-}
-
 .DetailsItem .modal-body>.addons .addon.selected,
 .DetailsItem .modal-body>.extras .extra.selected {
     opacity: .5;
@@ -153,34 +156,48 @@
 
 .DetailsItem .modal-body>.addons .addon .addon-img,
 .DetailsItem .modal-body>.extras .extra .extra-img {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     font-size: 7px;
     overflow: hidden;
     border-radius: 7px;
+    position: relative;
 }
 
-.DetailsItem .modal-body>.addons .addon .addon-text .cost,
-.DetailsItem .modal-body>.addons .addon .addon-text .count,
-.DetailsItem .modal-body>.extras .extra .extra-text .cost,
-.DetailsItem .modal-body>.extras .extra .extra-text .count {
+.DetailsItem .modal-body>.addons .addon:active .addon-img,
+.DetailsItem .modal-body>.extras .extra:active .extra-img {
+    transform: scale(0.98);
+}
+
+.DetailsItem .modal-body>.addons .addon .addon-img .cost,
+.DetailsItem .modal-body>.addons .addon .addon-img .count,
+.DetailsItem .modal-body>.extras .extra .extra-img .cost,
+.DetailsItem .modal-body>.extras .extra .extra-img .count {
     position: absolute;
-    top: 0px;
-    padding: 2px;
+    left: 3px;
+    padding: 3px;
     color: #fff;
+    font-size: 7px;
     font-weight: bold;
-    font-size: 10px;
     border-radius: 3px;
-    background: #0b5ed7;
-    transform: scale(0.7);
 }
 
-.DetailsItem .modal-body>.addons .addon .addon-text .count,
-.DetailsItem .modal-body>.extras .extra .extra-text .count {
-    right: 0;
-    color: #fff;
-    padding-inline: 3px;
+.DetailsItem .modal-body>.addons .addon .addon-img .cost,
+.DetailsItem .modal-body>.extras .extra .extra-img .cost {
+    top: 2px;
+    background: #0b5ed7;
+}
+
+.DetailsItem .modal-body>.addons .addon .addon-img .count,
+.DetailsItem .modal-body>.extras .extra .extra-img .count {
+    bottom: 2px;
     background: #d70b0b;
+}
+
+.DetailsItem .modal-body>.addons .addon .addon-text,
+.DetailsItem .modal-body>.extras .extra .extra-text {
+    width: 70px;
+    text-wrap: balance;
 }
 
 
@@ -214,10 +231,22 @@
 }
 
 .DetailsItem .modal-body button {
+    display: flex;
+    color: #ffffff;
+    font-size: 14px;
     border-radius: 25px;
+    align-items: center;
+    padding-block: 7px;
+    font-weight: 500 !important;
+    background-color: #0b5ed7;
 }
 
-.DetailsItem .modal-body button {
-    color: #ffffff;
-    background-color: #0b5ed7;
+.DetailsItem .modal-body #finalTotal {
+    padding: 0;
+    transition: .1s;
+    font-weight: 500 !important;
+}
+
+.DetailsItem .modal-body #finalTotal.scalable {
+    transform: translateY(-3px) scale(1.3);
 }

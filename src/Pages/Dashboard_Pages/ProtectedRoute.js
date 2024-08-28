@@ -14,7 +14,7 @@ const ProtectedRoute = ({ component: Component, role, ...rest }) => {
     setLoading(false);
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
 
   const isMultiRole =
     userRole &&

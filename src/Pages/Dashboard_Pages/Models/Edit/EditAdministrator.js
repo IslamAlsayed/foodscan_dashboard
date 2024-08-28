@@ -11,11 +11,10 @@ export default function EditAdministrator({
   item,
   updated,
 }) {
-  const [staticVisible, setStaticVisible] = useState(false);
   const [administrator, setAdministrator] = useState({
     name: "",
     email: "",
-    role: "chef",
+    role: "",
     phone: "",
     password: "",
     password_confirmation: "",
@@ -24,10 +23,6 @@ export default function EditAdministrator({
   useEffect(() => {
     if (item) setAdministrator(item);
   }, [item]);
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,7 +69,7 @@ export default function EditAdministrator({
   };
 
   return (
-    <div id="AddTable" className={staticVisible ? "visible" : ""}>
+    <div id="AddTable" className={visible ? "visible" : ""}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>
@@ -124,15 +119,32 @@ export default function EditAdministrator({
                   <label htmlFor="role" className="form-label">
                     role
                   </label>
-                  <input
-                    type="text"
+                  <select
                     className="form-control"
                     name="role"
                     id="role"
-                    disabled
                     value={administrator.role}
                     onChange={(e) => handleChange(e)}
-                  />
+                  >
+                    <option
+                      value="admin"
+                      disabled={administrator.role === "admin"}
+                    >
+                      admin
+                    </option>
+                    <option
+                      value="casher"
+                      disabled={administrator.role === "casher"}
+                    >
+                      casher
+                    </option>
+                    <option
+                      value="chef"
+                      disabled={administrator.role === "chef"}
+                    >
+                      chef
+                    </option>
+                  </select>
                 </div>
               </div>
 

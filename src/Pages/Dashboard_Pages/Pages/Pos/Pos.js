@@ -4,38 +4,90 @@ import React, { useCallback, useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { AiFillShopping } from "react-icons/ai";
 import { FaShoppingBag } from "react-icons/fa";
-import subMenuItems from "../../store/subMenu";
+import { FaXmark } from "react-icons/fa6";
 import AddCustomer from "./Features/AddCustomer";
 import CartItems from "./Features/CartItems";
 import DetailsItem from "./Features/DetailsItem";
 import { getData } from "../../../../axiosConfig/API";
 import Invoice from "./Features/Invoice";
 import MoreDetails from "./Features/MoreDetails";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Pos() {
   const [meals, setMeals] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [inputSearch, setInputSearch] = useState({ filter: "" });
   const [cartItemTotal, setCartItemTotal] = useState(0);
+  const [cartItem, setCartItem] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [invoiceVisible, setInvoiceVisible] = useState(false);
+  const [moreDetailsData, setMoreDetailsData] = useState(null);
+  const [modalMoreDetailsVisible, setModalMoreDetailsVisible] = useState(false);
 
   const fetchMenuItem = useCallback(async () => {
     try {
       const result = await getData("menu");
       sessionStorage.removeItem("origin_data");
+      if (!sessionStorage.getItem("origin_meals")) {
+        sessionStorage.setItem("origin_meals", JSON.stringify(result.meals));
+      }
       setMeals(result.meals);
     } catch (error) {
       console.error(error.response?.data?.message);
     }
   }, []);
 
-  useEffect(() => {
-    fetchMenuItem();
-  }, [fetchMenuItem]);
+  const fetchCategories = useCallback(async () => {
+    try {
+      const result = await getData("categories");
+      setCategories(result);
+    } catch (error) {
+      console.error(error.response?.data?.message);
+    }
+  }, []);
 
-  const [cartItem, setCartItem] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [invoiceVisible, setInvoiceVisible] = useState(false);
-  const [moreDetailsData, setMoreDetailsData] = useState(null);
-  const [modalMoreDetailsVisible, setModalMoreDetailsVisible] = useState(false);
+  useEffect(() => {
+    fetchCategories();
+    fetchMenuItem();
+  }, [fetchCategories, fetchMenuItem]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputSearch((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleInputSearch = () => {
+    const originMeals =
+      JSON.parse(sessionStorage.getItem("origin_meals")) || [];
+
+    const filtered = originMeals.filter((item) =>
+      item.name.includes(inputSearch.filter)
+    );
+
+    setMeals(filtered);
+  };
+
+  const handleInputReset = () => {
+    const originMeals =
+      JSON.parse(sessionStorage.getItem("origin_meals")) || [];
+    setInputSearch({ filter: "" });
+    setMeals(originMeals);
+  };
+
+  const handleFilterCategories = (id) => {
+    const currentItem = document.getElementById(`subMenu_${id}`);
+    const allItems = document.querySelectorAll(".subMenu .card");
+    const originMeals = JSON.parse(sessionStorage.getItem("origin_meals"));
+
+    const isActive = currentItem.classList.contains("current");
+    allItems.forEach((card) => card.classList.remove("current"));
+
+    if (isActive) {
+      setMeals(originMeals);
+    } else {
+      currentItem.classList.add("current");
+      setMeals(originMeals.filter((item) => item.id === id));
+    }
+  };
 
   const addToCart = (item) => {
     setCartItem(item);
@@ -107,41 +159,61 @@ export default function Pos() {
         <div className="posSearch">
           <div className="input-group mb-3">
             <input
-              type="text"
+              type="filter"
+              name="filter"
+              id="filter"
               className="form-control"
-              placeholder="search by menu item"
+              placeholder="search by name"
+              value={inputSearch.filter}
+              onChange={(e) => handleChange(e)}
             />
+
             <button
               className="btn btn-outline-secondary iconSearch"
               type="button"
+              onClick={() => handleInputSearch()}
             >
               <IoIosSearch />
             </button>
+            {inputSearch.filter !== "" && (
+              <button
+                className="btn btn-danger iconReset"
+                type="button"
+                onClick={() => handleInputReset()}
+              >
+                <FaXmark />
+              </button>
+            )}
           </div>
         </div>
 
         <div className="posContent">
-          <div className="subMenu mb-4">
-            <div className="cards">
-              {Object(subMenuItems).length > 0 &&
-                subMenuItems.map((item, index) => (
-                  <Link
-                    to="./pos"
+          {Object(categories).length > 0 && (
+            <div className="subMenu mb-3">
+              <div className="cards">
+                {categories.map((item, index) => (
+                  <div
                     className="card"
                     key={index}
-                    id={`subMenu_${index + 1}`}
+                    id={`subMenu_${item.id}`}
+                    onClick={() => handleFilterCategories(item.id)}
                   >
-                    <img loading="lazy" src={item.image} alt={item.title} />
-                    <small className="card-title">{item.title}</small>
-                  </Link>
+                    <img
+                      loading="lazy"
+                      src={`http://localhost:8000/storage/${item.image}`}
+                      alt={item.name}
+                    />
+                    <small className="card-name">{item.name}</small>
+                  </div>
                 ))}
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="mainMenu">
-            <div className="cards">
-              {Object(meals).length > 0 &&
-                meals.map((item, index) => (
+          {Object(meals).length > 0 ? (
+            <div className="mainMenu">
+              <div className="cards">
+                {meals.map((item, index) => (
                   <div className="card" key={index} id={`mainMenu_${item.id}`}>
                     <div className="card-img">
                       <img
@@ -152,21 +224,33 @@ export default function Pos() {
                     <div className="card-body p-2">
                       <p className="fw-bold pb-2">{item.name}</p>
                       <div>
-                        <span className="fw-bold price">
-                          ${item.meal_size_costs[0].cost}
-                        </span>
-                        <button
-                          className="addCartBtn"
-                          onClick={() => addToCart(item)}
-                        >
-                          <FaShoppingBag /> add
-                        </button>
+                        {item.meal_size_costs &&
+                        item.meal_size_costs.length > 0 ? (
+                          <>
+                            <span className="fw-bold itemPrice">
+                              ${item.meal_size_costs[0].cost}
+                            </span>
+                            <button
+                              className="addCartBtn"
+                              onClick={() => addToCart(item)}
+                            >
+                              <FaShoppingBag /> add
+                            </button>
+                          </>
+                        ) : (
+                          <p className="price_not_available">
+                            Price not available
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
                 ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <p>There are no items in this category.</p>
+          )}
         </div>
 
         <button

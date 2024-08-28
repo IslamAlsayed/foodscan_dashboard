@@ -10,6 +10,7 @@ import {
 } from "../../Store/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { imageStorageURL } from "../../axiosConfig/API";
 
 export function GridCard(pokemon) {
   const dispatch = useDispatch();
@@ -141,7 +142,7 @@ export function GridCard(pokemon) {
         <img
           className="grid-img"
           key={pokemon.image}
-          src={`http://127.0.0.1:8000/storage/${pokemon.image}`}
+          src={`${imageStorageURL}/storage/${pokemon.image}`}
           width={100}
         />
         <div className="card-body">

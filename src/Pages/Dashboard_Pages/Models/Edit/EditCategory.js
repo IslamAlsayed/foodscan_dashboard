@@ -5,9 +5,13 @@ import { HiXMark } from "react-icons/hi2";
 import Swal from "sweetalert2";
 import { updateData } from "../../../../axiosConfig/API";
 
-export default function EditCategories({ visible, item, updated }) {
+export default function EditCategories({
+  visible,
+  visibleToggle,
+  item,
+  updated,
+}) {
   const imageRef = useRef(null);
-  const [staticVisible, setStaticVisible] = useState(false);
   const [category, setCategory] = useState({
     name: "",
     description: "",
@@ -20,15 +24,6 @@ export default function EditCategories({ visible, item, updated }) {
       setCategory({ ...rest, image: null });
     }
   }, [item]);
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
-
-  const closeModal = () => {
-    setStaticVisible(false);
-    document.body.style.overflow = "visible";
-  };
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -75,10 +70,7 @@ export default function EditCategories({ visible, item, updated }) {
   };
 
   return (
-    <div
-      id="AddTable"
-      className={`Categories ${staticVisible ? "visible" : ""}`}
-    >
+    <div id="AddTable" className={`Categories ${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>
@@ -86,7 +78,7 @@ export default function EditCategories({ visible, item, updated }) {
           </h3>
 
           <div className="closeSidebar">
-            <HiXMark onClick={closeModal} />
+            <HiXMark onClick={visibleToggle} />
           </div>
         </div>
 
@@ -150,7 +142,7 @@ export default function EditCategories({ visible, item, updated }) {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={closeModal}
+                  onClick={visibleToggle}
                 >
                   <HiXMark />
                   <span className="ps-2">Close</span>

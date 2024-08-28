@@ -2,7 +2,7 @@ import { Row, Col } from "antd";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
 
 export default function Information({ data }) {
-  if (!data) return <p>loading...</p>;
+  if (!data) return;
 
   return (
     <div className="Information">

@@ -1,5 +1,5 @@
 import "./Sidebar.css";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaGear, FaXmark } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import publicRoutes from "../../../Pages/Dashboard_Pages/store/publicRoutes";
@@ -63,10 +63,6 @@ export default function Sidebar() {
           route.role.includes(adminRole)
         );
 
-        // {
-        //   console.log("hasMatchingRoutes", hasMatchingRoutes);
-        // }
-
         return (
           hasMatchingRoutes && (
             <div className="group" key={index}>
@@ -95,39 +91,6 @@ export default function Sidebar() {
           )
         );
       })}
-
-      {/* {publicRoutes.map((routeGroup, index) => {
-        const routesToShow = routeGroup.items.filter((route) =>
-          route.role.includes(adminRole)
-        );
-
-        {
-          console.log("routesToShow", routesToShow);
-        }
-
-        if (routesToShow.length === 0) return null;
-
-        return (
-          <div className="group" key={index}>
-            {routeGroup.label && <label>{routeGroup.label}</label>}
-            <ul>
-              {routesToShow.map((route) => (
-                <li
-                  key={route.id}
-                  id={route.id}
-                  className={`liRoute ${isActive(route.path) ? "active" : ""}`}
-                  onClick={() => handleClassActive(route.id)}
-                >
-                  <Link to={route.path}>
-                    {React.createElement(route.icon)}
-                    <span>{route.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })} */}
 
       {adminRole === "admin" && (
         <div className="group" key="75">

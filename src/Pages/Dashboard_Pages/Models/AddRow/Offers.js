@@ -8,7 +8,6 @@ import { addData } from "../../../../axiosConfig/API";
 
 export default function Offers({ visible, visibleToggle, updated }) {
   const imageRef = useRef(null);
-  const [staticVisible, setStaticVisible] = useState(false);
   const [offer, setOffer] = useState({
     name: "",
     discount: "",
@@ -17,10 +16,6 @@ export default function Offers({ visible, visibleToggle, updated }) {
     status: "active",
     image: null,
   });
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -73,7 +68,7 @@ export default function Offers({ visible, visibleToggle, updated }) {
   };
 
   return (
-    <div id="AddTable" className={`${staticVisible ? "visible" : ""}`}>
+    <div id="AddTable" className={`${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>

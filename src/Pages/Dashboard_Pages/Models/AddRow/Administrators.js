@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { addData } from "../../../../axiosConfig/API";
 
 export default function Administrator({ visible, visibleToggle, updated }) {
-  const [staticVisible, setStaticVisible] = useState(false);
   const [administrator, setAdministrator] = useState({
     name: "",
     email: "",
@@ -18,10 +17,6 @@ export default function Administrator({ visible, visibleToggle, updated }) {
     role: "administrator",
     identity_card: "",
   });
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value, id } = e.target;
@@ -75,7 +70,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
   };
 
   return (
-    <div id="AddTable" className={`${staticVisible ? "visible" : ""}`}>
+    <div id="AddTable" className={`${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>

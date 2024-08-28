@@ -20,7 +20,7 @@ export default function Administrators() {
 
   const fetchAdministrators = useCallback(async () => {
     try {
-      const result = await getData("admin/employees");
+      const result = await getData("admin/administrators");
       sessionStorage.removeItem("origin_data");
       setAdministrator(result);
     } catch (error) {

@@ -46,7 +46,7 @@ export default function Show() {
     }
   }, [id, fetchCustomers, fetchCustomerOrders]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
 
   return (
     <div className="Show">

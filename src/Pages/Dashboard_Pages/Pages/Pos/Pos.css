@@ -6,15 +6,6 @@
     position: relative;
 }
 
-.Pos .iconSearch {
-    color: #fff;
-    background-color: #1772FF;
-}
-
-.Pos .iconSearch * {
-    font-size: 22px;
-}
-
 .Pos .posMenuItem {
     width: calc(100% - 350px);
     transition: 0.3s;
@@ -31,6 +22,19 @@
     background-color: #00000070;
 }
 
+.Pos .iconSearch {
+    color: #fff;
+    background-color: #1772FF;
+}
+
+.Pos .iconSearch * {
+    font-size: 22px;
+}
+
+.Pos .posMenuItem .subMenu {
+    box-shadow: 0 -2px 9px #00000020;
+}
+
 .Pos .posMenuItem .subMenu .cards {
     gap: 15px;
     display: flex;
@@ -39,7 +43,7 @@
 
 .Pos .posMenuItem .subMenu .cards {
     overflow-y: auto;
-    padding-bottom: 15px;
+    padding-block: 15px;
 }
 
 .Pos .posMenuItem .subMenu .cards::-webkit-scrollbar {
@@ -51,24 +55,48 @@
 }
 
 .Pos .posMenuItem .subMenu .cards .card {
-    width: 110px;
-    min-width: 110px;
+    width: 90px;
+    min-width: 90px;
     height: 90px;
     border: none;
-    transition: 0.3s;
+    cursor: pointer;
     overflow: hidden;
     position: relative;
 }
 
 .Pos .posMenuItem .subMenu .cards .card:hover {
-    background-color: #DCEAFF;
-    box-shadow: inset 0px -2px 0px #1772FF;
+    outline: 1px solid #1772FF;
 }
 
-.Pos .posMenuItem .subMenu .cards .card img {
-    width: 35px;
-    height: 35px;
-    margin: auto;
+.Pos .posMenuItem .subMenu .cards .card.current {
+    background: #1772FF;
+    outline: 2px solid #1772FF;
+}
+
+.Pos .posMenuItem .subMenu .cards .card.current img {
+    clip-path: polygon(80% 1%, 100% 20%, 100% 100%, 0 100%, 0 0);
+}
+
+.Pos .posMenuItem .subMenu .cards .card .card-name {
+    width: calc(100% + 10px);
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    font-size: 8px;
+    text-wrap: balance;
+    padding-inline: 10px;
+    transform: translateX(-50%);
+    color: #0b5ed7;
+    font-weight: bold;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    background: linear-gradient(to top, #fff, transparent);
+}
+
+.Pos .posMenuItem .posContent {
+    padding-bottom: 50px;
 }
 
 .Pos .posMenuItem .mainMenu .cards {
@@ -80,7 +108,8 @@
 .Pos .posMenuItem .mainMenu .cards .card {
     border: none;
     overflow: hidden;
-    border-radius: 16px;
+    border-radius: 7px;
+    box-shadow: 0 -2px 9px #00000020;
 }
 
 .Pos .posMenuItem .mainMenu .cards .card .card-img {
@@ -102,8 +131,14 @@
     justify-content: space-between;
 }
 
-.Pos .posMenuItem .mainMenu .cards .card .card-body div .price {
+.Pos .posMenuItem .mainMenu .cards .card .card-body div .itemPrice {
     font-size: 16px;
+}
+
+.Pos .posMenuItem .mainMenu .cards .card .card-body div .price_not_available {
+    font-size: 12px;
+    color: #ff4f20;
+    font-weight: bold;
 }
 
 .Pos .posMenuItem .mainMenu .cards .card .card-body div .addCartBtn {
@@ -126,16 +161,18 @@
 
 .Pos .posCartItems {
     width: 350px;
+    height: calc(100svh - 70px);
     padding: 15px 15px 70px;
     position: fixed;
     top: 70px;
     right: 0;
     z-index: 404;
     transition: 0.3s;
-    height: calc(100svh - 70px);
-    background-color: #fff;
     direction: rtl;
     overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #00000020;
+    border-top: 0;
 }
 
 .Pos .posCartItems::-webkit-scrollbar {
@@ -315,11 +352,6 @@
     color: #1259c4;
 }
 
-.Pos .MoreDetails .modal-content .addons .addon-text .quantityActions svg:active,
-.Pos .MoreDetails .modal-content .addons .addon-text .quantityActions svg:active {
-    transform: scale(0.95);
-}
-
 .Pos .posCartItems .CartItems .discountType {
     display: flex;
     overflow: hidden;
@@ -393,104 +425,6 @@
         background-color: #1259c4;
         transform: translateY(1px) scale(0.99);
     }
-}
-
-.Pos .MoreDetails .modal-content {
-    padding-block: 15px;
-    padding-bottom: 0 !important;
-}
-
-.Pos .MoreDetails .modal-content .addons,
-.Pos .MoreDetails .modal-content .extras {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-}
-
-.Pos .MoreDetails .modal-content .addons label,
-.Pos .MoreDetails .modal-content .extras label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon,
-.Pos .MoreDetails .modal-content .extras .extra {
-    gap: 15px;
-    width: 100%;
-    display: flex;
-    padding: 15px;
-    margin: 0 auto 15px;
-    position: relative;
-    box-shadow: -2px 2px 9px #00000020;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon .type,
-.Pos .MoreDetails .modal-content .extras .extra .type {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 3px;
-    font-size: 10px;
-    border-radius: 3px;
-    font-weight: bold;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon-img,
-.Pos .MoreDetails .modal-content .extras .extra-img {
-    width: 70px;
-    height: 70px;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon-img img,
-.Pos .MoreDetails .modal-content .extras .extra-img img {
-    border-radius: 3px;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon-text .quantity,
-.Pos .MoreDetails .modal-content .extras .extra-text .quantity {
-    gap: 15px;
-    display: flex;
-    align-items: center;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon-text .quantityActions,
-.Pos .MoreDetails .modal-content .extras .extra-text .quantityActions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon-text .quantityActions input,
-.Pos .MoreDetails .modal-content .extras .extra-text .quantityActions input {
-    width: 25px;
-    text-align: center;
-}
-
-.Pos .MoreDetails .modal-content .addons .addon-text .quantityActions svg,
-.Pos .MoreDetails .modal-content .extras .extra-text .quantityActions svg {
-    font-size: 20px;
-    margin-top: -3px;
-    color: #1772FF;
-}
-
-.Pos .MoreDetails .modal-content .addons .trashAddon,
-.Pos .MoreDetails .modal-content .extras .trashExtra {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    border: none;
-    outline: none;
-    padding: 3px;
-    color: #ff4f20;
-    border-radius: 3px;
-}
-
-.Pos .MoreDetails .modal-content .closeMoreDetails {
-    position: sticky;
-    bottom: -15px;
-    background: #fff;
-    padding-block: 15px;
-    box-shadow: 0 -2px 9px #00000020;
 }
 
 .disabled-icon {

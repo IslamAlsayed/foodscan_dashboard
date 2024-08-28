@@ -1,28 +1,18 @@
 import "../Models.css";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiXMark } from "react-icons/hi2";
 import Swal from "sweetalert2";
 import { addData } from "../../../../axiosConfig/API";
 
-function Categories({ visible, updated }) {
+function Categories({ visible, visibleToggle, updated }) {
   const imageRef = useRef(null);
-  const [staticVisible, setStaticVisible] = useState(false);
   const [category, setCategory] = useState({
     name: "",
     description: "",
     image: null,
     status: 1,
   });
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
-
-  const closeModal = () => {
-    setStaticVisible(false);
-    document.body.style.overflow = "visible";
-  };
 
   const handleChange = (e) => {
     const { name, value, id, type, files } = e.target;
@@ -77,10 +67,7 @@ function Categories({ visible, updated }) {
   };
 
   return (
-    <div
-      id="AddTable"
-      className={`Categories ${staticVisible ? "visible" : ""}`}
-    >
+    <div id="AddTable" className={`Categories ${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>
@@ -88,7 +75,7 @@ function Categories({ visible, updated }) {
           </h3>
 
           <div className="closeSidebar">
-            <HiXMark onClick={closeModal} />
+            <HiXMark onClick={visibleToggle} />
           </div>
         </div>
 
@@ -189,7 +176,7 @@ function Categories({ visible, updated }) {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={closeModal}
+                  onClick={visibleToggle}
                 >
                   <HiXMark />
                   <span className="ps-2">Close</span>

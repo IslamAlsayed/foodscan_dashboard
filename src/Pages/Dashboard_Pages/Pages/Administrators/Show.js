@@ -20,7 +20,7 @@ export default function Show() {
   const fetchAdministrator = useCallback(async (id) => {
     if (!id) return;
     try {
-      const result = await getData(`admin/employees/${id}`);
+      const result = await getData(`admin/administrators/${id}`);
       setAdministrator(result);
       setLoading(false);
     } catch (error) {
@@ -40,13 +40,11 @@ export default function Show() {
   }, []);
 
   useEffect(() => {
-    if (id) {
-      fetchAdministrator(id);
-      fetchAdministratorOrders(id);
-    }
+    fetchAdministrator(id);
+    fetchAdministratorOrders(id);
   }, [id, fetchAdministrator, fetchAdministratorOrders]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
 
   return (
     <div className="Show">

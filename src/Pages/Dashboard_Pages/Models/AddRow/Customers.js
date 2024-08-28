@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { addData } from "../../../../axiosConfig/API";
 
 export default function Customers({ visible, visibleToggle, updated }) {
-  const [staticVisible, setStaticVisible] = useState(false);
   const [customer, setCustomer] = useState({
     name: "",
     email: "",
@@ -17,10 +16,6 @@ export default function Customers({ visible, visibleToggle, updated }) {
     status: 1,
     role: "customer",
   });
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value, id } = e.target;
@@ -69,7 +64,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
   };
 
   return (
-    <div id="AddTable" className={`${staticVisible ? "visible" : ""}`}>
+    <div id="AddTable" className={`${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>

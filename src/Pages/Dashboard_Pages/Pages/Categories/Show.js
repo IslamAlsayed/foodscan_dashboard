@@ -28,7 +28,7 @@ export default function ShowItem() {
     fetchCategory(id);
   }, [id, fetchCategory]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
 
   return (
     <div className="ShowItem ItemsTabs">

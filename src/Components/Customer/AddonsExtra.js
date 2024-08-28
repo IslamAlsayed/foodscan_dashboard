@@ -1,11 +1,12 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { imageStorageURL } from "../../axiosConfig/API";
 export function AddonsExtra(props) {
   return (
     <>
       <div className="cart-card addon d-flex mx-2">
         {props.img && (
           <img
-            src={`http://127.0.0.1:8000/storage/${props.img}`}
+            src={`${imageStorageURL}/storage/${props.img}`}
             className="addon-img"
             alt="Addon"
           ></img>

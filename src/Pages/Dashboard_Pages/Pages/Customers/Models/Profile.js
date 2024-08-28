@@ -1,7 +1,7 @@
 import "../Models.css";
 
 export default function Profile({ data }) {
-  if (!data) return <p>Loading...</p>;
+  if (!data) return;
 
   return (
     <div className="Profile">

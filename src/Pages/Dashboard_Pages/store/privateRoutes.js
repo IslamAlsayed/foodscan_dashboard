@@ -16,7 +16,7 @@ import ShowDeliveryOrder from "../Pages/DeliveryOrders/Show";
 import ShowOffer from "../Pages/Offers/Show";
 import ShowAdministrator from "../Pages/Administrators/Show";
 import ShowCustomer from "../Pages/Customers/Show";
-import DetailsCustomer from "../Pages/Customers/Details";
+import DetailsOrder from "../Pages/Customers/DetailsOrder";
 import ShowEmployee from "../Pages/Employees/Show";
 import EditProfile from "../Pages/Profile/EditProfile";
 import ChangePassword from "../Pages/Profile/ChangePassword";
@@ -86,10 +86,10 @@ const privateRoutes = [
     role: ["admin"],
   },
   {
-    path: "/admin/dashboard/details-orders/:id/:id",
+    path: "/admin/dashboard/details-order/:id",
     name: "details order",
     icon: FaUsers,
-    component: DetailsCustomer,
+    component: DetailsOrder,
     role: ["admin"],
   },
   {

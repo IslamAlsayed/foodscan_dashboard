@@ -29,11 +29,7 @@ export default function Show() {
     fetchDiningTable(id);
   }, [id, fetchDiningTable]);
 
-  useEffect(() => {
-    console.log("diningTable", diningTable);
-  }, [diningTable]);
-
-  if (loading) return <p>Loading...</p>;
+  if (loading) return;
 
   return (
     <div className="Show">

@@ -4,7 +4,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import { IoMdRefresh } from "react-icons/io";
 import ImageTest from "../../../../assets/global/profile.png";
 import Swal from "sweetalert2";
-import { updateData } from "../../../../axiosConfig/API";
+import { imageStorageURL, updateData } from "../../../../axiosConfig/API";
 
 export default function Image({ url, data }) {
   const imageRef = useRef(null);
@@ -13,7 +13,7 @@ export default function Image({ url, data }) {
     id: data.id,
     image: null,
     imagePreview: data.image
-      ? `http://localhost:8000/storage/${data.image}`
+      ? `${imageStorageURL}/storage/${data.image}`
       : ImageTest,
   });
 
@@ -57,13 +57,13 @@ export default function Image({ url, data }) {
       id: data.id,
       image: null,
       imagePreview: data.image
-        ? `http://localhost:8000/storage/${data.image}`
+        ? `${imageStorageURL}/storage/${data.image}`
         : ImageTest,
     });
     setActionsVisible(false);
   };
 
-  if (!data) return <p>Loading...</p>;
+  if (!data) return;
 
   return (
     <div className="SubModel Image">

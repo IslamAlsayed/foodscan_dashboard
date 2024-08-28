@@ -69,8 +69,6 @@ export default function Offers({
       );
     });
 
-    console.log("offers", offers);
-
     setFilteredData(filtered);
     filtrated(filtered);
   };

@@ -7,7 +7,6 @@ import { updateData } from "../../../../axiosConfig/API";
 
 export default function EditOffer({ visible, visibleToggle, item, updated }) {
   const imageRef = useRef(null);
-  const [staticVisible, setStaticVisible] = useState(false);
   const [offer, setOffer] = useState({
     name: "",
     discount: "",
@@ -22,10 +21,6 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
       setOffer({ ...rest, image: null });
     }
   }, [item]);
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -54,9 +49,6 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
     if (offer.image) formData.append("image", offer.image);
     formData.append("_method", "put");
 
-    console.log("startDate", offer.startDate);
-    console.log("endDate", offer.endDate);
-
     try {
       const response = await updateData(
         `admin/offers/${item.id}`,
@@ -76,7 +68,7 @@ export default function EditOffer({ visible, visibleToggle, item, updated }) {
   };
 
   return (
-    <div id="AddTable" className={staticVisible ? "visible" : ""}>
+    <div id="AddTable" className={visible ? "visible" : ""}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>

@@ -7,7 +7,6 @@ import { getData, updateData } from "../../../../axiosConfig/API";
 
 export default function EditMeal({ visible, visibleToggle, item, updated }) {
   const imageRef = useRef(null);
-  const [staticVisible, setStaticVisible] = useState(false);
   const [categories, setCategories] = useState([]);
   const [meal, setMeal] = useState({
     name: "",
@@ -24,10 +23,6 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
       setMeal({ ...rest, image: null });
     }
   }, [item]);
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value, id, type, files } = e.target;
@@ -76,8 +71,6 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
         true
       );
 
-      console.log("meal", meal);
-
       if (response.status === "success") {
         updated();
         if (imageRef.current) imageRef.current.value = null;
@@ -104,7 +97,7 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
   }, [fetchCategories]);
 
   return (
-    <div id="AddTable" className={staticVisible ? "visible" : ""}>
+    <div id="AddTable" className={visible ? "visible" : ""}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>
@@ -149,7 +142,9 @@ export default function EditMeal({ visible, visibleToggle, item, updated }) {
                   >
                     {Object(categories).length > 0 &&
                       categories.map((category) => (
-                        <option value={category.id}>{category.name}</option>
+                        <option value={category.id} key={category.id}>
+                          {category.name}
+                        </option>
                       ))}
                   </select>
                 </div>

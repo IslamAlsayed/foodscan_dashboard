@@ -120,11 +120,32 @@ button {
 }
 
 .statusOrderLength {
-    gap: 15px;
+    gap: 10px;
 }
 
 .statusOrderLength,
 .statusOrderLength li {
     display: flex;
+    cursor: pointer;
     align-items: center;
+}
+
+.statusOrderLength li {
+    opacity: 0.7;
+    transition: 0.2s;
+    padding-inline: 5px;
+    border-radius: 25px;
+}
+
+.statusOrderLength li * {
+    font-size: 10px;
+}
+
+.statusOrderLength li.showAll {
+    opacity: 0.7;
+}
+
+.statusOrderLength li.current {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.1);
 }

@@ -6,17 +6,12 @@ import Swal from "sweetalert2";
 import { addData } from "../../../../axiosConfig/API";
 
 function DiningTables({ visible, visibleToggle, updated }) {
-  const [staticVisible, setStaticVisible] = useState(false);
   const [diningTable, setDiningTable] = useState({
     floor: "",
     size: "",
     num: "",
     status: 1,
   });
-
-  useEffect(() => {
-    setStaticVisible(visible);
-  }, [visible]);
 
   const handleChange = (e) => {
     const { name, value, id } = e.target;
@@ -58,7 +53,7 @@ function DiningTables({ visible, visibleToggle, updated }) {
   };
 
   return (
-    <div id="AddTable" className={`${staticVisible ? "visible" : ""}`}>
+    <div id="AddTable" className={`${visible ? "visible" : ""}`}>
       <div className="modal-container">
         <div className="breadcrumb">
           <h3>
