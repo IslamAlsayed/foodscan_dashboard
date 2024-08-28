@@ -46,7 +46,6 @@ export default function Employees() {
 
   const handleEdit = async (item) => {
     setEditItem(item);
-    console.log("employee edit", item);
     setModalEditVisibleToggle(!modalEditVisibleToggle);
     document.body.style.overflow = modalEditVisibleToggle
       ? "visible"

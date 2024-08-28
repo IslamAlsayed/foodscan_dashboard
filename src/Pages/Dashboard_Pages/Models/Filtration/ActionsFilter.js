@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Collapse } from "bootstrap";
 import { Button, Space } from "antd";
 import { CSVLink } from "react-csv";
@@ -7,6 +7,8 @@ import { LuPrinter } from "react-icons/lu";
 import { FaFileExcel, FaFileExport, FaFilter, FaPlus } from "react-icons/fa";
 
 export default function ActionsFilter({ handleModalToggle, data, headers }) {
+  const exportRef = useRef(null);
+  const [isListPrintVisible, setIsListPrintVisible] = useState(false);
   const [pathname, setPathname] = useState();
   useEffect(() => {
     setPathname(window.location.pathname.replace("/admin/dashboard/", ""));
@@ -46,13 +48,35 @@ export default function ActionsFilter({ handleModalToggle, data, headers }) {
     }
   }, [toggleFilter, data]);
 
-  const handleExport = () => {
-    var listPrint = document.getElementById("listPrint");
-    if (listPrint) listPrint.classList.toggle("show");
+  const handleClickOutside = (event) => {
+    if (
+      exportRef.current &&
+      !exportRef.current.contains(event.target) &&
+      !event.target.closest(".btnPrintList")
+    ) {
+      setIsListPrintVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handlePrintOperation = (type) => {
+    setIsListPrintVisible(false);
+
+    if (type === "print") {
+      window.print();
+    } else if (type === "csv") {
+      setFilename(generateUniqueFilename());
+    }
   };
 
   return (
-    <div className="head">
+    <div className="head not-print">
       <div className="titlePage">
         {pathname} - {Object(data).length > 0 ? Object(data).length : 0}
       </div>
@@ -71,17 +95,24 @@ export default function ActionsFilter({ handleModalToggle, data, headers }) {
             <div className="dropListPrint">
               <Button
                 icon={<FaFileExport />}
-                onClick={handleExport}
+                onClick={() => setIsListPrintVisible((prev) => !prev)}
                 className="btnPrintList"
               >
                 Export
                 <IoMdArrowDropdown />
               </Button>
 
-              <div className="listPrint" id="listPrint">
+              <div
+                className={`listPrint ${isListPrintVisible ? "show" : ""}`}
+                id="listPrint"
+                ref={exportRef}
+              >
                 <ul>
                   <li>
-                    <Button icon={<LuPrinter />} onClick={() => window.print()}>
+                    <Button
+                      icon={<LuPrinter />}
+                      onClick={() => handlePrintOperation("print")}
+                    >
                       Print
                     </Button>
                   </li>
@@ -92,7 +123,7 @@ export default function ActionsFilter({ handleModalToggle, data, headers }) {
                       filename={filename}
                       icon={<FaFileExcel />}
                       className="btn CSVLink"
-                      onClick={() => setFilename(generateUniqueFilename())}
+                      onClick={() => handlePrintOperation("csv")}
                     >
                       <FaFileExcel /> CSV
                     </CSVLink>

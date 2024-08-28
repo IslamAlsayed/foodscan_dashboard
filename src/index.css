@@ -204,12 +204,10 @@ button.btn {
   background-color: #FECACA;
 }
 
-.non-print {
-  display: none;
-}
-
 @media print {
 
+  .not-print,
+  .ant-pagination,
   .Items th:nth-child(5),
   .Items td:nth-child(5) {
     display: none !important;

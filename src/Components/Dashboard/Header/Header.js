@@ -18,6 +18,13 @@ export default function Header() {
     window.location.pathname === "/branch_2" ? "2" : "1"
   );
 
+  useEffect(() => {
+    if (Cookies.get("loginMessage")) {
+      setAlert({ message: Cookies.get("loginMessage"), type: "success" });
+      Cookies.remove("loginMessage");
+    }
+  }, []);
+
   const handleClickOutside = (event) => {
     if (
       branchRef.current &&
@@ -27,13 +34,6 @@ export default function Header() {
       setIsOpen(false);
     }
   };
-
-  useEffect(() => {
-    if (Cookies.get("loginMessage")) {
-      setAlert({ message: Cookies.get("loginMessage"), type: "success" });
-      Cookies.remove("loginMessage");
-    }
-  }, []);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);

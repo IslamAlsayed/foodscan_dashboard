@@ -118,6 +118,11 @@
 
 .DataTable .headerTable .actions button {
     padding-inline: 10px;
+    border: 1px solid #eaeaea !important;
+
+    &:hover {
+        border: 1px solid #1772ff !important;
+    }
 }
 
 .DataTable .headerTable .actions .CSVLink {
@@ -133,6 +138,7 @@
     &:hover {
         color: #1772ff;
         background-color: #F3F8FF;
+        border: 1px solid #1772ff;
     }
 }
 
