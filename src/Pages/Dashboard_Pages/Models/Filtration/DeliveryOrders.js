@@ -51,9 +51,9 @@ export default function DeliveryOrders({
   };
 
   function formatDate(dateString) {
-    return new Date(dateString)
-      .toLocaleString("sv-SE", { timeZone: "UTC" })
-      .replace("T", " ");
+    return new Date(dateString).toLocaleDateString("sv-SE", {
+      timeZone: "UTC",
+    });
   }
 
   const handleSearch = () => {
@@ -62,7 +62,7 @@ export default function DeliveryOrders({
       return (
         (id === "" || item.id === parseInt(id)) &&
         (customer_id === "" || item.customer_id === parseInt(customer_id)) &&
-        (!created_at || item.created_at <= created_at) &&
+        (!created_at || item.created_at.split(" ")[0] === created_at) &&
         (total_cost === "" || item.total_cost === parseInt(total_cost)) &&
         (!status || item.status === status)
       );
@@ -140,7 +140,7 @@ export default function DeliveryOrders({
                 date
               </label>
               <input
-                type="datetime-local"
+                type="date"
                 className="form-control"
                 name="created_at"
                 id="created_at"

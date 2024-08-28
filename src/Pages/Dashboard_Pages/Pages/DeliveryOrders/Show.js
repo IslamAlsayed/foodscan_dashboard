@@ -264,7 +264,11 @@ export default function Show() {
                   userAddons.map((addon, index) => (
                     <>
                       {index < 1 ? <h3>the addons</h3> : false}
-                      <div className="card" data-id={addon.addon_id}>
+                      <div
+                        className="card"
+                        data-id={addon.addon_id}
+                        key={addon.id}
+                      >
                         <div className="card-img">
                           <img
                             loading="lazy"
@@ -291,7 +295,11 @@ export default function Show() {
                   userExtras.map((extra, index) => (
                     <>
                       {index < 1 ? <h3>the extras</h3> : false}
-                      <div className="card" data-id={extra.extra_id}>
+                      <div
+                        className="card"
+                        data-id={extra.extra_id}
+                        key={extra.id}
+                      >
                         <div className="card-img">
                           <img
                             loading="lazy"
