@@ -261,11 +261,13 @@ export default function Pos() {
               </div>
 
               {/* Pagination */}
-              <Pagination
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                totalPages={totalPages}
-              />
+              {Object(meals).length > 10 && (
+                <Pagination
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  totalPages={totalPages}
+                />
+              )}
             </div>
           ) : (
             <p>There are no items in this category.</p>
