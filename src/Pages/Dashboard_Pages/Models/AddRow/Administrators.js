@@ -14,7 +14,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
     password: "",
     password_confirmation: "",
     status: 1,
-    role: "administrator",
+    role: "",
     identity_card: "",
   });
 
@@ -57,7 +57,7 @@ export default function Administrator({ visible, visibleToggle, updated }) {
           password: "",
           password_confirmation: "",
           status: 1,
-          role: "administrator",
+          role: "",
           identity_card: "",
         });
         setTimeout(() => {
@@ -188,7 +188,9 @@ export default function Administrator({ visible, visibleToggle, updated }) {
 
               <div className="col-6">
                 <div className="mb-3">
-                  <label htmlFor="role">Role</label>
+                  <label htmlFor="role" className="form-label">
+                    Role <span className="star">*</span>
+                  </label>
                   <select
                     className="form-control"
                     name="role"
@@ -197,12 +199,12 @@ export default function Administrator({ visible, visibleToggle, updated }) {
                     onChange={(e) => handleChange(e)}
                     required
                   >
-                    <option defaultValue="" selected disabled>
+                    <option value="" selected disabled>
                       --
                     </option>
-                    <option defaultValue="chef">chef</option>
-                    <option defaultValue="admin">admin</option>
-                    <option defaultValue="casher">casher</option>
+                    <option value="admin">admin</option>
+                    <option value="casher">casher</option>
+                    <option value="chef">chef</option>
                   </select>
                 </div>
               </div>

@@ -170,13 +170,6 @@ export default function DiningTables() {
               <MdQrCode2 />
             </Link>
           )}
-          <div ref={qrRef} className="customQrCode">
-            {item?.qr_code_link ? (
-              <QRCode value={item.qr_code_link.replace("?", "/")} />
-            ) : (
-              <span>no qr code {item.status} </span>
-            )}
-          </div>
         </div>
       ),
     },

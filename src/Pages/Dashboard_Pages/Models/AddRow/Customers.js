@@ -14,7 +14,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
     password: "",
     password_confirmation: "",
     status: 1,
-    role: "customer",
+    role: "",
   });
 
   const handleChange = (e) => {
@@ -52,7 +52,7 @@ export default function Customers({ visible, visibleToggle, updated }) {
           password: "",
           password_confirmation: "",
           status: 1,
-          role: "customer",
+          role: "",
         });
         setTimeout(() => {
           Swal.fire("Saved!", response.message, "success");
@@ -177,9 +177,9 @@ export default function Customers({ visible, visibleToggle, updated }) {
                     <option value="" selected disabled>
                       --
                     </option>
-                    <option value="chef">chef</option>
                     <option value="admin">admin</option>
                     <option value="casher">casher</option>
+                    <option value="chef">chef</option>
                   </select>
                 </div>
               </div>

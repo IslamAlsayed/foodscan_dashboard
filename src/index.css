@@ -72,6 +72,7 @@ button:focus {
   box-shadow: none !important;
 }
 
+input[type="radio"],
 .form-control,
 .form-control:focus {
   border: 1px solid #00000020 !important;
