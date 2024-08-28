@@ -16,7 +16,7 @@ import { toPng } from "html-to-image";
 
 export default function DiningTables() {
   const componentRef = useRef();
-  const qrRef = useRef();
+  const qrRef = useRef(null);
   const [diningTables, setDiningTables] = useState([]);
   const [editItem, setEditItem] = useState(null);
   const [modalVisibleToggle, setModalVisibleToggle] = useState(false);
@@ -57,20 +57,25 @@ export default function DiningTables() {
   };
 
   const downloadQRCode = (item) => {
-    if (qrRef.current === null) return;
+    if (qrRef.current === null) {
+      console.log("not found");
+      return;
+    }
+
     if (document.getElementById("Loader")) {
       document.getElementById("Loader").classList.add("show");
     }
 
     toPng(qrRef.current)
       .then((dataUrl) => {
+        console.log("dataUrl", dataUrl);
         if (dataUrl) {
           if (document.getElementById("Loader")) {
             document.getElementById("Loader").classList.remove("show");
 
             const link = document.createElement("a");
-            link.download = `customer_menu_table_${item.id}.png`;
             link.href = dataUrl;
+            link.download = `customer_menu_table_${item.id}.png`;
             link.click();
           }
         }
@@ -124,7 +129,7 @@ export default function DiningTables() {
         return (
           <div ref={qrRef} className="customQrCode">
             {item?.qr_code_link ? (
-              <QRCode value={item.qr_code_link} level="H" />
+              <QRCode value={item.qr_code_link.replace("?", "/")} />
             ) : (
               <span>no qr code {item.status} </span>
             )}
@@ -135,7 +140,7 @@ export default function DiningTables() {
     {
       title: "ACTION",
       key: "action",
-      render: (item) => (
+      render: (text, item) => (
         <div className="actionResource">
           <Link
             to={`/admin/dashboard/dining-tables/show/${item.id}`}
@@ -165,6 +170,13 @@ export default function DiningTables() {
               <MdQrCode2 />
             </Link>
           )}
+          <div ref={qrRef} className="customQrCode">
+            {item?.qr_code_link ? (
+              <QRCode value={item.qr_code_link.replace("?", "/")} />
+            ) : (
+              <span>no qr code {item.status} </span>
+            )}
+          </div>
         </div>
       ),
     },
