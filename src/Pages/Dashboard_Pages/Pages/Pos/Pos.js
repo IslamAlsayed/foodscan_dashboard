@@ -93,6 +93,7 @@ export default function Pos() {
     } else {
       currentItem.classList.add("current");
       setMeals(originMeals.filter((item) => item.category_id === id));
+      setTotalPages(Math.ceil(meals.length / pagination_length));
     }
   };
 
