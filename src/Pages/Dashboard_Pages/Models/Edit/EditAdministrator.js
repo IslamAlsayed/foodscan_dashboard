@@ -123,27 +123,27 @@ export default function EditAdministrator({
                     className="form-control"
                     name="role"
                     id="role"
-                    value={employee.role}
+                    value={administrator.role}
                     onChange={(e) => handleChange(e)}
                   >
                     <option
                       value="admin"
                       selected
-                      disabled={employee.role === "admin"}
+                      disabled={administrator.role === "admin"}
                     >
                       admin
                     </option>
                     <option
                       value="casher"
                       selected
-                      disabled={employee.role === "casher"}
+                      disabled={administrator.role === "casher"}
                     >
                       casher
                     </option>
                     <option
                       value="chef"
                       selected
-                      disabled={employee.role === "chef"}
+                      disabled={administrator.role === "chef"}
                     >
                       chef
                     </option>

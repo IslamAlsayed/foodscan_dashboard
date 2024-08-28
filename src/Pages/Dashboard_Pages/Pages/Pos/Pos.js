@@ -7,13 +7,17 @@ import { FaShoppingBag } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import AddCustomer from "./Features/AddCustomer";
 import CartItems from "./Features/CartItems";
+import Pagination from "../Actions/Pagination";
 import DetailsItem from "./Features/DetailsItem";
 import { getData } from "../../../../axiosConfig/API";
 import Invoice from "./Features/Invoice";
 import MoreDetails from "./Features/MoreDetails";
 
 export default function Pos() {
+  const pagination_length = 10;
   const [meals, setMeals] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [categories, setCategories] = useState([]);
   const [inputSearch, setInputSearch] = useState({ filter: "" });
   const [cartItemTotal, setCartItemTotal] = useState(0);
@@ -27,14 +31,9 @@ export default function Pos() {
     try {
       const result = await getData("menu");
       sessionStorage.removeItem("origin_data");
-      if (!sessionStorage.getItem("origin_meals")) {
-        sessionStorage.setItem("origin_meals", JSON.stringify(result.meals));
-      } else {
-        sessionStorage.removeItem("origin_meals");
-        sessionStorage.setItem("origin_meals", JSON.stringify(result.meals));
-      }
-
+      sessionStorage.setItem("origin_meals", JSON.stringify(result.meals));
       setMeals(result.meals);
+      setTotalPages(Math.ceil(result.meals.length / pagination_length));
     } catch (error) {
       console.error(error.response?.data?.message);
     }
@@ -48,6 +47,10 @@ export default function Pos() {
       console.error(error.response?.data?.message);
     }
   }, []);
+
+  const indexOfLastItem = currentPage * pagination_length;
+  const indexOfFirstItem = indexOfLastItem - pagination_length;
+  const currentItems = meals.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     fetchCategories();
@@ -217,8 +220,12 @@ export default function Pos() {
           {Object(meals).length > 0 ? (
             <div className="mainMenu">
               <div className="cards">
-                {meals.map((item, index) => (
-                  <div className="card" key={index} id={`mainMenu_${item.id}`}>
+                {currentItems.map((item) => (
+                  <div
+                    className="card"
+                    key={item.id}
+                    id={`mainMenu_${item.id}`}
+                  >
                     <div className="card-img">
                       <img
                         src={`http://localhost:8000/storage/${item.image}`}
@@ -251,6 +258,13 @@ export default function Pos() {
                   </div>
                 ))}
               </div>
+
+              {/* Pagination */}
+              <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalPages={totalPages}
+              />
             </div>
           ) : (
             <p>There are no items in this category.</p>

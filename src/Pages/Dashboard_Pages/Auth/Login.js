@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import { login } from "../../../axiosConfig/Auth";
 import CustomAlert from "../../../Components/Dashboard/CustomAlert/CustomAlert";
 import Cookies from "js-cookie";
@@ -46,6 +45,11 @@ export default function Login() {
         setEmail("");
         setPassword("");
         Cookies.set("loginMessage", "Login successfully");
+
+        if (document.getElementById("Loader")) {
+          document.getElementById("Loader").classList.remove("show");
+        }
+
         history.push("/admin/dashboard");
       } else {
         setAlert({ message: data?.message, type: "error" });

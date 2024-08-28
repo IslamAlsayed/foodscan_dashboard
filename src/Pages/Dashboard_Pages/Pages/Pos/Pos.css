@@ -159,6 +159,25 @@
     background-color: #1772FF;
 }
 
+.Pos .posMenuItem .mainMenu .pagination {
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.Pos .posMenuItem .mainMenu .pagination button {
+    width: 35px;
+    height: 35px;
+    color: #000000;
+    font-weight: bold;
+    border-radius: 3px;
+    background: #cadffb;
+
+    &.active {
+        color: #ffffff !important;
+        background: #1772FF !important;
+    }
+}
+
 .Pos .posCartItems {
     width: 350px;
     height: calc(100svh - 70px);

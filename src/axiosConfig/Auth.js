@@ -32,10 +32,6 @@ export const login = async (email, password) => {
     return response.data;
   } catch (error) {
     return error.response?.data;
-  } finally {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.remove("show");
-    }
   }
 };
 

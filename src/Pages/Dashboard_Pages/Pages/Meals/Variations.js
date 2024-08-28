@@ -9,12 +9,12 @@ import { Modal } from "bootstrap";
 import { addData, getData, updateData } from "../../../../axiosConfig/API";
 import { FiEdit } from "react-icons/fi";
 
-export default function Variations({ order_id }) {
+export default function Variations() {
   const { id } = useParams();
   const componentRef = useRef();
   const [variations, setVariations] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [newSize, setNewSize] = useState({});
   const [sizeList, setSizeList] = useState([
     { value: 1, label: "small" },
     { value: 2, label: "medium" },
@@ -24,17 +24,21 @@ export default function Variations({ order_id }) {
 
   const [meal, setMeal] = useState({
     size: "",
-    number_of_piece: "",
+    number_of_pieces: "",
     cost: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setMeal({ ...meal, [name]: value });
+    if (name === "size") {
+      setNewSize({ [name]: value });
+    } else {
+      setMeal({ ...meal, [name]: value });
+    }
   };
 
-  const fetchVariations = useCallback(async (order_id) => {
-    if (!order_id) return;
+  const fetchVariations = useCallback(async (id) => {
+    if (!id) return;
     try {
       const result = await getData(`admin/meals/${id}/size-costs`);
       const sizesInResult = result.map((record) => record.size);
@@ -44,20 +48,20 @@ export default function Variations({ order_id }) {
       setSizeList(updatedSize);
       setVariations(result);
     } catch (error) {
-      console.error(error.response?.data?.message);
+      console.error(error.response?.data?.message || error.message);
     }
   }, []);
 
   useEffect(() => {
-    fetchVariations(order_id);
-  }, [order_id, fetchVariations]);
+    fetchVariations(id);
+  }, [id, fetchVariations]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("size", meal.size);
-    formData.append("number_of_piece", meal.number_of_piece);
+    formData.append("size", newSize.size);
+    formData.append("number_of_pieces", meal.number_of_pieces);
     formData.append("cost", meal.cost);
 
     try {
@@ -76,12 +80,17 @@ export default function Variations({ order_id }) {
       }
 
       if (response.status === "success") {
-        fetchVariations(order_id);
-        setMeal({
-          size: "",
-          number_of_piece: "",
-          cost: "",
-        });
+        fetchVariations(id);
+
+        if (method === "add") {
+          setMeal({
+            size: "",
+            number_of_pieces: "",
+            cost: "",
+          });
+        } else {
+          setMeal({ size: newSize.size });
+        }
 
         setTimeout(() => {
           Swal.fire(
@@ -102,11 +111,17 @@ export default function Variations({ order_id }) {
 
   const handleEdit = (item) => {
     setMeal(item);
+    setNewSize({ value: item.size, label: convert(item.size) });
     setModalVisible(true);
   };
 
   const handleClose = () => {
-    setMeal([]);
+    setMeal({
+      size: "",
+      number_of_pieces: "",
+      cost: "",
+    });
+    setNewSize({ size: "" });
     setModalVisible(false);
   };
 
@@ -199,7 +214,7 @@ export default function Variations({ order_id }) {
           <form className="modal-content" onSubmit={handleSubmit}>
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="addVariationsLabel">
-                add variations
+                {modalVisible ? "update" : "add"} variations
               </h1>
               <button
                 type="button"
@@ -221,15 +236,27 @@ export default function Variations({ order_id }) {
                         className="form-control"
                         name="size"
                         id="size"
-                        value={meal.size}
+                        value={newSize.size}
                         onChange={(e) => handleChange(e)}
                         required
                       >
-                        <option value="" selected>
-                          --
-                        </option>
+                        {!modalVisible && (
+                          <option value="" selected>
+                            --
+                          </option>
+                        )}
+
+                        {modalVisible && (
+                          <option value={meal.size} key="0" selected>
+                            {convert(parseInt(meal.size))}
+                          </option>
+                        )}
+
+                        {/* <option value={newSize.size} key="0">
+                          {convert(parseInt(newSize.size))}
+                        </option> */}
                         {sizeList.map((item) => (
-                          <option key={item.value} value={item.value}>
+                          <option value={item.value} key={item.value}>
                             {item.label}
                           </option>
                         ))}
@@ -240,15 +267,15 @@ export default function Variations({ order_id }) {
 
                 <div className="col col-12 col-sm-6">
                   <div className="mb-3">
-                    <label htmlFor="number_of_piece" className="form-label">
+                    <label htmlFor="number_of_pieces" className="form-label">
                       NUMBER OF PIECE <span className="star">*</span>
                     </label>
                     <input
                       type="number"
                       className="form-control"
-                      name="number_of_piece"
-                      id="number_of_piece"
-                      value={meal.number_of_piece}
+                      name="number_of_pieces"
+                      id="number_of_pieces"
+                      value={meal.number_of_pieces}
                       onChange={(e) => handleChange(e)}
                     />
                   </div>

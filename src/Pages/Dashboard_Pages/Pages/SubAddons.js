@@ -7,11 +7,21 @@ import Swal from "sweetalert2";
 import { getData, addData } from "../../../axiosConfig/API";
 import DeleteRecord from "./Actions/DeleteRecord";
 
-export default function SubAddons({ order_id, data }) {
+export default function SubAddons({ order_id }) {
   const componentRef = useRef();
   const [addons, setAddons] = useState();
   const [addon_id, setAddon_id] = useState();
   const [optionsAddons, setOptionsAddons] = useState();
+
+  const fetchAddons = useCallback(async (id) => {
+    if (!id) return;
+    try {
+      const result = await getData(`admin/meals/${id}/addons`);
+      setAddons(result);
+    } catch (error) {
+      console.error(error.response?.data?.message);
+    }
+  }, []);
 
   const fetchOptionsAddons = useCallback(async (id) => {
     if (!id) return;
@@ -24,9 +34,9 @@ export default function SubAddons({ order_id, data }) {
   }, []);
 
   useEffect(() => {
-    if (data) setAddons(data);
+    if (order_id) fetchAddons(order_id);
     if (order_id) fetchOptionsAddons(order_id);
-  }, [data, order_id, setAddons, fetchOptionsAddons]);
+  }, [order_id, fetchAddons, fetchOptionsAddons]);
 
   const handleAddAddon = async (e) => {
     e.preventDefault();

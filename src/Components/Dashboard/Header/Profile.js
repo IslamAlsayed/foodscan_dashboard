@@ -47,18 +47,16 @@ export default function Profile() {
   };
 
   const authLogout = () => {
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.add("show");
-    }
+    let loader = document.getElementById("Loader");
+    if (loader) loader.classList.add("show");
 
     setTimeout(() => {
       logout().then((response) => {
         Cookies.set("logoutMessage", response.message);
 
         document.body.style.overflow = "visible";
-        if (document.getElementById("Loader")) {
-          document.getElementById("Loader").classList.remove("show");
-        }
+        if (loader) loader.classList.remove("show");
+
         history.push("/auth/login");
       });
     }, 1000);

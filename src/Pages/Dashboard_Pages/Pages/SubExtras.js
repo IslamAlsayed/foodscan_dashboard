@@ -7,11 +7,21 @@ import Swal from "sweetalert2";
 import { getData, addData } from "../../../axiosConfig/API";
 import DeleteRecord from "./Actions/DeleteRecord";
 
-export default function SubExtras({ order_id, data }) {
+export default function SubExtras({ order_id }) {
   const componentRef = useRef();
   const [extras, setExtras] = useState();
   const [extra_id, setExtra_id] = useState();
   const [optionsExtras, setOptionsExtras] = useState();
+
+  const fetchExtras = useCallback(async (id) => {
+    if (!id) return;
+    try {
+      const result = await getData(`admin/meals/${id}/extras`);
+      setExtras(result);
+    } catch (error) {
+      console.error(error.response?.data?.message);
+    }
+  }, []);
 
   const fetchOptionsExtras = useCallback(async (id) => {
     if (!id) return;
@@ -24,9 +34,9 @@ export default function SubExtras({ order_id, data }) {
   }, []);
 
   useEffect(() => {
-    if (data) setExtras(data);
+    if (order_id) fetchExtras(order_id);
     if (order_id) fetchOptionsExtras(order_id);
-  }, [data, order_id, setExtras, fetchOptionsExtras]);
+  }, [order_id, fetchExtras, fetchOptionsExtras]);
 
   const handleAddExtra = async (e) => {
     e.preventDefault();
@@ -153,7 +163,9 @@ export default function SubExtras({ order_id, data }) {
                       </option>
                       {optionsExtras &&
                         optionsExtras.map((extra) => (
-                          <option value={extra.id}>{extra.name}</option>
+                          <option value={extra.id} key={extra.id}>
+                            {extra.name}
+                          </option>
                         ))}
                     </select>
                   </div>

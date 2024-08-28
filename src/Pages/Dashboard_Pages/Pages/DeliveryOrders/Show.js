@@ -11,7 +11,6 @@ import {
 } from "../../../../axiosConfig/API";
 import { getUser, isAuth } from "../../../../axiosConfig/Auth";
 import Invoice from "../Pos/Features/Invoice";
-import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
 
 export default function Show() {
   const { id } = useParams();
@@ -243,11 +242,11 @@ export default function Show() {
                         <img
                           loading="lazy"
                           src={`${imageStorageURL}/${userOrder.meal_image}`}
-                          alt={userOrder.meal_name}
+                          alt={userOrder.meal.name}
                         />
                       </div>
                       <div className="card-text">
-                        <p className="name fw-bold">{userOrder.meal_name}</p>
+                        <p className="name fw-bold">{userOrder.meal.name}</p>
                         <p className="quantity">
                           quantity choice:
                           <span className="fw-bold">
@@ -270,11 +269,11 @@ export default function Show() {
                           <img
                             loading="lazy"
                             src={`${imageStorageURL}/${addon.addon_image}`}
-                            alt={addon.addon_name}
+                            alt={addon.addon.name}
                           />
                         </div>
                         <div className="card-text">
-                          <p className="name fw-bold">{addon.addon_name}</p>
+                          <p className="name fw-bold">{addon.addon.name}</p>
                           <p className="quantity">
                             quantity choice:
                             <span className="fw-bold">
@@ -297,11 +296,11 @@ export default function Show() {
                           <img
                             loading="lazy"
                             src={`${imageStorageURL}/${extra.extra_image}`}
-                            alt={extra.extra_name}
+                            alt={extra.extra.name}
                           />
                         </div>
                         <div className="card-text">
-                          <p className="name fw-bold">{extra.extra_name}</p>
+                          <p className="name fw-bold">{extra.extra.name}</p>
                           <p className="quantity">
                             quantity choice:
                             <span className="fw-bold">

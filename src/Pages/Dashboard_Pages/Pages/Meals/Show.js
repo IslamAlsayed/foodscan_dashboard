@@ -19,8 +19,6 @@ import { getData } from "../../../../axiosConfig/API";
 export default function ShowItem() {
   const { id } = useParams();
   const [meal, setMeal] = useState(null);
-  const [addons, setAddons] = useState(null);
-  const [extras, setExtras] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchMeal = useCallback(async (id) => {
@@ -38,31 +36,6 @@ export default function ShowItem() {
   useEffect(() => {
     fetchMeal(id);
   }, [id, fetchMeal]);
-
-  const fetchExtras = useCallback(async (id) => {
-    if (!id) return;
-    try {
-      const result = await getData(`admin/meals/${id}/extras`);
-      setExtras(result);
-    } catch (error) {
-      console.error(error.response?.data?.message);
-    }
-  }, []);
-
-  const fetchAddons = useCallback(async (id) => {
-    if (!id) return;
-    try {
-      const result = await getData(`admin/meals/${id}/addons`);
-      setAddons(result);
-    } catch (error) {
-      console.error(error.response?.data?.message);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchExtras(id);
-    fetchAddons(id);
-  }, [id, fetchExtras, fetchAddons]);
 
   if (loading) return;
 
@@ -101,7 +74,7 @@ export default function ShowItem() {
           }
           key="3"
         >
-          <Variations order_id={id} />
+          <Variations />
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={
@@ -112,7 +85,7 @@ export default function ShowItem() {
           }
           key="4"
         >
-          <SubExtra order_id={id} data={extras} />
+          <SubExtra order_id={id} />
         </Tabs.TabPane>
         <Tabs.TabPane
           tab={
@@ -123,7 +96,7 @@ export default function ShowItem() {
           }
           key="5"
         >
-          <SubAddon order_id={id} data={addons} />
+          <SubAddon order_id={id} />
         </Tabs.TabPane>
       </Tabs>
     </div>
