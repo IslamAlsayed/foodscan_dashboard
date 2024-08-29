@@ -1,8 +1,4 @@
-import { Route } from "react-router-dom";
-import {
-  BrowserRouter,
-  Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Index from "./Pages/Index.js";
 import { Auth } from "./Pages/Dashboard_Pages/Auth/Auth";
 import { Dashboard } from "./Pages/Dashboard_Pages/Dashboard";

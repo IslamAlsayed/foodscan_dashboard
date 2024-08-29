@@ -1,8 +1,8 @@
 import React from "react";
-import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 import { BiTrash } from "react-icons/bi";
+import Swal from "sweetalert2";
 import { deleteData } from "../../../../axiosConfig/API";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function DeleteRecord({ url, refreshed }) {
   const handleDeleteRecord = async () => {

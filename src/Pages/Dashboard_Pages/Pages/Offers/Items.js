@@ -1,9 +1,8 @@
 import "./Models.css";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { PlusCircleFilled } from "@ant-design/icons";
+import { PlusCircleFilled, CheckCircleFilled } from "@ant-design/icons";
 import { BiTrash } from "react-icons/bi";
-import { CheckCircleFilled } from "@ant-design/icons";
 import { FaXmark } from "react-icons/fa6";
 import Swal from "sweetalert2";
 

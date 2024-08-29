@@ -1,15 +1,15 @@
 import "../DataTable.css";
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import { getData, imageStorageURL } from "../../../../axiosConfig/API";
+import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import Filtration from "../../Models/Filtration/Categories";
 import AddRow from "../../Models/AddRow/Categories";
 import EditCategory from "../../Models/Edit/EditCategory";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
+import { getData, imageStorageURL } from "../../../../axiosConfig/API";
 
 export default function Categories() {
   const componentRef = useRef();

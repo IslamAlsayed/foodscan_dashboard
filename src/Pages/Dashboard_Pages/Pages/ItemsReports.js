@@ -2,9 +2,8 @@ import "./DataTable.css";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Table } from "antd";
 import Breadcrumb from "../../../Components/Dashboard/Features/Breadcrumb";
-
-import { getData } from "../../../axiosConfig/API";
 import Filtration from "../Models/Filtration/SalesReports";
+import { getData } from "../../../axiosConfig/API";
 
 export default function SalesReports() {
   const componentRef = useRef();

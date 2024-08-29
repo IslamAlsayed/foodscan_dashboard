@@ -1,12 +1,11 @@
 import "../DataTable.css";
 import "./QrCode.css";
-import Dashboard from "../Dashboard";
-import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { PrinterOutlined } from "@ant-design/icons";
 import Logo from "../../../../assets/global/logo.png";
-import { useCallback, useEffect, useState } from "react";
+import Dashboard from "../Dashboard";
 import { getData } from "../../../../axiosConfig/API";
-import QRCode from "react-qr-code";
 
 export default function Show() {
   const { id } = useParams();
@@ -71,7 +70,8 @@ export default function Show() {
 
           <div className="qrCode">
             {diningTable?.qr_code_link ? (
-              <QRCode value={diningTable.qr_code_link} level="H" />
+              // <QRCode value={diningTable.qr_code_link} level="H" />
+              <span>qr code</span>
             ) : (
               <span>no qr code</span>
             )}

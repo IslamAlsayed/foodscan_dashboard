@@ -1,7 +1,6 @@
 import "./Settings.css";
 import React from "react";
-import { Link } from "react-router-dom";
-import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Switch, Link } from "react-router-dom";
 import Header from "../../../../Components/Dashboard/Header/Header";
 import Sidebar from "../../../../Components/Dashboard/Sidebar/Sidebar";
 import routesSetting from "../../store/routesSettings";

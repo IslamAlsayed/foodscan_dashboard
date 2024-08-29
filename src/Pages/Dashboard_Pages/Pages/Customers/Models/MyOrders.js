@@ -9,7 +9,7 @@ export default function MyOrders({ data }) {
 
   useEffect(() => {
     if (data) setMyOrder(data);
-  }, data);
+  }, [data]);
 
   const countStatus = (status) => {
     if (status === "all") {

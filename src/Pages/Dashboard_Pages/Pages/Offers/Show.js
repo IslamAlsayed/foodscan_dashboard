@@ -1,13 +1,13 @@
 import "./Offers.css";
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import { Tabs } from "antd";
 import { TabPane } from "react-bootstrap";
+import { FaImage } from "react-icons/fa6";
 import { FaInfoCircle, FaShoppingBag } from "react-icons/fa";
 import Information from "./Information";
 import UploadImage from "../Actions/UploadImage";
 import Items from "./Items";
-import { FaImage } from "react-icons/fa6";
 import { getData } from "../../../../axiosConfig/API";
 
 export default function ShowItem() {

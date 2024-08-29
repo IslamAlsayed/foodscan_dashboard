@@ -1,13 +1,13 @@
 import "../DataTable.css";
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import { getData } from "../../../../axiosConfig/API";
+import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import Filtration from "../../Models/Filtration/Administrators";
 import AddRow from "../../Models/AddRow/Administrators";
+import { getData } from "../../../../axiosConfig/API";
 import EditAdministrator from "../../Models/Edit/EditAdministrator";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
 

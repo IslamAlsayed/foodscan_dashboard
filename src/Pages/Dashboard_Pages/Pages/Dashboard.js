@@ -1,7 +1,7 @@
 import "./Dashboard.css";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { BsFront } from "react-icons/bs";
 import { FaUserGroup } from "react-icons/fa6";
 import { IoStatsChart } from "react-icons/io5";

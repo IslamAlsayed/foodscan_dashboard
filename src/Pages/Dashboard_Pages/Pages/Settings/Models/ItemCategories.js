@@ -1,6 +1,5 @@
 import "./SubModels.css";
 import { Table } from "antd";
-
 import { PlusOutlined } from "@ant-design/icons";
 import { FaCheckCircle } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";

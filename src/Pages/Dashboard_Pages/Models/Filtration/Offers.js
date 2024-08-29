@@ -156,7 +156,7 @@ export default function Offers({
               <label htmlFor="status" className="mb-2">
                 status
               </label>
-              <div className="col d-flex gap-2 align-items-center">
+              <div className="d-flex gap-2 align-items-center">
                 <input
                   type="radio"
                   name="status"

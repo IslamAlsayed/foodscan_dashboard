@@ -1,5 +1,5 @@
 import "../Models.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import { BiSolidDish } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 

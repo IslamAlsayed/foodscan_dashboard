@@ -148,7 +148,7 @@ export default function Extras({
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
               <label className="mb-2">Type</label>
-              <div className="col d-flex gap-2 align-items-center">
+              <div className="d-flex gap-2 align-items-center">
                 <input
                   type="radio"
                   name="type"
@@ -170,7 +170,7 @@ export default function Extras({
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
               <label className="mb-2">status</label>
-              <div className="col d-flex gap-2 align-items-center">
+              <div className="d-flex gap-2 align-items-center">
                 <input
                   type="radio"
                   name="status"

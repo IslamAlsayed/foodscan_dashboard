@@ -1,13 +1,13 @@
 import "../SubModels.css";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useParams } from "react-router-dom";
 import { Table, Row, Col } from "antd";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiXMark } from "react-icons/hi2";
-import Swal from "sweetalert2";
-import { Modal } from "bootstrap";
-import { addData, getData, updateData } from "../../../../axiosConfig/API";
 import { FiEdit } from "react-icons/fi";
+import { Modal } from "bootstrap";
+import Swal from "sweetalert2";
+import { addData, getData, updateData } from "../../../../axiosConfig/API";
 
 export default function Variations() {
   const { id } = useParams();
@@ -32,9 +32,9 @@ export default function Variations() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "size") {
-      setNewSize({ [name]: value });
+      setNewSize({ [name]: parseInt(value) });
     } else {
-      setMeal({ ...meal, [name]: value });
+      setMeal({ ...meal, [name]: parseInt(value) });
     }
   };
 
@@ -61,7 +61,7 @@ export default function Variations() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("size", newSize.size);
+    formData.append("size", newSize.value);
     formData.append("number_of_pieces", meal.number_of_pieces);
     formData.append("cost", meal.cost);
     formData.append("meal_id", meal.meal_id);
@@ -234,7 +234,7 @@ export default function Variations() {
                   <div className="col col-12 col-sm-6">
                     <div className="mb-3">
                       <label htmlFor="size" className="form-label">
-                        SIZE <span className="star">*</span>
+                        SIZE {!modalVisible && <span className="star">*</span>}
                       </label>
                       <select
                         className="form-control"
@@ -269,7 +269,8 @@ export default function Variations() {
                 <div className="col col-12 col-sm-6">
                   <div className="mb-3">
                     <label htmlFor="number_of_pieces" className="form-label">
-                      NUMBER OF PIECES <span className="star">*</span>
+                      NUMBER OF PIECES
+                      {!modalVisible && <span className="star">*</span>}
                     </label>
                     <input
                       type="number"
@@ -285,7 +286,7 @@ export default function Variations() {
                 <div className="col col-12 col-sm-6">
                   <div className="mb-3">
                     <label htmlFor="cost" className="form-label">
-                      COST <span className="star">*</span>
+                      PRICE {!modalVisible && <span className="star">*</span>}
                     </label>
                     <input
                       type="number"

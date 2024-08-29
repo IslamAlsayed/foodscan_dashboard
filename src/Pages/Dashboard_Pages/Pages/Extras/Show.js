@@ -1,12 +1,12 @@
 import "../DataTable.css";
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import { Tabs } from "antd";
 import { TabPane } from "react-bootstrap";
 import { FaInfoCircle } from "react-icons/fa";
+import { FaImage } from "react-icons/fa6";
 import Information from "./Information";
 import UploadImage from "../Actions/UploadImage";
-import { FaImage } from "react-icons/fa6";
 import { getData } from "../../../../axiosConfig/API";
 
 export default function ShowItem() {

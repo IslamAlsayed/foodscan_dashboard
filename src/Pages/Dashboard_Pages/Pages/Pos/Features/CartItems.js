@@ -67,7 +67,7 @@ export default function CartItems({
         total(0);
       }
     },
-    [handleApplyDiscount, total]
+    [total]
   );
 
   useEffect(() => {

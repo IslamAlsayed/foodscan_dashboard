@@ -1,6 +1,6 @@
 import "./Style.css";
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import { MdDateRange } from "react-icons/md";
 import { TbInvoice } from "react-icons/tb";
 import Swal from "sweetalert2";

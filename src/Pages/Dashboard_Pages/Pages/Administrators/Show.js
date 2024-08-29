@@ -1,11 +1,11 @@
 import "./Administrators.css";
 import React, { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import profileImage from "../../../../assets/global/profile.png";
+import { useParams } from "react-router-dom";
 import { Tabs } from "antd";
 import { TabPane } from "react-bootstrap";
 import { LockFilled, UserOutlined } from "@ant-design/icons";
 import { IoMdNotifications } from "react-icons/io";
+import profileImage from "../../../../assets/global/profile.png";
 import Profile from "./Models/Profile";
 import Security from "./Models/Security";
 import MyOrders from "./Models/MyOrders";

@@ -1,15 +1,15 @@
 import "../DataTable.css";
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import { getData, imageStorageURL } from "../../../../axiosConfig/API";
+import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import Filtration from "../../Models/Filtration/Extras";
 import AddRow from "../../Models/AddRow/Extras";
 import EditExtra from "../../Models/Edit/EditExtras";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
+import { getData, imageStorageURL } from "../../../../axiosConfig/API";
 
 export default function Extra() {
   const componentRef = useRef();

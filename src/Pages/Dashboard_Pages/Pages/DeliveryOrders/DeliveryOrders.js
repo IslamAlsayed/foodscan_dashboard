@@ -1,12 +1,12 @@
 import "../DataTable.css";
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { BsEye } from "react-icons/bs";
-import { getData } from "../../../../axiosConfig/API";
 import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import Filtration from "../../Models/Filtration/DeliveryOrders";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
+import { getData } from "../../../../axiosConfig/API";
 
 export default function DeliveryOrders() {
   const componentRef = useRef();

@@ -1,5 +1,5 @@
 import "../Models.css";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { HiXMark } from "react-icons/hi2";
 import { FaXmark } from "react-icons/fa6";

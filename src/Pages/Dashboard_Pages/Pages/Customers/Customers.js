@@ -1,15 +1,15 @@
 import "../DataTable.css";
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
-import { getData } from "../../../../axiosConfig/API";
+import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import Filtration from "../../Models/Filtration/Customers";
 import AddRow from "../../Models/AddRow/Customers";
 import EditCustomer from "../../Models/Edit/EditCustomer";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
+import { getData } from "../../../../axiosConfig/API";
 
 export default function Customers() {
   const componentRef = useRef();

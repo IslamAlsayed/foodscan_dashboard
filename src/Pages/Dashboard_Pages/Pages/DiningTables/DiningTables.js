@@ -1,21 +1,20 @@
 import "../DataTable.css";
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Table } from "antd";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import { FiEdit } from "react-icons/fi";
 import { BsEye } from "react-icons/bs";
 import { MdQrCode2 } from "react-icons/md";
-import EditDiningTable from "../../Models/Edit/EditDiningTable";
-import { getData } from "../../../../axiosConfig/API";
+import { QRCodeCanvas } from "qrcode.react";
+import Breadcrumb from "../../../../Components/Dashboard/Features/Breadcrumb";
 import Filtration from "../../Models/Filtration/DiningTables";
 import AddRow from "../../Models/AddRow/DiningTables";
+import EditDiningTable from "../../Models/Edit/EditDiningTable";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
-import QRCode from "react-qr-code";
-import { toPng } from "html-to-image";
+import { getData } from "../../../../axiosConfig/API";
 
 export default function DiningTables() {
-  const componentRef = useRef();
+  const componentRef = useRef(null);
   const qrRef = useRef(null);
   const [diningTables, setDiningTables] = useState([]);
   const [editItem, setEditItem] = useState(null);
@@ -57,32 +56,16 @@ export default function DiningTables() {
   };
 
   const downloadQRCode = (item) => {
-    if (qrRef.current === null) {
-      console.log("not found");
-      return;
+    const canvas = document.getElementById(`canvas_${item.id}`);
+    if (canvas) {
+      const pngUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = pngUrl;
+      link.download = `customer_menu_table_${item.id}.png`;
+      link.click();
+    } else {
+      console.error("Canvas not found for item:", item.id);
     }
-
-    if (document.getElementById("Loader")) {
-      document.getElementById("Loader").classList.add("show");
-    }
-
-    toPng(qrRef.current)
-      .then((dataUrl) => {
-        console.log("dataUrl", dataUrl);
-        if (dataUrl) {
-          if (document.getElementById("Loader")) {
-            document.getElementById("Loader").classList.remove("show");
-
-            const link = document.createElement("a");
-            link.href = dataUrl;
-            link.download = `customer_menu_table_${item.id}.png`;
-            link.click();
-          }
-        }
-      })
-      .catch((err) => {
-        console.error("Error generating PNG: ", err);
-      });
   };
 
   const columns = [
@@ -129,7 +112,10 @@ export default function DiningTables() {
         return (
           <div ref={qrRef} className="customQrCode">
             {item?.qr_code_link ? (
-              <QRCode value={item.qr_code_link.replace("?", "/")} />
+              <QRCodeCanvas
+                id={`canvas_${item.id}`}
+                value={item.qr_code_link.replace("?", "/")}
+              />
             ) : (
               <span>no qr code {item.status} </span>
             )}
@@ -232,6 +218,7 @@ export default function DiningTables() {
 
       <div className="tableItems" ref={componentRef}>
         <Table
+          rowKey="id"
           columns={columns}
           dataSource={diningTables}
           pagination={Object(diningTables).length > 10}
