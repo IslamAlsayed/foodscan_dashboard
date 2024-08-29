@@ -102,6 +102,7 @@ export default function Invoice({ visible, modalClose }) {
                         </td>
                         <td>${item.sizes[0].cost * item.sizes[0].quantity}</td>
                       </tr>
+
                       {Object(item.addons).length > 0
                         ? item.addons.map((addon, index) => (
                             <tr className="addons" key={index}>

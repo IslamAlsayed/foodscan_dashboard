@@ -2,9 +2,10 @@ import "../DataTable.css";
 import "./QrCode.css";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { PrinterOutlined } from "@ant-design/icons";
+import { DownloadOutlined, PrinterOutlined } from "@ant-design/icons";
 import Logo from "../../../../assets/global/logo.png";
 import Dashboard from "../Dashboard";
+import { QRCodeCanvas } from "qrcode.react";
 import { getData } from "../../../../axiosConfig/API";
 
 export default function Show() {
@@ -27,6 +28,19 @@ export default function Show() {
   useEffect(() => {
     fetchDiningTable(id);
   }, [id, fetchDiningTable]);
+
+  const downloadQRCode = (item) => {
+    const canvas = document.getElementById(`canvas_${item.id}`);
+    if (canvas) {
+      const pngUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = pngUrl;
+      link.download = `customer_menu_table_${item.id}.png`;
+      link.click();
+    } else {
+      console.error("Canvas not found for item:", item.id);
+    }
+  };
 
   if (loading) return;
 
@@ -51,13 +65,25 @@ export default function Show() {
       <div className="qrCodeComponent">
         <div className="qrCode-head">
           <label>dining table</label>
-          <button
-            className="btn btn-sm btn-primary"
-            onClick={() => window.print()}
-          >
-            <PrinterOutlined />
-            print
-          </button>
+          <div className="d-flex gap-2 alien-center">
+            {diningTable?.qr_code_link ||
+              (diningTable?.qr_code && (
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() => downloadQRCode(diningTable)}
+                >
+                  <DownloadOutlined />
+                  Qr Code Download
+                </button>
+              ))}
+            <button
+              className="btn btn-sm btn-primary"
+              onClick={() => window.print()}
+            >
+              <PrinterOutlined />
+              print
+            </button>
+          </div>
         </div>
 
         <div className="qrCode-body">
@@ -69,9 +95,14 @@ export default function Show() {
           <p>house: 25, road no: 2, block a, mirpur-1, dhaka 1216</p>
 
           <div className="qrCode">
-            {diningTable?.qr_code_link ? (
-              // <QRCode value={diningTable.qr_code_link} level="H" />
-              <span>qr code</span>
+            {diningTable?.qr_code_link || diningTable?.qr_code ? (
+              <QRCodeCanvas
+                id={`canvas_${diningTable.id}`}
+                value={
+                  diningTable?.qr_code_link ||
+                  diningTable?.qr_code.replace("?", "/")
+                }
+              />
             ) : (
               <span>no qr code</span>
             )}

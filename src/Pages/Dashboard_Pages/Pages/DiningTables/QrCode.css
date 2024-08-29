@@ -42,6 +42,11 @@
     margin: 20px auto 0;
 }
 
+.qrCodeComponent .qrCode-body .qrCode canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .qrCodeComponent .qrCode-body .qrCode span {
     font-size: 22px;
     justify-content: center;
