@@ -12,8 +12,8 @@ import { useParams } from "react-router-dom";
 import Information from "./Information";
 import UploadImage from "../Actions/UploadImage";
 import Variations from "./Variations";
-import SubExtra from "../SubExtras";
-import SubAddon from "../SubAddons";
+import SubExtra from "./SubExtras";
+import SubAddon from "./SubAddons";
 import { getData } from "../../../../axiosConfig/API";
 
 export default function ShowItem() {

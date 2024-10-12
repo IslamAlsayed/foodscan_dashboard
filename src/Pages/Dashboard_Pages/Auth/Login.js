@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { login } from "../../../axiosConfig/Auth";
 import CustomAlert from "../../../Components/Dashboard/CustomAlert/CustomAlert";
 import Cookies from "js-cookie";
@@ -20,7 +20,7 @@ export default function Login() {
   }, []);
 
   const [email, setEmail] = useState("islam@gmail.com");
-  const [password, setPassword] = useState("test1234");
+  const [password, setPassword] = useState("test123");
 
   const injectData = (email, password) => {
     setEmail(email);

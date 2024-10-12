@@ -61,9 +61,9 @@ export default function UpdateMultiStatus({ url, item, updated, list }) {
     >
       <span
         className={
-          staticItem.status === 1
+          staticItem.status === "active" || staticItem.status === 1
             ? "active"
-            : staticItem.status === 0
+            : staticItem.status === "inactive" || staticItem.status === 0
             ? "inactive"
             : staticItem.status
         }

@@ -4,10 +4,17 @@ import { useParams } from "react-router-dom";
 import { Tabs } from "antd";
 import { TabPane } from "react-bootstrap";
 import { FaImage } from "react-icons/fa6";
-import { FaInfoCircle, FaShoppingBag } from "react-icons/fa";
+import {
+  FaPlus,
+  FaPuzzlePiece,
+  FaInfoCircle,
+  FaShoppingBag,
+} from "react-icons/fa";
 import Information from "./Information";
 import UploadImage from "../Actions/UploadImage";
 import Items from "./Items";
+import SubExtra from "./SubExtras";
+import SubAddon from "./SubAddons";
 import { getData } from "../../../../axiosConfig/API";
 
 export default function ShowItem() {
@@ -31,7 +38,7 @@ export default function ShowItem() {
     fetchOffer(id);
   }, [id, fetchOffer]);
 
-  if (loading) return;
+  if (loading) return <p>loading...</p>;
 
   return (
     <div className="Show">
@@ -49,7 +56,9 @@ export default function ShowItem() {
           >
             {offer && <Information data={offer} />}
           </TabPane>
+
           <TabPane
+            className="TabPane"
             tab={
               <span>
                 <FaImage />
@@ -60,7 +69,9 @@ export default function ShowItem() {
           >
             <UploadImage url={`admin/offers/${id}`} data={offer} />
           </TabPane>
+
           <TabPane
+            className="TabPane"
             tab={
               <span>
                 <FaShoppingBag />
@@ -69,7 +80,33 @@ export default function ShowItem() {
             }
             key="3"
           >
-            <Items />
+            <Items id={id} />
+          </TabPane>
+
+          <TabPane
+            className="TabPane"
+            tab={
+              <span>
+                <FaPlus />
+                Extra
+              </span>
+            }
+            key="4"
+          >
+            <SubExtra order_id={id} />
+          </TabPane>
+
+          <TabPane
+            className="TabPane"
+            tab={
+              <span>
+                <FaPuzzlePiece />
+                Addon
+              </span>
+            }
+            key="5"
+          >
+            <SubAddon order_id={id} />
           </TabPane>
         </Tabs>
       </div>

@@ -43,6 +43,8 @@ export const getData = async (url) => {
     }
 
     throw error;
+  } finally {
+    if (loader) loader.classList.remove("show");
   }
 };
 
@@ -82,6 +84,8 @@ export const addData = async (url, data) => {
     }
 
     throw error;
+  } finally {
+    if (loader) loader.classList.remove("show");
   }
 };
 
@@ -125,6 +129,8 @@ export const updateData = async (url, data, multipart, method = "post") => {
     }
 
     throw error;
+  } finally {
+    if (loader) loader.classList.remove("show");
   }
 };
 
@@ -163,5 +169,7 @@ export const deleteData = async (url) => {
     }
 
     throw error;
+  } finally {
+    if (loader) loader.classList.remove("show");
   }
 };

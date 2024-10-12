@@ -52,9 +52,9 @@ export default function Offers({
   };
 
   function formatDate(dateString) {
-    return new Date(dateString)
-      .toLocaleString("sv-SE", { timeZone: "UTC" })
-      .replace("T", " ");
+    return new Date(dateString).toLocaleDateString("sv-SE", {
+      timeZone: "UTC",
+    });
   }
 
   const handleSearch = () => {
@@ -62,8 +62,8 @@ export default function Offers({
     const filtered = filteredData.filter((item) => {
       return (
         (!name || item.name.toLowerCase().includes(name.toLowerCase())) &&
-        (!start_data || item.start_data >= start_data) &&
-        (!end_data || item.end_data <= end_data) &&
+        (start_data === "" || item.start_date >= start_data) &&
+        (end_data === "" || item.end_date <= end_data) &&
         (discount === "" || item.discount === parseFloat(discount)) &&
         (status === "" || item.status === parseInt(status))
       );
@@ -129,12 +129,12 @@ export default function Offers({
                 start data
               </label>
               <input
-                type="datetime-local"
+                type="date"
                 className="form-control"
                 name="start_data"
                 id="start_data"
                 value={offers.start_data}
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
               />
             </div>
 
@@ -143,12 +143,12 @@ export default function Offers({
                 end data
               </label>
               <input
-                type="datetime-local"
+                type="date"
                 className="form-control"
                 name="end_data"
                 id="end_data"
                 value={offers.end_data}
-                onChange={(e) => handleChange(e)}
+                onChange={handleChange}
               />
             </div>
 

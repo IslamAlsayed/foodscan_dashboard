@@ -10,7 +10,7 @@ import {
   imageStorageURL,
 } from "../../../../axiosConfig/API";
 import { getUser, isAuth } from "../../../../axiosConfig/Auth";
-import Invoice from "../Pos/Features/Invoice";
+import Invoice from "./Invoice";
 
 export default function Show() {
   const { id } = useParams();
@@ -23,6 +23,11 @@ export default function Show() {
   const [status, setStatus] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [invoiceVisible, setInvoiceVisible] = useState(false);
+  const [dataInvoise, setDataInvoise] = useState({
+    meals: "",
+    addons: "",
+    extras: "",
+  });
 
   useEffect(() => {
     if (isAuth()) {
@@ -39,6 +44,11 @@ export default function Show() {
       setUserOrder(result.order_meals[0]);
       setUserAddons(result.order_addons);
       setUserExtras(result.order_extras);
+      setDataInvoise({
+        meals: userOrder,
+        addons: userAddons,
+        extras: userExtras,
+      });
       setPay(result.pay === 1 ? "Paid" : "Not Paid");
       setStatus(result.status);
       setLoading(false);
@@ -136,6 +146,9 @@ export default function Show() {
 
   const handlePrintInvoice = () => {
     setInvoiceVisible(!invoiceVisible);
+    if (document.getElementById("Loader") && !invoiceVisible) {
+      document.getElementById("Loader").classList.add("show");
+    }
     document.body.style.overflow = invoiceVisible ? "visible" : "hidden";
   };
 
@@ -167,7 +180,12 @@ export default function Show() {
 
             <div className="delivery_time">
               <label>delivery time:</label>
-              <b>{deliveryOrder.created_at}</b>
+              <b>
+                {new Date(deliveryOrder.created_at).toLocaleString("sv-SE", {
+                  timeZone: "UTC",
+                  hour12: false,
+                })}
+              </b>
             </div>
 
             <div className="table_id">

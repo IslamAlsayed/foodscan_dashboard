@@ -153,7 +153,6 @@ export default function CartItems({
         if (type === "makeOrder") {
           try {
             const response = await addData("auth/orders", items);
-            console.log("response", response);
             if (response.status === "success") {
               resetItemsCart();
               setTimeout(() => {

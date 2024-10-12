@@ -1,7 +1,7 @@
 import { Row, Col } from "antd";
 
 export default function Information({ data }) {
-  if (!data) return;
+  if (!data) return <p>loading...</p>;
 
   return (
     <div className="Information">
@@ -20,20 +20,14 @@ export default function Information({ data }) {
         </Col>
         <Col span={12}>
           <div className="d-flex pt-2 pb-2">
-            <label>startDate</label>
-            <span>{data.startDate}</span>
+            <label>start date</label>
+            <span>{data.start_date}</span>
           </div>
         </Col>
         <Col span={12}>
           <div className="d-flex pt-2 pb-2">
-            <label>endDate</label>
-            <span>{data.endDate}</span>
-          </div>
-        </Col>
-        <Col span={12}>
-          <div className="d-flex pt-2 pb-2">
-            <label>Name</label>
-            <span>{data.name}</span>
+            <label>end date</label>
+            <span>{data.end_date}</span>
           </div>
         </Col>
         <Col span={12}>
