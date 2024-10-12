@@ -9,8 +9,7 @@ import Filtration from "../../Models/Filtration/Offers";
 import AddRow from "../../Models/AddRow/Offers";
 import EditOffer from "../../Models/Edit/EditOffer";
 import UpdateMultiStatus from "../Actions/UpdateMultiStatus";
-import { getData } from "../../../../axiosConfig/API";
-
+import { getData, imageStorageURL } from "../../../../axiosConfig/API";
 export default function Offers() {
   const componentRef = useRef();
   const [offers, setOffers] = useState([]);
@@ -78,6 +77,18 @@ export default function Offers() {
       title: "END DATE",
       dataIndex: "end_date",
       key: "end_date",
+    },
+    {
+      title: "IMAGE",
+      dataIndex: "image",
+      key: "image",
+      render: (record) => (
+        <img
+          src={`${imageStorageURL}/${record}`}
+          alt=""
+          style={{ width: "70px", height: "auto" }}
+        />
+      ),
     },
     {
       title: "STATUS",

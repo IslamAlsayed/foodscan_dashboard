@@ -12,8 +12,8 @@ export default function Offers({
   const [offers, setOffers] = useState({
     name: "",
     discount: "",
-    start_data: "",
-    end_data: "",
+    start_date: "",
+    end_date: "",
     status: "",
   });
   const [filteredData, setFilteredData] = useState();
@@ -31,15 +31,15 @@ export default function Offers({
         ...prevData,
         status: id === "active" ? 1 : 0,
       }));
-    } else if (name === "start_data") {
+    } else if (name === "start_date") {
       setOffers((prevData) => ({
         ...prevData,
-        start_data: formatDate(value),
+        start_date: formatDate(value),
       }));
-    } else if (name === "end_data") {
+    } else if (name === "end_date") {
       setOffers((prevData) => ({
         ...prevData,
-        end_data: formatDate(value),
+        end_date: formatDate(value),
       }));
     } else if (name === "type") {
       setOffers((prevData) => ({
@@ -58,12 +58,17 @@ export default function Offers({
   }
 
   const handleSearch = () => {
-    const { name, start_data, end_data, discount, status } = offers;
+    const { name, start_date, end_date, discount, status } = offers;
     const filtered = filteredData.filter((item) => {
+      const itemStartDate = new Date(item.start_date + "T00:00:00");
+      const itemEndDate = new Date(item.end_date + "T23:59:59");
+      const startDateInput = new Date(start_date + "T00:00:00");
+      const endDateInput = new Date(end_date + "T23:59:59");
+
       return (
         (!name || item.name.toLowerCase().includes(name.toLowerCase())) &&
-        (start_data === "" || item.start_date >= start_data) &&
-        (end_data === "" || item.end_date <= end_data) &&
+        (start_date === "" || itemStartDate >= startDateInput) &&
+        (end_date === "" || itemEndDate <= endDateInput) &&
         (discount === "" || item.discount === parseFloat(discount)) &&
         (status === "" || item.status === parseInt(status))
       );
@@ -77,8 +82,8 @@ export default function Offers({
     setOffers({
       name: "",
       discount: "",
-      start_data: "",
-      end_data: "",
+      start_date: "",
+      end_date: "",
       status: "",
     });
     setFilteredData(JSON.parse(sessionStorage.getItem("origin_data")));
@@ -125,29 +130,29 @@ export default function Offers({
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label htmlFor="start_data" className="mb-2">
+              <label htmlFor="start_date" className="mb-2">
                 start data
               </label>
               <input
                 type="date"
                 className="form-control"
-                name="start_data"
-                id="start_data"
-                value={offers.start_data}
+                name="start_date"
+                id="start_date"
+                value={offers.start_date}
                 onChange={handleChange}
               />
             </div>
 
             <div className="col col-12 col-md-6 col-lg-3 mb-3">
-              <label htmlFor="end_data" className="mb-2">
+              <label htmlFor="end_date" className="mb-2">
                 end data
               </label>
               <input
                 type="date"
                 className="form-control"
-                name="end_data"
-                id="end_data"
-                value={offers.end_data}
+                name="end_date"
+                id="end_date"
+                value={offers.end_date}
                 onChange={handleChange}
               />
             </div>

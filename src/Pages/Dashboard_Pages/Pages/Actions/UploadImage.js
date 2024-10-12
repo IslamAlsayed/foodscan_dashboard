@@ -12,9 +12,7 @@ export default function Image({ url, data }) {
   const [categoryImage, setCategoryImage] = useState({
     id: data.id,
     image: null,
-    imagePreview: data.image
-      ? `${imageStorageURL}/storage/${data.image}`
-      : ImageTest,
+    imagePreview: data.image ? `${imageStorageURL}/${data.image}` : ImageTest,
   });
 
   const handleImageChange = (e) => {
@@ -56,9 +54,7 @@ export default function Image({ url, data }) {
     setCategoryImage({
       id: data.id,
       image: null,
-      imagePreview: data.image
-        ? `${imageStorageURL}/storage/${data.image}`
-        : ImageTest,
+      imagePreview: data.image ? `${imageStorageURL}/${data.image}` : ImageTest,
     });
     setActionsVisible(false);
   };
