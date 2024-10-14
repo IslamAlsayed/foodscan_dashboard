@@ -1,5 +1,5 @@
 import "./Dashboard.css";
-import React, { useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import { Link } from "react-router-dom";
 import { BsFront } from "react-icons/bs";
@@ -9,16 +9,28 @@ import { RiMoneyDollarCircleFill, RiAlignItemLeftFill } from "react-icons/ri";
 import LineChartComponent from "./Charts/LineChartComponent";
 import AreaChartComponent from "./Charts/AreaChartComponent";
 import ImageTest from "../../../assets/global/profile.png";
+import { getData } from "../../../axiosConfig/API";
 
 export default function Dashboard() {
   const [startDate, setStartDate] = useState(new Date());
+  const [chartData, setChartData] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const data = [
-    { date: "2024-07-01", sales: 4.5 },
-    { date: "2024-07-02", sales: 0.0 },
-    { date: "2024-07-03", sales: 0.0 },
-    { date: "2024-07-04", sales: 0.0 },
-  ];
+  const fetchChartData = useCallback(async () => {
+    try {
+      const result = await getData(`admin/sales`);
+      console.log(result);
+      setChartData(result);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.error(error.response?.data?.message);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchChartData();
+  }, [fetchChartData]);
 
   const cards = [
     {
@@ -159,7 +171,7 @@ export default function Dashboard() {
             </div>
 
             <div className="section-chart">
-              <LineChartComponent data={data} />
+              <LineChartComponent data={chartData} />
             </div>
           </div>
         </div>

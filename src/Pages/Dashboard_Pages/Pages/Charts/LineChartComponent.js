@@ -19,7 +19,7 @@ export default function LineChartComponent({ data }) {
         <YAxis />
         <Tooltip formatter={(value) => `₹${value}`} />
         <Legend />
-        <Line type="monotone" dataKey="sales" stroke="#ff6384" />
+        <Line type="monotone" dataKey="sales" stroke="#567DFF" />
       </LineChart>
     </ResponsiveContainer>
   );
