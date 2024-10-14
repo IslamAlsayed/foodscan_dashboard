@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+# FoodScan
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Food Order Management System! This project is a comprehensive control panel designed for cashier systems to efficiently manage food orders. The system includes a user-friendly interface for administrators, employees, and customers, providing functionalities such as order tracking, invoicing, sales reporting, and more. It's a perfect solution for restaurants and cafes looking to streamline their order processing and enhance customer satisfaction.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+### 1. Cloning the Repository
 
-### `npm start`
+First, clone the repository to your local machine:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+git clone https://github.com/IslamAlsayed/foodscan_dashboard.git
+cd foodscan_dashboard
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. Install Dependencies
 
-### `npm test`
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Overview
 
-### `npm run build`
+## Home
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Home](./src/assets/mockup/home.png)
+Home page of the project.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Login
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Login](./src/assets/mockup/login.png)
+User login interface.
 
-### `npm run eject`
+## Main Sidebar
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Sidebar1](./src/assets/mockup/sidebar1.png)
+![Sidebar2](./src/assets/mockup/sidebar2.png)
+Navigation sidebar.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Administrator
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Administrator](./src/assets/mockup/administrator.png)
+Administrator dashboard with all essential controls.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Administrator Details
 
-## Learn More
+![Administrator Details](./src/assets/mockup/administrator_show.png)
+Detailed view of the administrator's features.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Add-ons and Extras
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+![Add-ons and Extras](./src/assets/mockup/addons_and_extras.png)
+This image shows additional features and extras included in the project.
 
-### Code Splitting
+## Categories
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Categories](./src/assets/mockup/catgeories.png)
+Different categories available in the project.
 
-### Analyzing the Bundle Size
+## Meals
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![Meals](./src/assets/mockup/meals.png)
+Display of meal options.
 
-### Making a Progressive Web App
+## Offers
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![Offers](./src/assets/mockup/offers.png)
+Special offers available.
 
-### Advanced Configuration
+## POS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![POS](./src/assets/mockup/pos.png)
+Point of Sale system interface.
 
-### Deployment
+## POS Invoice
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+![POS Invoice](./src/assets/mockup/pos_invoise.png)
+Point of Sale (POS) invoice generation.
 
-### `npm run build` fails to minify
+## Delivery Order
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Delivery Order](./src/assets/mockup/deliveryOrder.png)
+Details of the delivery order management.
+
+## Delivery Invoice
+
+![Delivery Invoice](./src/assets/mockup/delivery_invoise.png)
+Generating invoices for delivery orders.
+
+## Cart Items
+
+![Cart Items](./src/assets/mockup/cartItems.png)
+Overview of items currently in the cart.
+
+## Add Data Modal
+
+![Add Data Modal](./src/assets/mockup/add_data_modal.png)
+Modal for adding new data entries.
+
+## Edit Data Modal
+
+![Edit Data Modal](./src/assets/mockup/edit_data_modal.png)
+Modal for editing existing data entries.
+
+## Filter Data Modal
+
+![Filter Data Modal](./src/assets/mockup/filter_data_modal.png)
+Modal for filtering data based on various criteria.
+
+## Read Data / Index Data
+
+![Read Data](./src/assets/mockup/read_data.png)
+Displaying data in a readable format.
+
+## Print Options
+
+![Print Options](./src/assets/mockup/print_options.png)
+Different print options available.
+
+## Roles
+
+![Roles](./src/assets/mockup/roles.png)
+User roles for admin, employee, and user.
+
+## Sales Reports
+
+![Sales Reports](./src/assets/mockup/salesReports.png)
+Detailed sales reports.
+
+## Settings
+
+![Settings](./src/assets/mockup/settings.png)
+Settings page for the project.
+
+## Supplier Show
+
+![Supplier Show](./src/assets/mockup/supShow.png)
+Detailed view of supplier information.
+
+## Contact me
+
+### If you have any questions or need further assistance, you can reach out to me:
+
+### Email: [email](eslamalsayed8133@gmail.com)
+
+### LinkedIn: [Islam Alsayed](https://www.linkedin.com/in/islam-alsayed7)
