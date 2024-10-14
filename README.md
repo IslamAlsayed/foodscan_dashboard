@@ -155,4 +155,4 @@ Detailed view of supplier information.
 
 ### Email: eslamalsayed8133@gmail.com
 
-### LinkedIn: [Islam Alsayed](https://www.linkedin.com/in/islam-alsayed7)
+### LinkedIn: [IslamAlsayed](https://www.linkedin.com/in/islam-alsayed7)
