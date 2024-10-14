@@ -153,6 +153,6 @@ Detailed view of supplier information.
 
 ### If you have any questions or need further assistance, you can reach out to me:
 
-### Email:eslamalsayed8133@gmail.com
+### Email: eslamalsayed8133@gmail.com
 
 ### LinkedIn: [Islam Alsayed](https://www.linkedin.com/in/islam-alsayed7)
