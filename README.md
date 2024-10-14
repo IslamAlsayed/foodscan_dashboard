@@ -1,4 +1,4 @@
-# FoodScan
+# FoodScan - POS Management System
 
 Welcome to the Food Order Management System! This project is a comprehensive control panel designed for cashier systems to efficiently manage food orders. The system includes a user-friendly interface for administrators, employees, and customers, providing functionalities such as order tracking, invoicing, sales reporting, and more. It's a perfect solution for restaurants and cafes looking to streamline their order processing and enhance customer satisfaction.
 
