@@ -19,7 +19,19 @@ cd foodscan_dashboard
 npm install
 ```
 
-## Project Overview
+### 3. Run project
+
+```bash
+npm start
+```
+
+### 4. Open project in browser
+
+```bash
+http://localhost:3000
+```
+
+# Overview
 
 ## Project mockup
 
@@ -79,7 +91,7 @@ Point of Sale system interface.
 
 ## POS Invoice
 
-![POS Invoice](./src/assets/mockup/pos_invoise.png)
+![POS Invoice](./src/assets/mockup/pos_invoice.png)
 Point of Sale (POS) invoice generation.
 
 ## Delivery Order
