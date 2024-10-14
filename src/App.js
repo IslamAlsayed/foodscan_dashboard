@@ -6,6 +6,12 @@ import { Branch_2 } from "./Pages/Dashboard_Pages/Branch_2.js";
 import Settings from "./Pages/Dashboard_Pages/Pages/Settings/Settings";
 import Loader from "./Components/Dashboard/Loader/Loader.js";
 
+/**
+ * Handles App.
+ *
+ * @author IslamAlsayed eslamalsayed8133@gmail.com
+ */
+
 function App() {
   return (
     <>
