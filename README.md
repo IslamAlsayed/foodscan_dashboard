@@ -35,7 +35,7 @@ http://localhost:3000
 
 ## Project mockup
 
-![Home](./src/assets/mockup/mochup.png)
+![Mochup](./src/assets/mockup/mockup.png)
 Mockup image of the project.
 
 ## Home
@@ -71,7 +71,7 @@ This image shows additional features and extras included in the project.
 
 ## Categories
 
-![Categories](./src/assets/mockup/catgeories.png)
+![Categories](./src/assets/mockup/categories.png)
 Different categories available in the project.
 
 ## Meals
