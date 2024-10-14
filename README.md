@@ -21,6 +21,11 @@ npm install
 
 ## Project Overview
 
+## Project mockup
+
+![Home](./src/assets/mockup/mochup.png)
+Mockup image of the project.
+
 ## Home
 
 ![Home](./src/assets/mockup/home.png)
@@ -82,11 +87,6 @@ Point of Sale (POS) invoice generation.
 ![Delivery Order](./src/assets/mockup/deliveryOrder.png)
 Details of the delivery order management.
 
-## Delivery Invoice
-
-![Delivery Invoice](./src/assets/mockup/delivery_invoise.png)
-Generating invoices for delivery orders.
-
 ## Cart Items
 
 ![Cart Items](./src/assets/mockup/cartItems.png)
@@ -117,7 +117,7 @@ Displaying data in a readable format.
 ![Print Options](./src/assets/mockup/print_options.png)
 Different print options available.
 
-## Roles
+## Roles [admin, employee, user]
 
 ![Roles](./src/assets/mockup/roles.png)
 User roles for admin, employee, and user.
@@ -141,6 +141,6 @@ Detailed view of supplier information.
 
 ### If you have any questions or need further assistance, you can reach out to me:
 
-### Email: [email](eslamalsayed8133@gmail.com)
+### Email:eslamalsayed8133@gmail.com
 
 ### LinkedIn: [Islam Alsayed](https://www.linkedin.com/in/islam-alsayed7)
